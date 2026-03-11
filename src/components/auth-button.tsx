@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { signInWithGoogle, signOut } from "@/lib/auth";
+import { signOut } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 
 export default function AuthButton() {
@@ -45,8 +46,8 @@ export default function AuthButton() {
   }
 
   return (
-    <Button size="sm" onClick={signInWithGoogle}>
-      로그인
-    </Button>
+    <Link href="/login">
+      <Button size="sm">로그인</Button>
+    </Link>
   );
 }
