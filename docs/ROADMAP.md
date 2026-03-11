@@ -52,8 +52,9 @@
 
 ### 1-1. 게임 데이터 및 타입
 
-- [ ] Game 타입 정의 (src/types/game.ts)
-- [ ] 게임 데이터 20~30개 작성 (src/data/games/)
+- [x] Game 타입 정의 (src/types/game.ts)
+- [x] 샘플 게임 데이터 3개 작성 (src/data/games/)
+- [ ] 게임 데이터 20~30개로 확충 (UI 확인 후 진행)
 - [ ] 카테고리별 균형 확인 (대상별, 활동성별 최소 3~5개씩)
 - [ ] 썸네일 이미지 배치 (public/images/games/)
 
