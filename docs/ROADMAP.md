@@ -22,35 +22,27 @@
   - src/constants/ — 상수 데이터
   - src/hooks/ — 커스텀 React 훅
   - src/lib/ — 유틸리티 함수, Supabase 클라이언트
+  - src/data/ — 게임 콘텐츠 데이터 (TypeScript 파일)
   - src/types/ — 공유 TypeScript 타입
 - [x] CLAUDE.md 작성
 - [x] 기획서 작성 (docs/SPEC.md)
-- [ ] shadcn/ui 초기 설정
+- [x] 데이터 설계 (docs/SCHEMA.md) — 하이브리드 아키텍처 (게임: 파일, 사용자: DB)
+- [x] shadcn/ui 초기 설정
 - [ ] Vercel 연동 (GitHub 레포 연결 → 자동 배포 파이프라인)
 
-### 0-3. DB 설계 및 Supabase 세팅
+### 0-3. Supabase 세팅
 
-- [ ] DB 스키마 설계 → docs/SCHEMA.md에 문서화
-  - games 테이블 (게임 기본 정보)
-  - game_tags 테이블 (대상, 공간, 활동성 등 태그)
-  - game_steps 테이블 (진행 스텝)
-  - game_materials 테이블 (준비물)
-  - game_scripts 테이블 (한/영 진행 스크립트)
-  - game_bible_connections 테이블 (말씀 연결)
-  - game_variations 테이블 (변형 팁)
-  - users 테이블 (Supabase Auth 연동)
-  - bookmarks 테이블 (보관함)
-  - reviews 테이블 (리뷰/평점)
-  - subscriptions 테이블 (구독 정보)
 - [ ] Supabase 프로젝트 생성 (대시보드)
-- [ ] 테이블 생성 및 RLS(Row Level Security) 정책 설정
+- [ ] 테이블 생성 (profiles, subscriptions, bookmarks, reviews, free_view_logs)
+- [ ] RLS(Row Level Security) 정책 설정
 - [ ] Supabase 클라이언트 설정 (src/lib/supabase.ts)
+- [ ] 환경 변수 설정 (.env.local)
 
 ### 0-4. 인증 설정
 
-- [ ] Supabase Auth 구글 소셜 로그인 설정 (대시보드)
 - [ ] Google Cloud Console OAuth 클라이언트 생성
-- [ ] 환경 변수 설정 (.env.local)
+- [ ] Supabase Auth 구글 소셜 로그인 설정 (대시보드)
+- [ ] 환경 변수에 OAuth 키 추가
 
 ---
 
@@ -58,21 +50,28 @@
 
 > 목표: "게임을 검색/필터하고, 상세 가이드를 본다"는 핵심 플로우 완성
 
-### 1-1. 공통 레이아웃
+### 1-1. 게임 데이터 및 타입
+
+- [ ] Game 타입 정의 (src/types/game.ts)
+- [ ] 게임 데이터 20~30개 작성 (src/data/games/)
+- [ ] 카테고리별 균형 확인 (대상별, 활동성별 최소 3~5개씩)
+- [ ] 썸네일 이미지 배치 (public/images/games/)
+
+### 1-2. 공통 레이아웃
 
 - [ ] 헤더 (로고, 네비게이션, 로그인 버튼)
 - [ ] 푸터 (링크, 저작권)
 - [ ] 반응형 기본 레이아웃 (모바일 퍼스트)
 - [ ] 디자인 토큰 설정 (색상: 노란색/파란색 주색상)
 
-### 1-2. 인증 기능
+### 1-3. 인증 기능
 
 - [ ] 구글 소셜 로그인 버튼 UI
 - [ ] 로그인/로그아웃 플로우
 - [ ] 로그인 상태에 따른 UI 분기 (헤더 프로필 등)
 - [ ] 인증 미들웨어 (보호된 라우트)
 
-### 1-3. 게임 리스트 페이지
+### 1-4. 게임 리스트 페이지
 
 - [ ] 카드 뷰 (Summary Card) 컴포넌트
   - 게임명, 썸네일, 핵심 태그
@@ -89,7 +88,7 @@
 - [ ] 필터 조합 시 실시간 결과 갱신
 - [ ] 빈 상태 / 로딩 상태 UI
 
-### 1-4. 게임 상세 페이지
+### 1-5. 게임 상세 페이지
 
 - [ ] 기본 정보 영역 (게임명, 태그, 메타데이터)
 - [ ] 준비물 리스트
@@ -98,12 +97,6 @@
 - [ ] 말씀 연결 영역 (성경 구절 + 1분 메시지 요약)
 - [ ] 변형 팁 영역
 - [ ] 무료 사용자: 월 3개 상세 열람 제한 로직
-
-### 1-5. 시드 데이터
-
-- [ ] 게임 데이터 20~30개 작성
-- [ ] Supabase에 시드 데이터 투입
-- [ ] 카테고리별 균형 확인 (대상별, 활동성별 최소 3~5개씩)
 
 ---
 
