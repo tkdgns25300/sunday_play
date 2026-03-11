@@ -33,8 +33,8 @@
 ### 0-3. Supabase 세팅
 
 - [x] Supabase 프로젝트 생성 (대시보드)
-- [ ] 테이블 생성 (profiles, subscriptions, bookmarks, reviews, free_view_logs)
-- [ ] RLS(Row Level Security) 정책 설정
+- [x] 테이블 생성 (profiles, subscriptions, bookmarks, reviews, free_view_logs)
+- [x] RLS(Row Level Security) 정책 설정
 - [x] Supabase 클라이언트 설정 (src/lib/supabase/)
 - [x] 환경 변수 설정 (.env.local)
 
