@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import AuthButton from "@/components/auth-button";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function Header() {
           >
             요금제
           </Link>
-          <Button size="sm">로그인</Button>
+          <AuthButton />
         </nav>
 
         <button
@@ -66,7 +66,7 @@ export default function Header() {
             >
               요금제
             </Link>
-            <Button size="sm" className="w-fit">로그인</Button>
+            <AuthButton />
           </div>
         </nav>
       )}

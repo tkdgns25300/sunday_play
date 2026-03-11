@@ -28,21 +28,22 @@
 - [x] 기획서 작성 (docs/SPEC.md)
 - [x] 데이터 설계 (docs/SCHEMA.md) — 하이브리드 아키텍처 (게임: 파일, 사용자: DB)
 - [x] shadcn/ui 초기 설정
-- [ ] Vercel 연동 (GitHub 레포 연결 → 자동 배포 파이프라인)
+- [x] Vercel 연동 (GitHub 레포 연결 → 자동 배포 파이프라인)
 
 ### 0-3. Supabase 세팅
 
-- [ ] Supabase 프로젝트 생성 (대시보드)
+- [x] Supabase 프로젝트 생성 (대시보드)
 - [ ] 테이블 생성 (profiles, subscriptions, bookmarks, reviews, free_view_logs)
 - [ ] RLS(Row Level Security) 정책 설정
-- [ ] Supabase 클라이언트 설정 (src/lib/supabase.ts)
-- [ ] 환경 변수 설정 (.env.local)
+- [x] Supabase 클라이언트 설정 (src/lib/supabase/)
+- [x] 환경 변수 설정 (.env.local)
 
 ### 0-4. 인증 설정
 
-- [ ] Google Cloud Console OAuth 클라이언트 생성
-- [ ] Supabase Auth 구글 소셜 로그인 설정 (대시보드)
-- [ ] 환경 변수에 OAuth 키 추가
+- [x] Google Cloud Console OAuth 클라이언트 생성
+- [x] Supabase Auth 구글 소셜 로그인 설정 (대시보드)
+- [x] 인증 콜백 라우트 (src/app/auth/callback/)
+- [x] 인증 미들웨어 (src/middleware.ts)
 
 ---
 
@@ -68,10 +69,10 @@
 
 ### 1-3. 인증 기능
 
-- [ ] 구글 소셜 로그인 버튼 UI
-- [ ] 로그인/로그아웃 플로우
-- [ ] 로그인 상태에 따른 UI 분기 (헤더 프로필 등)
-- [ ] 인증 미들웨어 (보호된 라우트)
+- [x] 구글 소셜 로그인 버튼 UI (AuthButton 컴포넌트)
+- [x] 로그인/로그아웃 플로우
+- [x] 로그인 상태에 따른 UI 분기 (헤더 프로필/이름 표시)
+- [x] 인증 미들웨어 (세션 갱신)
 
 ### 1-4. 게임 리스트 페이지
 
