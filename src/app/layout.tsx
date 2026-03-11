@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sunday Play — 교회 레크레이션 큐레이션",
+  title: "Sunday Play",
   description:
     "주일학교 교사와 교회 리더를 위한 레크레이션 큐레이션 플랫폼. 대상별·상황별로 적합한 게임을 쉽게 찾고, 상세 진행 가이드와 함께 활용하세요.",
 };
