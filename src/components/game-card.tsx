@@ -12,11 +12,13 @@ export default function GameCard({ game }: GameCardProps) {
   return (
     <Link href={`/games/${game.id}`}>
       <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
-        <div className="aspect-[16/10] bg-muted">
+        <div className="aspect-[16/10] overflow-hidden bg-muted">
           {game.thumbnailUrl ? (
-            <div className="flex size-full items-center justify-center bg-primary/5 text-4xl">
-              🎮
-            </div>
+            <img
+              src={game.thumbnailUrl}
+              alt={game.title}
+              className="size-full object-cover"
+            />
           ) : (
             <div className="flex size-full items-center justify-center bg-primary/5 text-4xl">
               🎮

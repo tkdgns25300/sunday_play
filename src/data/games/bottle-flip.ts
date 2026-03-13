@@ -6,7 +6,7 @@ const bottleFlip: Game = {
   summary: "물병을 던져 바닥에 똑바로 세우는 집중력 게임",
   description:
     "각 팀별로 준비된 물병을 공중으로 한 바퀴 돌려 던져서 바닥에 똑바로 세우는 게임입니다.",
-  thumbnailUrl: "/images/games/bottle-flip.jpg",
+  thumbnailUrl: "/images/games/bottle-flip.png",
   ageGroups: ["유치부", "유년부", "초등부", "중고등부", "청년부"],
   energyLevel: 3,
   environments: ["실내교실", "실내강당"],

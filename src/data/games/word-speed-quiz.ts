@@ -6,7 +6,7 @@ const wordSpeedQuiz: Game = {
   summary: "특정 알파벳으로 시작하는 단어와 성경 퀴즈를 맞히는 지혜 대결",
   description:
     "제시된 알파벳으로 시작하는 영어 단어를 많이 적고 성경 관련 추가 문제를 해결하는 게임입니다.",
-  thumbnailUrl: "/images/games/word-speed-quiz.jpg",
+  thumbnailUrl: "/images/games/word-speed-quiz.png",
   ageGroups: ["유년부", "초등부", "중고등부"],
   energyLevel: 2,
   environments: ["실내교실"],

@@ -6,7 +6,7 @@ const colorFlipBingo: Game = {
   summary: "릴레이로 색판을 뒤집어 팀의 빙고를 먼저 완성하는 에너지 넘치는 게임",
   description:
     "한 명씩 달려 나가 준비된 색판을 뒤집거나 깔아 빙고를 만드는 전략 릴레이 게임입니다.",
-  thumbnailUrl: "/images/games/color-flip-bingo.jpg",
+  thumbnailUrl: "/images/games/color-flip-bingo.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
   energyLevel: 4,
   environments: ["실내강당", "야외"],
