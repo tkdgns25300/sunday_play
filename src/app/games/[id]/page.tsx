@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getGameById, getAllGameIds } from "@/lib/games";
-import GameDetail from "@/components/game-detail";
+import GameDetailGate from "@/components/game-detail-gate";
 
 type GamePageProps = {
   params: Promise<{ id: string }>;
@@ -34,7 +34,7 @@ export default async function GamePage({ params }: GamePageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <GameDetail game={game} />
+      <GameDetailGate game={game} />
     </div>
   );
 }
