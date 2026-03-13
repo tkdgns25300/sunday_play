@@ -1,5 +1,6 @@
-import balloonRelay from "./balloon-relay";
-import bibleCharacterQuiz from "./bible-character-quiz";
-import humanKnot from "./human-knot";
+import colorFlipBingo from "./color-flip-bingo";
+import numberSumGame from "./number-sum-game";
+import wordSpeedQuiz from "./word-speed-quiz";
+import bottleFlip from "./bottle-flip";
 
-export const games = [balloonRelay, bibleCharacterQuiz, humanKnot];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip];
