@@ -15,6 +15,7 @@ const colorFlipBingo: Game = {
   biblicalThemes: ["협동", "한 몸"],
   durationMinutes: 15,
   difficulty: 2,
+  requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {
       title: "준비",

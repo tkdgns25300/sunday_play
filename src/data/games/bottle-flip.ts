@@ -15,6 +15,7 @@ const bottleFlip: Game = {
   biblicalThemes: ["인내", "집중력"],
   durationMinutes: 10,
   difficulty: 2,
+  requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {
       title: "준비",

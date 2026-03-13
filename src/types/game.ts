@@ -57,6 +57,7 @@ export type Game = {
   biblicalThemes: string[];
   durationMinutes: number;
   difficulty: 1 | 2 | 3 | 4 | 5;
+  requiredStaff: { min: number; recommended: number };
   steps: GameStep[];
   materials: GameMaterial[];
   bibleConnections: BibleConnection[];

@@ -57,10 +57,17 @@ export default function GameCard({ game }: GameCardProps) {
               {game.durationMinutes}분
             </span>
             <span className="flex items-center gap-1" title="활동성">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
               </svg>
               {ENERGY_LEVEL_LABELS[game.energyLevel]}
+            </span>
+            <span className="flex items-center gap-1" title="필요 심판수">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+              </svg>
+              심판 {game.requiredStaff.min === game.requiredStaff.recommended ? `${game.requiredStaff.min}명` : `${game.requiredStaff.min}~${game.requiredStaff.recommended}명`}
             </span>
             {hasMaterials && (
               <span className="flex items-center gap-1" title="준비물 필요">

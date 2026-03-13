@@ -15,6 +15,7 @@ const wordSpeedQuiz: Game = {
   biblicalThemes: ["지혜", "성경 지식"],
   durationMinutes: 15,
   difficulty: 3,
+  requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {
       title: "알파벳 퀴즈",

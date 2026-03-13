@@ -62,6 +62,14 @@ export default function GameDetail({ game }: GameDetailProps) {
           <MetaItem label="난이도" value={DIFFICULTY_LABELS[game.difficulty]} />
           <MetaItem label="인원" value={groupSizeLabels} />
           <MetaItem label="준비" value={prepTimeLabel} />
+          <MetaItem
+            label="심판"
+            value={
+              game.requiredStaff.min === game.requiredStaff.recommended
+                ? `${game.requiredStaff.min}명`
+                : `${game.requiredStaff.min}~${game.requiredStaff.recommended}명`
+            }
+          />
         </div>
       </section>
 

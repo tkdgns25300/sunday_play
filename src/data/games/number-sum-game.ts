@@ -15,6 +15,7 @@ const numberSumGame: Game = {
   biblicalThemes: ["연합", "공동체"],
   durationMinutes: 15,
   difficulty: 3,
+  requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {
       title: "준비",
