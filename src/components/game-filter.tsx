@@ -16,14 +16,16 @@ export type FilterState = {
   prepTime: PrepTime | null;
   groupSize: GroupSize | null;
   energyLevel: number | null;
+  biblicalThemes: string[];
 };
 
 type GameFilterProps = {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
+  biblicalThemes: string[];
 };
 
-export default function GameFilter({ filters, onFilterChange }: GameFilterProps) {
+export default function GameFilter({ filters, onFilterChange, biblicalThemes }: GameFilterProps) {
   function updateFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     onFilterChange({ ...filters, [key]: value });
   }
@@ -37,7 +39,8 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
     filters.environment !== null ||
     filters.prepTime !== null ||
     filters.groupSize !== null ||
-    filters.energyLevel !== null;
+    filters.energyLevel !== null ||
+    filters.biblicalThemes.length > 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -119,6 +122,22 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
             />
           ))}
         </FilterSection>
+
+        <FilterSection label="성경 주제">
+          {biblicalThemes.map((theme) => (
+            <FilterChip
+              key={theme}
+              label={theme}
+              isActive={filters.biblicalThemes.includes(theme)}
+              onClick={() => {
+                const next = filters.biblicalThemes.includes(theme)
+                  ? filters.biblicalThemes.filter((t) => t !== theme)
+                  : [...filters.biblicalThemes, theme];
+                onFilterChange({ ...filters, biblicalThemes: next });
+              }}
+            />
+          ))}
+        </FilterSection>
       </div>
 
       {hasActiveFilters && (
@@ -131,6 +150,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
               prepTime: null,
               groupSize: null,
               energyLevel: null,
+              biblicalThemes: [],
             })
           }
           className="self-start text-sm text-muted-foreground transition-colors hover:text-foreground"

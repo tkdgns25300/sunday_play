@@ -12,7 +12,12 @@ const INITIAL_FILTERS: FilterState = {
   prepTime: null,
   groupSize: null,
   energyLevel: null,
+  biblicalThemes: [],
 };
+
+const allBiblicalThemes = [
+  ...new Set(games.flatMap((game) => game.biblicalThemes)),
+];
 
 export default function GameList() {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
@@ -59,13 +64,22 @@ export default function GameList() {
         return false;
       }
 
+      if (
+        filters.biblicalThemes.length > 0 &&
+        !filters.biblicalThemes.some((theme) =>
+          game.biblicalThemes.includes(theme)
+        )
+      ) {
+        return false;
+      }
+
       return true;
     });
   }, [filters]);
 
   return (
     <div className="flex flex-col gap-6">
-      <GameFilter filters={filters} onFilterChange={setFilters} />
+      <GameFilter filters={filters} onFilterChange={setFilters} biblicalThemes={allBiblicalThemes} />
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
