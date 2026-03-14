@@ -62,6 +62,8 @@ export default function PricingCard() {
     try {
       const paymentId = `payment-${userId}-${Date.now()}`;
 
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
       const response = await PortOne.requestPayment({
         storeId: process.env.NEXT_PUBLIC_PORTONE_STORE_ID!,
         channelKey: process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY!,
@@ -73,6 +75,9 @@ export default function PricingCard() {
         customer: {
           customerId: userId,
         },
+        ...(isMobile && {
+          redirectUrl: `${window.location.origin}/payment/complete`,
+        }),
       });
 
       if (response?.code) {
