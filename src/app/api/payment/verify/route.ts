@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
           status: "active",
           current_period_start: now.toISOString(),
           current_period_end: periodEnd.toISOString(),
-          stripe_customer_id: payment.customer?.customerId ?? null,
-          stripe_subscription_id: paymentId,
+          payment_customer_id: payment.customer?.customerId ?? null,
+          payment_id: paymentId,
           updated_at: now.toISOString(),
         },
         { onConflict: "user_id" }

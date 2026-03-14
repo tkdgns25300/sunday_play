@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
             status: "active",
             current_period_start: now.toISOString(),
             current_period_end: periodEnd.toISOString(),
-            stripe_subscription_id: paymentId,
+            payment_id: paymentId,
             updated_at: now.toISOString(),
           },
           { onConflict: "user_id" }
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
           status: "canceled",
           updated_at: new Date().toISOString(),
         })
-        .eq("stripe_subscription_id", paymentId);
+        .eq("payment_id", paymentId);
     }
 
     return NextResponse.json({ success: true });

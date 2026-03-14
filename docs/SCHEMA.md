@@ -198,8 +198,8 @@ Supabase Auth의 `auth.users`와 1:1 연결.
 |------|------|-----------|------|
 | id | uuid | PK | ID |
 | user_id | uuid | FK → profiles.id, UNIQUE | 사용자 ID |
-| stripe_customer_id | text | UNIQUE | Stripe 고객 ID |
-| stripe_subscription_id | text | UNIQUE | Stripe 구독 ID |
+| payment_customer_id | text | UNIQUE | 결제 고객 ID |
+| payment_id | text | UNIQUE | 결제 ID |
 | status | text | NOT NULL | 구독 상태 (active, canceled, past_due) |
 | current_period_start | timestamptz | | 현재 결제 기간 시작 |
 | current_period_end | timestamptz | | 현재 결제 기간 종료 |
