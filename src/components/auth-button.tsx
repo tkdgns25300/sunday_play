@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { signOut } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 
 export default function AuthButton() {
@@ -35,12 +34,12 @@ export default function AuthButton() {
   if (user) {
     return (
       <div className="flex items-center gap-3">
-        <span className="hidden text-sm text-muted-foreground sm:block">
-          {user.user_metadata.full_name ?? user.email}
-        </span>
-        <Button variant="outline" size="sm" onClick={signOut}>
-          로그아웃
-        </Button>
+        <Link
+          href="/mypage"
+          className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {user.user_metadata.full_name ?? "마이페이지"}
+        </Link>
       </div>
     );
   }
