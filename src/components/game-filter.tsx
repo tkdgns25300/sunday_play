@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { AgeGroup, Environment, PrepTime, GroupSize, CharacterQuality } from "@/types/game";
 import {
   AGE_GROUP_OPTIONS,
@@ -7,6 +8,7 @@ import {
   PREP_TIME_OPTIONS,
   GROUP_SIZE_OPTIONS,
   ENERGY_LEVEL_LABELS,
+  CHARACTER_QUALITIES,
 } from "@/constants/game";
 
 export type FilterState = {
@@ -25,7 +27,9 @@ type GameFilterProps = {
   characterQualities: CharacterQuality[];
 };
 
-export default function GameFilter({ filters, onFilterChange, characterQualities }: GameFilterProps) {
+export default function GameFilter({ filters, onFilterChange }: GameFilterProps) {
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
   function updateFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     onFilterChange({ ...filters, [key]: value });
   }
@@ -39,6 +43,11 @@ export default function GameFilter({ filters, onFilterChange, characterQualities
     filters.environment !== null ||
     filters.prepTime !== null ||
     filters.groupSize !== null ||
+    filters.energyLevel !== null ||
+    filters.characterQualities.length > 0;
+
+  const hasDetailFilters =
+    filters.prepTime !== null ||
     filters.energyLevel !== null ||
     filters.characterQualities.length > 0;
 
@@ -79,28 +88,6 @@ export default function GameFilter({ filters, onFilterChange, characterQualities
           ))}
         </FilterSection>
 
-        <FilterSection label="공간">
-          {ENVIRONMENT_OPTIONS.map((option) => (
-            <FilterChip
-              key={option.value}
-              label={option.label}
-              isActive={filters.environment === option.value}
-              onClick={() => toggleFilter("environment", option.value)}
-            />
-          ))}
-        </FilterSection>
-
-        <FilterSection label="준비 시간">
-          {PREP_TIME_OPTIONS.map((option) => (
-            <FilterChip
-              key={option.value}
-              label={option.label}
-              isActive={filters.prepTime === option.value}
-              onClick={() => toggleFilter("prepTime", option.value)}
-            />
-          ))}
-        </FilterSection>
-
         <FilterSection label="인원">
           {GROUP_SIZE_OPTIONS.map((option) => (
             <FilterChip
@@ -112,33 +99,73 @@ export default function GameFilter({ filters, onFilterChange, characterQualities
           ))}
         </FilterSection>
 
-        <FilterSection label="활동성">
-          {[1, 2, 3, 4, 5].map((level) => (
+        <FilterSection label="장소">
+          {ENVIRONMENT_OPTIONS.map((option) => (
             <FilterChip
-              key={level}
-              label={ENERGY_LEVEL_LABELS[level]}
-              isActive={filters.energyLevel === level}
-              onClick={() => toggleFilter("energyLevel", level)}
-            />
-          ))}
-        </FilterSection>
-
-        <FilterSection label="품성">
-          {characterQualities.map((theme) => (
-            <FilterChip
-              key={theme}
-              label={theme}
-              isActive={filters.characterQualities.includes(theme)}
-              onClick={() => {
-                const next = filters.characterQualities.includes(theme)
-                  ? filters.characterQualities.filter((t) => t !== theme)
-                  : [...filters.characterQualities, theme];
-                onFilterChange({ ...filters, characterQualities: next });
-              }}
+              key={option.value}
+              label={option.label}
+              isActive={filters.environment === option.value}
+              onClick={() => toggleFilter("environment", option.value)}
             />
           ))}
         </FilterSection>
       </div>
+
+      <button
+        onClick={() => setIsDetailOpen(!isDetailOpen)}
+        className="flex items-center gap-1.5 self-start text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${isDetailOpen ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+        상세 필터
+        {hasDetailFilters && (
+          <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] text-primary-foreground">
+            적용 중
+          </span>
+        )}
+      </button>
+
+      {isDetailOpen && (
+        <div className="flex flex-col gap-3">
+          <FilterSection label="준비 시간">
+            {PREP_TIME_OPTIONS.map((option) => (
+              <FilterChip
+                key={option.value}
+                label={option.label}
+                isActive={filters.prepTime === option.value}
+                onClick={() => toggleFilter("prepTime", option.value)}
+              />
+            ))}
+          </FilterSection>
+
+          <FilterSection label="활동성">
+            {[1, 2, 3, 4, 5].map((level) => (
+              <FilterChip
+                key={level}
+                label={ENERGY_LEVEL_LABELS[level]}
+                isActive={filters.energyLevel === level}
+                onClick={() => toggleFilter("energyLevel", level)}
+              />
+            ))}
+          </FilterSection>
+
+          <CharacterQualityFilter
+            selected={filters.characterQualities}
+            onChange={(next) => onFilterChange({ ...filters, characterQualities: next })}
+          />
+        </div>
+      )}
 
       {hasActiveFilters && (
         <button
@@ -158,6 +185,126 @@ export default function GameFilter({ filters, onFilterChange, characterQualities
           필터 초기화
         </button>
       )}
+    </div>
+  );
+}
+
+function CharacterQualityFilter({
+  selected,
+  onChange,
+}: {
+  selected: CharacterQuality[];
+  onChange: (next: CharacterQuality[]) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredQualities = CHARACTER_QUALITIES.filter((q) =>
+    q.includes(query)
+  );
+
+  function toggle(quality: CharacterQuality) {
+    if (selected.includes(quality)) {
+      onChange(selected.filter((q) => q !== quality));
+    } else {
+      onChange([...selected, quality]);
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:gap-3">
+      <span className="shrink-0 pt-1 text-xs font-medium text-muted-foreground sm:w-16">
+        품성
+      </span>
+      <div className="flex flex-1 flex-col gap-2">
+        {selected.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {selected.map((quality) => (
+              <button
+                key={quality}
+                onClick={() => toggle(quality)}
+                className="flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground"
+              >
+                {quality}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex h-8 items-center gap-1.5 rounded-lg border border-input bg-background px-3 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            품성 선택...
+          </button>
+
+          {isOpen && (
+            <div className="absolute left-0 top-full z-10 mt-1 w-64 rounded-lg border border-border bg-background shadow-lg">
+              <div className="border-b border-border p-2">
+                <input
+                  type="text"
+                  placeholder="품성 검색..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="h-7 w-full rounded border-none bg-muted px-2 text-xs
+                    placeholder:text-muted-foreground focus:outline-none"
+                  autoFocus
+                />
+              </div>
+              <div className="max-h-48 overflow-y-auto p-1">
+                {filteredQualities.length > 0 ? (
+                  filteredQualities.map((quality) => (
+                    <button
+                      key={quality}
+                      onClick={() => toggle(quality)}
+                      className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs transition-colors hover:bg-muted"
+                    >
+                      <div
+                        className={`flex size-4 shrink-0 items-center justify-center rounded border ${
+                          selected.includes(quality)
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-input"
+                        }`}
+                      >
+                        {selected.includes(quality) && (
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        )}
+                      </div>
+                      {quality}
+                    </button>
+                  ))
+                ) : (
+                  <p className="px-2 py-3 text-center text-xs text-muted-foreground">
+                    결과 없음
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
