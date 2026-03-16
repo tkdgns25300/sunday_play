@@ -78,7 +78,7 @@ type Game = {
   environments: Environment[];
   prepTime: PrepTime;
   groupSizes: GroupSize[];
-  biblicalThemes: string[];
+  characterQualities: CharacterQuality[];
   durationMinutes: number;
   difficulty: 1 | 2 | 3 | 4 | 5;
   steps: GameStep[];
@@ -106,7 +106,7 @@ const balloonRelay: Game = {
   environments: ["실내강당", "야외"],
   prepTime: "quick",
   groupSizes: ["md", "lg"],
-  biblicalThemes: ["협동", "사랑"],
+  characterQualities: ["책임감", "충성"],
   durationMinutes: 15,
   difficulty: 2,
   steps: [

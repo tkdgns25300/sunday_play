@@ -12,7 +12,7 @@ const bottleFlip: Game = {
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
   groupSizes: ["sm", "md"],
-  biblicalThemes: ["인내", "집중력"],
+  characterQualities: ["인내", "끈기", "절제"],
   durationMinutes: 10,
   difficulty: 2,
   requiredStaff: { min: 1, recommended: 2 },

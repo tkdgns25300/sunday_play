@@ -12,7 +12,7 @@ const colorFlipBingo: Game = {
   environments: ["실내강당", "야외"],
   prepTime: "quick",
   groupSizes: ["md", "lg"],
-  biblicalThemes: ["협동", "한 몸"],
+  characterQualities: ["책임감", "솔선", "충성"],
   durationMinutes: 15,
   difficulty: 2,
   requiredStaff: { min: 1, recommended: 2 },

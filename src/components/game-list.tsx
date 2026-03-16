@@ -12,11 +12,11 @@ const INITIAL_FILTERS: FilterState = {
   prepTime: null,
   groupSize: null,
   energyLevel: null,
-  biblicalThemes: [],
+  characterQualities: [],
 };
 
-const allBiblicalThemes = [
-  ...new Set(games.flatMap((game) => game.biblicalThemes)),
+const allCharacterQualities = [
+  ...new Set(games.flatMap((game) => game.characterQualities)),
 ];
 
 export default function GameList() {
@@ -29,7 +29,7 @@ export default function GameList() {
         const isMatch =
           game.title.toLowerCase().includes(query) ||
           game.summary.toLowerCase().includes(query) ||
-          game.biblicalThemes.some((theme) =>
+          game.characterQualities.some((theme) =>
             theme.toLowerCase().includes(query)
           );
         if (!isMatch) return false;
@@ -65,9 +65,9 @@ export default function GameList() {
       }
 
       if (
-        filters.biblicalThemes.length > 0 &&
-        !filters.biblicalThemes.some((theme) =>
-          game.biblicalThemes.includes(theme)
+        filters.characterQualities.length > 0 &&
+        !filters.characterQualities.some((theme) =>
+          game.characterQualities.includes(theme)
         )
       ) {
         return false;
@@ -79,7 +79,7 @@ export default function GameList() {
 
   return (
     <div className="flex flex-col gap-6">
-      <GameFilter filters={filters} onFilterChange={setFilters} biblicalThemes={allBiblicalThemes} />
+      <GameFilter filters={filters} onFilterChange={setFilters} characterQualities={allCharacterQualities} />
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">

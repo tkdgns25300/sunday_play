@@ -12,7 +12,7 @@ const wordSpeedQuiz: Game = {
   environments: ["실내교실"],
   prepTime: "none",
   groupSizes: ["sm", "md"],
-  biblicalThemes: ["지혜", "성경 지식"],
+  characterQualities: ["지혜", "경각심", "분별력"],
   durationMinutes: 15,
   difficulty: 3,
   requiredStaff: { min: 1, recommended: 2 },

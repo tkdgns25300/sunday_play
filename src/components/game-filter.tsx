@@ -1,6 +1,6 @@
 "use client";
 
-import { AgeGroup, Environment, PrepTime, GroupSize } from "@/types/game";
+import { AgeGroup, Environment, PrepTime, GroupSize, CharacterQuality } from "@/types/game";
 import {
   AGE_GROUP_OPTIONS,
   ENVIRONMENT_OPTIONS,
@@ -16,16 +16,16 @@ export type FilterState = {
   prepTime: PrepTime | null;
   groupSize: GroupSize | null;
   energyLevel: number | null;
-  biblicalThemes: string[];
+  characterQualities: CharacterQuality[];
 };
 
 type GameFilterProps = {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
-  biblicalThemes: string[];
+  characterQualities: CharacterQuality[];
 };
 
-export default function GameFilter({ filters, onFilterChange, biblicalThemes }: GameFilterProps) {
+export default function GameFilter({ filters, onFilterChange, characterQualities }: GameFilterProps) {
   function updateFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     onFilterChange({ ...filters, [key]: value });
   }
@@ -40,7 +40,7 @@ export default function GameFilter({ filters, onFilterChange, biblicalThemes }: 
     filters.prepTime !== null ||
     filters.groupSize !== null ||
     filters.energyLevel !== null ||
-    filters.biblicalThemes.length > 0;
+    filters.characterQualities.length > 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -123,17 +123,17 @@ export default function GameFilter({ filters, onFilterChange, biblicalThemes }: 
           ))}
         </FilterSection>
 
-        <FilterSection label="성경 주제">
-          {biblicalThemes.map((theme) => (
+        <FilterSection label="품성">
+          {characterQualities.map((theme) => (
             <FilterChip
               key={theme}
               label={theme}
-              isActive={filters.biblicalThemes.includes(theme)}
+              isActive={filters.characterQualities.includes(theme)}
               onClick={() => {
-                const next = filters.biblicalThemes.includes(theme)
-                  ? filters.biblicalThemes.filter((t) => t !== theme)
-                  : [...filters.biblicalThemes, theme];
-                onFilterChange({ ...filters, biblicalThemes: next });
+                const next = filters.characterQualities.includes(theme)
+                  ? filters.characterQualities.filter((t) => t !== theme)
+                  : [...filters.characterQualities, theme];
+                onFilterChange({ ...filters, characterQualities: next });
               }}
             />
           ))}
@@ -150,7 +150,7 @@ export default function GameFilter({ filters, onFilterChange, biblicalThemes }: 
               prepTime: null,
               groupSize: null,
               energyLevel: null,
-              biblicalThemes: [],
+              characterQualities: [],
             })
           }
           className="self-start text-sm text-muted-foreground transition-colors hover:text-foreground"

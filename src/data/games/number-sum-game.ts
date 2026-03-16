@@ -12,7 +12,7 @@ const numberSumGame: Game = {
   environments: ["실내강당", "야외"],
   prepTime: "quick",
   groupSizes: ["md", "lg"],
-  biblicalThemes: ["연합", "공동체"],
+  characterQualities: ["경청", "유연성", "베풂"],
   durationMinutes: 15,
   difficulty: 3,
   requiredStaff: { min: 1, recommended: 1 },
