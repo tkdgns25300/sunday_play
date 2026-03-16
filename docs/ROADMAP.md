@@ -36,7 +36,7 @@
 - [x] 테이블 생성 (profiles, subscriptions, bookmarks, reviews, free_view_logs)
 - [x] RLS(Row Level Security) 정책 설정
 - [x] Supabase 클라이언트 설정 (src/lib/supabase/)
-- [x] 환경 변수 설정 (.env.local)
+- [x] 환경 변수 설정 (.env)
 
 ### 0-4. 인증 설정
 
@@ -54,9 +54,7 @@
 ### 1-1. 게임 데이터 및 타입
 
 - [x] Game 타입 정의 (src/types/game.ts)
-- [x] 샘플 게임 데이터 3개 작성 (src/data/games/)
-- [ ] 게임 데이터 20~30개로 확충 (UI 확인 후 진행)
-- [ ] 카테고리별 균형 확인 (대상별, 활동성별 최소 3~5개씩)
+- [x] 샘플 게임 데이터 4개 작성 (src/data/games/)
 - [x] 썸네일 이미지 배치 (public/images/games/)
 
 ### 1-2. 공통 레이아웃
@@ -109,22 +107,33 @@
 
 > 목표: 구독 결제 시스템 연동 및 프리미엄 콘텐츠 제공
 
-### 2-1. Stripe 구독 결제
+### 2-1. 포트원 결제
 
-- [ ] Stripe 계정 생성 및 상품/가격 설정 ($5/월)
-- [ ] 결제 페이지 (Stripe Checkout 연동)
-- [ ] 구독 상태 관리 (Webhook으로 Supabase 동기화)
-- [ ] 구독/해지 플로우
-- [ ] 구독 상태에 따른 콘텐츠 접근 제어
+- [x] 포트원 V2 연동 (토스페이먼츠 PG)
+- [x] 결제 페이지 (/pricing) — 무료 vs 프리미엄 비교 UI
+- [x] 결제 검증 API (/api/payment/verify)
+- [x] Webhook 핸들러 (/api/payment/webhook)
+- [x] 모바일 리다이렉트 결제 플로우 (/payment/complete)
+- [x] 마이페이지 (/mypage) — 프로필, 구독 상태 확인
+- [x] DB 컬럼명 정리 (stripe_ → payment_)
+- [x] Webhook에 service role key 적용 (RLS 우회)
 
-### 2-2. 프리미엄 콘텐츠
+### 2-2. 게임 데이터 구조 개편 + 프리미엄 콘텐츠
 
+- [ ] Game 타입 재설계 (프리미엄 필드 포함)
+- [ ] 게임 상세 페이지 렌더링 리팩터링
 - [ ] 진행 스크립트 (한/영) 영역 — 구독자 전용
 - [ ] PPT 템플릿 / 활동지 PDF 다운로드 기능
 - [ ] Supabase Storage에 파일 업로드 및 관리
 - [ ] 다운로드 권한 체크 (구독 여부)
 
-### 2-3. 다국어 지원
+### 2-3. 게임 데이터 확충
+
+- [ ] 게임 데이터 20~30개로 확충
+- [ ] 카테고리별 균형 확인 (대상별, 활동성별 최소 3~5개씩)
+- [ ] 썸네일 이미지 생성 및 배치
+
+### 2-4. 다국어 지원 (보류)
 
 - [ ] i18n 라이브러리 설정 (next-intl 등)
 - [ ] 한국어/영어 번역 키 구조 설계
