@@ -6,7 +6,6 @@ import GameCard from "@/components/game-card";
 import GameFilter, { FilterState } from "@/components/game-filter";
 
 const INITIAL_FILTERS: FilterState = {
-  search: "",
   ageGroup: null,
   environment: null,
   prepTime: null,
@@ -14,10 +13,6 @@ const INITIAL_FILTERS: FilterState = {
   energyLevel: null,
   characterQualities: [],
 };
-
-const allCharacterQualities = [
-  ...new Set(games.flatMap((game) => game.characterQualities)),
-];
 
 export default function GameList() {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
@@ -68,7 +63,7 @@ export default function GameList() {
 
   return (
     <div className="flex flex-col gap-6">
-      <GameFilter filters={filters} onFilterChange={setFilters} characterQualities={allCharacterQualities} />
+      <GameFilter filters={filters} onFilterChange={setFilters} />
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">

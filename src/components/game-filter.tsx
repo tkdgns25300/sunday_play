@@ -12,7 +12,6 @@ import {
 } from "@/constants/game";
 
 export type FilterState = {
-  search: string;
   ageGroup: AgeGroup | null;
   environment: Environment | null;
   prepTime: PrepTime | null;
@@ -24,7 +23,6 @@ export type FilterState = {
 type GameFilterProps = {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
-  characterQualities: CharacterQuality[];
 };
 
 export default function GameFilter({ filters, onFilterChange }: GameFilterProps) {
@@ -69,65 +67,60 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
           onSelect={(value) => toggleFilter("environment", value)}
         />
 
-        <div className="ml-auto">
-          <button
-            onClick={() => setIsDetailOpen(!isDetailOpen)}
-            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
-              hasDetailFilters
-                ? "border-primary bg-primary/5 text-primary"
-                : "border-input text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="4" x2="4" y1="21" y2="14" />
-              <line x1="4" x2="4" y1="10" y2="3" />
-              <line x1="12" x2="12" y1="21" y2="12" />
-              <line x1="12" x2="12" y1="8" y2="3" />
-              <line x1="20" x2="20" y1="21" y2="16" />
-              <line x1="20" x2="20" y1="12" y2="3" />
-              <line x1="2" x2="6" y1="14" y2="14" />
-              <line x1="10" x2="14" y1="8" y2="8" />
-              <line x1="18" x2="22" y1="16" y2="16" />
-            </svg>
-            상세 필터
-            {hasDetailFilters && (
-              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] leading-none text-primary-foreground">
-                적용 중
-              </span>
-            )}
-          </button>
-        </div>
-      </div>
+        {isDetailOpen && (
+          <>
+            <DropdownFilter
+              label="준비 시간"
+              value={filters.prepTime}
+              options={PREP_TIME_OPTIONS}
+              onSelect={(value) => toggleFilter("prepTime", value)}
+            />
+            <DropdownFilter
+              label="활동성"
+              value={filters.energyLevel as number | null}
+              options={[1, 2, 3, 4, 5].map((level) => ({
+                value: level,
+                label: ENERGY_LEVEL_LABELS[level],
+              }))}
+              onSelect={(value) => toggleFilter("energyLevel", value)}
+            />
+            <CharacterQualityDropdown
+              selected={filters.characterQualities}
+              onChange={(next) => onFilterChange({ ...filters, characterQualities: next })}
+            />
+          </>
+        )}
 
-      {isDetailOpen && (
-        <div className="flex flex-wrap items-center gap-2">
-          <DropdownFilter
-            label="준비 시간"
-            value={filters.prepTime}
-            options={PREP_TIME_OPTIONS}
-            onSelect={(value) => toggleFilter("prepTime", value)}
-          />
-          <DropdownFilter
-            label="활동성"
-            value={filters.energyLevel as number | null}
-            options={[1, 2, 3, 4, 5].map((level) => ({
-              value: level,
-              label: ENERGY_LEVEL_LABELS[level],
-            }))}
-            onSelect={(value) => toggleFilter("energyLevel", value)}
-          />
-          <CharacterQualityDropdown
-            selected={filters.characterQualities}
-            onChange={(next) => onFilterChange({ ...filters, characterQualities: next })}
-          />
-        </div>
-      )}
+        <button
+          onClick={() => setIsDetailOpen(!isDetailOpen)}
+          className={`ml-auto flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+            hasDetailFilters
+              ? "border-primary text-primary"
+              : "border-input text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="4" x2="4" y1="21" y2="14" />
+            <line x1="4" x2="4" y1="10" y2="3" />
+            <line x1="12" x2="12" y1="21" y2="12" />
+            <line x1="12" x2="12" y1="8" y2="3" />
+            <line x1="20" x2="20" y1="21" y2="16" />
+            <line x1="20" x2="20" y1="12" y2="3" />
+            <line x1="2" x2="6" y1="14" y2="14" />
+            <line x1="10" x2="14" y1="8" y2="8" />
+            <line x1="18" x2="22" y1="16" y2="16" />
+          </svg>
+          {isDetailOpen ? "접기" : "상세"}
+          {hasDetailFilters && !isDetailOpen && (
+            <span className="size-1.5 rounded-full bg-primary" />
+          )}
+        </button>
+      </div>
 
       {hasActiveFilters && (
         <button
           onClick={() =>
             onFilterChange({
-              search: "",
               ageGroup: null,
               environment: null,
               prepTime: null,
@@ -291,16 +284,25 @@ function CharacterQualityDropdown({
 
       {isOpen && (
         <div className="absolute left-0 top-full z-10 mt-1 w-64 rounded-lg border border-border bg-background shadow-lg">
-          <div className="border-b border-border p-2">
+          <div className="flex items-center justify-between border-b border-border p-2">
             <input
               type="text"
               placeholder="품성 검색..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="h-7 w-full rounded border-none bg-muted px-2 text-xs
+              className="h-7 flex-1 rounded border-none bg-muted px-2 text-xs
                 placeholder:text-muted-foreground focus:outline-none"
               autoFocus
             />
+            <a
+              href="https://kr.iblp.org/49cq/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="49가지 품성 정의 보기"
+              className="ml-2 flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              ?
+            </a>
           </div>
           <div className="max-h-48 overflow-y-auto p-1">
             {filteredQualities.length > 0 ? (
