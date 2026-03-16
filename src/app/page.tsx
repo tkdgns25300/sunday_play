@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { games } from "@/data/games";
 import GameCard from "@/components/game-card";
+import { SUBSCRIPTION_PRICE_LABEL } from "@/constants/subscription";
 import {
-  FREE_MONTHLY_VIEW_LIMIT,
-  SUBSCRIPTION_PRICE_LABEL,
-} from "@/constants/subscription";
+  FREE_FEATURES as FREE_FEATURE_LIST,
+  PREMIUM_FEATURES as PREMIUM_FEATURE_LIST,
+} from "@/constants/pricing";
 
 const PREVIEW_GAMES = games.slice(0, 3);
 
@@ -105,7 +106,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-12 lg:py-20 text-center md:py-32">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-12 lg:py-25 text-center md:py-32">
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
             이번 주 레크레이션,
           </h1>
@@ -147,7 +148,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-25">
           <div className="mb-8 flex items-end justify-between">
             <div>
               <h2 className="text-2xl font-bold">인기 게임</h2>
@@ -176,7 +177,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-25">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold">이런 분들에게 추천해요</h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -203,7 +204,7 @@ export default function Home() {
       </section>
 
       <section className="bg-muted/20">
-        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 lg:py-25">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold">요금제</h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -215,10 +216,9 @@ export default function Home() {
               <h3 className="text-lg font-bold">무료</h3>
               <p className="mt-1 text-3xl font-bold">₩0</p>
               <ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-                <PricingItem>전체 게임 목록 탐색</PricingItem>
-                <PricingItem>필터로 게임 검색</PricingItem>
-                <PricingItem>상세 가이드 월 {FREE_MONTHLY_VIEW_LIMIT}개</PricingItem>
-                <PricingItem>말씀 연결 열람</PricingItem>
+                {FREE_FEATURE_LIST.map((f) => (
+                  <PricingItem key={f}>{f}</PricingItem>
+                ))}
               </ul>
               <div className="mt-auto pt-6">
                 <Link href="/games">
@@ -239,10 +239,9 @@ export default function Home() {
                 {SUBSCRIPTION_PRICE_LABEL}
               </p>
               <ul className="mt-6 flex flex-col gap-2 text-sm">
-                <PricingItem highlighted>모든 상세 가이드 무제한</PricingItem>
-                <PricingItem highlighted>진행 스크립트 (한/영)</PricingItem>
-                <PricingItem highlighted>PPT/PDF 자료 다운로드</PricingItem>
-                <PricingItem highlighted>모든 무료 기능 포함</PricingItem>
+                {PREMIUM_FEATURE_LIST.map((f) => (
+                  <PricingItem key={f} highlighted>{f}</PricingItem>
+                ))}
               </ul>
               <div className="mt-auto pt-6">
                 <Link href="/pricing">

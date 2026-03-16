@@ -7,27 +7,11 @@ import { createClient } from "@/lib/supabase/client";
 import { getSubscriptionStatus } from "@/lib/subscription";
 import { Button } from "@/components/ui/button";
 import {
-  FREE_MONTHLY_VIEW_LIMIT,
   SUBSCRIPTION_PRICE,
   SUBSCRIPTION_PRICE_LABEL,
   SUBSCRIPTION_NAME,
 } from "@/constants/subscription";
-
-const FREE_FEATURES = [
-  "전체 게임 목록 탐색",
-  "검색 및 필터",
-  `상세 가이드 월 ${FREE_MONTHLY_VIEW_LIMIT}개`,
-  "말씀 연결 열람",
-];
-
-const PREMIUM_FEATURES = [
-  "전체 게임 목록 탐색",
-  "검색 및 필터",
-  "모든 상세 가이드 무제한",
-  "말씀 연결 열람",
-  "진행 스크립트 (한/영)",
-  "PPT/PDF 자료 다운로드",
-];
+import { FREE_FEATURES, PREMIUM_FEATURES } from "@/constants/pricing";
 
 export default function PricingCard() {
   const router = useRouter();
@@ -100,7 +84,7 @@ export default function PricingCard() {
       } else {
         alert(`결제 검증 실패: ${result.message}`);
       }
-    } catch (error) {
+    } catch {
       alert("결제 중 오류가 발생했습니다.");
     } finally {
       setIsProcessing(false);
@@ -119,9 +103,15 @@ export default function PricingCard() {
           ))}
         </ul>
         <div className="mt-auto pt-6">
-          <Button variant="outline" className="w-full" disabled>
-            현재 이용 중
-          </Button>
+          {isSubscribed ? (
+            <Button variant="outline" className="w-full" disabled>
+              무료 플랜
+            </Button>
+          ) : (
+            <Button variant="outline" className="w-full" disabled>
+              현재 이용 중
+            </Button>
+          )}
         </div>
       </div>
 
@@ -133,8 +123,7 @@ export default function PricingCard() {
           </span>
         </div>
         <p className="mt-1 text-3xl font-bold">
-          ₩5,000
-          <span className="text-base font-normal text-muted-foreground">/월</span>
+          {SUBSCRIPTION_PRICE_LABEL}
         </p>
         <p className="mt-1 text-sm text-muted-foreground">모든 기능 무제한</p>
         <ul className="mt-6 flex flex-col gap-2">
