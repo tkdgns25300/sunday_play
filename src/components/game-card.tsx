@@ -1,13 +1,37 @@
 import Link from "next/link";
-import { Game } from "@/types/game";
-import { ENERGY_LEVEL_LABELS } from "@/constants/game";
+import { Game, GroupSize } from "@/types/game";
+
+const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
+  xs: { min: 1, max: 5 },
+  sm: { min: 5, max: 10 },
+  md: { min: 10, max: 30 },
+  lg: { min: 30, max: null },
+};
+
+const ALL_SIZES: GroupSize[] = ["xs", "sm", "md", "lg"];
+
+function getGroupSizeSummary(sizes: GroupSize[]): string {
+  if (sizes.length === ALL_SIZES.length) return "인원 무관";
+
+  const sorted = ALL_SIZES.filter((s) => sizes.includes(s));
+  const min = GROUP_SIZE_RANGE[sorted[0]].min;
+  const last = sorted[sorted.length - 1];
+  const max = GROUP_SIZE_RANGE[last].max;
+
+  if (max === null) return `${min}명 이상`;
+  if (min === max || sorted.length === 1) {
+    const range = GROUP_SIZE_RANGE[sorted[0]];
+    return range.max === null ? `${range.min}명 이상` : `${range.min}~${range.max}명`;
+  }
+  return `${min}~${max}명`;
+}
 
 type GameCardProps = {
   game: Game;
 };
 
 export default function GameCard({ game }: GameCardProps) {
-  const hasMaterials = game.materials.length > 0;
+  const groupSizeLabel = getGroupSizeSummary(game.groupSizes);
 
   return (
     <Link href={`/games/${game.id}`}>
@@ -27,22 +51,6 @@ export default function GameCard({ game }: GameCardProps) {
         </div>
 
         <div className="flex flex-1 flex-col gap-3 p-4">
-          <div className="flex flex-wrap gap-1.5">
-            {game.ageGroups.slice(0, 3).map((group) => (
-              <span
-                key={group}
-                className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
-              >
-                {group}
-              </span>
-            ))}
-            {game.ageGroups.length > 3 && (
-              <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                +{game.ageGroups.length - 3}
-              </span>
-            )}
-          </div>
-
           <h3 className="text-base font-semibold group-hover:text-primary">
             {game.title}
           </h3>
@@ -58,30 +66,15 @@ export default function GameCard({ game }: GameCardProps) {
               </svg>
               {game.durationMinutes}분
             </span>
-            <span className="flex items-center gap-1" title="활동성">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
-              </svg>
-              {ENERGY_LEVEL_LABELS[game.energyLevel]}
-            </span>
-            <span className="flex items-center gap-1" title="필요 심판수">
+            <span className="flex items-center gap-1" title="인원">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
-              심판 {game.requiredStaff.min === game.requiredStaff.recommended ? `${game.requiredStaff.min}명` : `${game.requiredStaff.min}~${game.requiredStaff.recommended}명`}
+              {groupSizeLabel}
             </span>
-            {hasMaterials && (
-              <span className="flex items-center gap-1" title="준비물 필요">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="m7.5 4.27 9 5.15" />
-                  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                  <path d="m3.3 7 8.7 5 8.7-5" />
-                  <path d="M12 22V12" />
-                </svg>
-                준비물
-              </span>
-            )}
           </div>
         </div>
       </article>
