@@ -113,9 +113,9 @@ export default function Home() {
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-primary md:text-5xl lg:text-6xl">
             고민 끝.
           </h1>
-          <p className="mt-2 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            50+개 이상의 게임 중 딱 맞는 게임을 찾고,
-            <br />
+          <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
+            50+개 이상의 게임 중 딱 맞는 게임을 찾고,{" "}
+            <br className="hidden md:block" />
             진행 스크립트·PPT·활동지까지 한 번에 준비하세요.
           </p>
           <div className="flex gap-3">

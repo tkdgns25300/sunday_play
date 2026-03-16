@@ -93,7 +93,7 @@ export default function PricingCard() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <div className="flex flex-col rounded-xl border border-border p-6">
+      <div className="flex flex-col rounded-xl border border-border p-6 lg:p-10">
         <h3 className="text-lg font-bold">무료</h3>
         <p className="mt-1 text-3xl font-bold">₩0</p>
         <p className="mt-1 text-sm text-muted-foreground">영원히 무료</p>
@@ -115,7 +115,7 @@ export default function PricingCard() {
         </div>
       </div>
 
-      <div className="flex flex-col rounded-xl border-2 border-primary p-6">
+      <div className="flex flex-col rounded-xl border-2 border-primary p-6 lg:p-10">
         <div className="flex items-center gap-2">
           <h3 className="text-lg font-bold">프리미엄</h3>
           <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
