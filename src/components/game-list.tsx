@@ -24,17 +24,6 @@ export default function GameList() {
 
   const filteredGames = useMemo(() => {
     return games.filter((game) => {
-      if (filters.search) {
-        const query = filters.search.toLowerCase();
-        const isMatch =
-          game.title.toLowerCase().includes(query) ||
-          game.summary.toLowerCase().includes(query) ||
-          game.characterQualities.some((theme) =>
-            theme.toLowerCase().includes(query)
-          );
-        if (!isMatch) return false;
-      }
-
       if (filters.ageGroup && !game.ageGroups.includes(filters.ageGroup)) {
         return false;
       }
@@ -66,8 +55,8 @@ export default function GameList() {
 
       if (
         filters.characterQualities.length > 0 &&
-        !filters.characterQualities.some((theme) =>
-          game.characterQualities.includes(theme)
+        !filters.characterQualities.some((q) =>
+          game.characterQualities.includes(q)
         )
       ) {
         return false;
@@ -96,7 +85,7 @@ export default function GameList() {
       ) : (
         <div className="flex flex-col items-center gap-3 py-16 text-center">
           <div className="text-4xl">🔍</div>
-          <p className="text-lg font-medium">검색 결과가 없습니다</p>
+          <p className="text-lg font-medium">조건에 맞는 게임이 없습니다</p>
           <p className="text-sm text-muted-foreground">
             다른 필터 조합을 시도해보세요.
           </p>

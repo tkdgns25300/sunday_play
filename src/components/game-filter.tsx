@@ -30,10 +30,6 @@ type GameFilterProps = {
 export default function GameFilter({ filters, onFilterChange }: GameFilterProps) {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-  function updateFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
-    onFilterChange({ ...filters, [key]: value });
-  }
-
   function toggleFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     onFilterChange({ ...filters, [key]: filters[key] === value ? null : value });
   }
@@ -53,114 +49,74 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
-        <input
-          type="text"
-          placeholder="게임 이름 또는 키워드로 검색..."
-          value={filters.search}
-          onChange={(e) => updateFilter("search", e.target.value)}
-          className="h-10 w-full rounded-lg border border-input bg-background pl-10 pr-4 text-sm
-            placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      <div className="flex flex-wrap items-center gap-2">
+        <DropdownFilter
+          label="대상"
+          value={filters.ageGroup}
+          options={AGE_GROUP_OPTIONS}
+          onSelect={(value) => toggleFilter("ageGroup", value)}
         />
+        <DropdownFilter
+          label="인원"
+          value={filters.groupSize}
+          options={GROUP_SIZE_OPTIONS}
+          onSelect={(value) => toggleFilter("groupSize", value)}
+        />
+        <DropdownFilter
+          label="장소"
+          value={filters.environment}
+          options={ENVIRONMENT_OPTIONS}
+          onSelect={(value) => toggleFilter("environment", value)}
+        />
+
+        <div className="ml-auto">
+          <button
+            onClick={() => setIsDetailOpen(!isDetailOpen)}
+            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+              hasDetailFilters
+                ? "border-primary bg-primary/5 text-primary"
+                : "border-input text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="4" x2="4" y1="21" y2="14" />
+              <line x1="4" x2="4" y1="10" y2="3" />
+              <line x1="12" x2="12" y1="21" y2="12" />
+              <line x1="12" x2="12" y1="8" y2="3" />
+              <line x1="20" x2="20" y1="21" y2="16" />
+              <line x1="20" x2="20" y1="12" y2="3" />
+              <line x1="2" x2="6" y1="14" y2="14" />
+              <line x1="10" x2="14" y1="8" y2="8" />
+              <line x1="18" x2="22" y1="16" y2="16" />
+            </svg>
+            상세 필터
+            {hasDetailFilters && (
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] leading-none text-primary-foreground">
+                적용 중
+              </span>
+            )}
+          </button>
+        </div>
       </div>
-
-      <div className="flex flex-col gap-3">
-        <FilterSection label="대상">
-          {AGE_GROUP_OPTIONS.map((option) => (
-            <FilterChip
-              key={option.value}
-              label={option.label}
-              isActive={filters.ageGroup === option.value}
-              onClick={() => toggleFilter("ageGroup", option.value)}
-            />
-          ))}
-        </FilterSection>
-
-        <FilterSection label="인원">
-          {GROUP_SIZE_OPTIONS.map((option) => (
-            <FilterChip
-              key={option.value}
-              label={option.label}
-              isActive={filters.groupSize === option.value}
-              onClick={() => toggleFilter("groupSize", option.value)}
-            />
-          ))}
-        </FilterSection>
-
-        <FilterSection label="장소">
-          {ENVIRONMENT_OPTIONS.map((option) => (
-            <FilterChip
-              key={option.value}
-              label={option.label}
-              isActive={filters.environment === option.value}
-              onClick={() => toggleFilter("environment", option.value)}
-            />
-          ))}
-        </FilterSection>
-      </div>
-
-      <button
-        onClick={() => setIsDetailOpen(!isDetailOpen)}
-        className="flex items-center gap-1.5 self-start text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={`transition-transform ${isDetailOpen ? "rotate-180" : ""}`}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-        상세 필터
-        {hasDetailFilters && (
-          <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] text-primary-foreground">
-            적용 중
-          </span>
-        )}
-      </button>
 
       {isDetailOpen && (
-        <div className="flex flex-col gap-3">
-          <FilterSection label="준비 시간">
-            {PREP_TIME_OPTIONS.map((option) => (
-              <FilterChip
-                key={option.value}
-                label={option.label}
-                isActive={filters.prepTime === option.value}
-                onClick={() => toggleFilter("prepTime", option.value)}
-              />
-            ))}
-          </FilterSection>
-
-          <FilterSection label="활동성">
-            {[1, 2, 3, 4, 5].map((level) => (
-              <FilterChip
-                key={level}
-                label={ENERGY_LEVEL_LABELS[level]}
-                isActive={filters.energyLevel === level}
-                onClick={() => toggleFilter("energyLevel", level)}
-              />
-            ))}
-          </FilterSection>
-
-          <CharacterQualityFilter
+        <div className="flex flex-wrap items-center gap-2">
+          <DropdownFilter
+            label="준비 시간"
+            value={filters.prepTime}
+            options={PREP_TIME_OPTIONS}
+            onSelect={(value) => toggleFilter("prepTime", value)}
+          />
+          <DropdownFilter
+            label="활동성"
+            value={filters.energyLevel as number | null}
+            options={[1, 2, 3, 4, 5].map((level) => ({
+              value: level,
+              label: ENERGY_LEVEL_LABELS[level],
+            }))}
+            onSelect={(value) => toggleFilter("energyLevel", value)}
+          />
+          <CharacterQualityDropdown
             selected={filters.characterQualities}
             onChange={(next) => onFilterChange({ ...filters, characterQualities: next })}
           />
@@ -171,7 +127,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
         <button
           onClick={() =>
             onFilterChange({
-              search: filters.search,
+              search: "",
               ageGroup: null,
               environment: null,
               prepTime: null,
@@ -189,7 +145,88 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
   );
 }
 
-function CharacterQualityFilter({
+function DropdownFilter<T extends string | number>({
+  label,
+  value,
+  options,
+  onSelect,
+}: {
+  label: string;
+  value: T | null;
+  options: { value: T; label: string }[];
+  onSelect: (value: T) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedLabel = options.find((o) => o.value === value)?.label;
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+          value
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+        }`}
+      >
+        {selectedLabel ?? label}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="absolute left-0 top-full z-10 mt-1 min-w-32 rounded-lg border border-border bg-background py-1 shadow-lg">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => {
+                onSelect(option.value);
+                setIsOpen(false);
+              }}
+              className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-muted ${
+                value === option.value ? "font-medium text-primary" : "text-foreground"
+              }`}
+            >
+              {value === option.value && (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              )}
+              <span className={value === option.value ? "" : "pl-5"}>
+                {option.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CharacterQualityDropdown({
   selected,
   onChange,
 }: {
@@ -198,11 +235,11 @@ function CharacterQualityFilter({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     }
@@ -222,129 +259,82 @@ function CharacterQualityFilter({
     }
   }
 
+  const buttonLabel = selected.length > 0
+    ? `품성 (${selected.length})`
+    : "품성";
+
   return (
-    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:gap-3">
-      <span className="shrink-0 pt-1 text-xs font-medium text-muted-foreground sm:w-16">
-        품성
-      </span>
-      <div className="flex flex-1 flex-col gap-2">
-        {selected.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {selected.map((quality) => (
-              <button
-                key={quality}
-                onClick={() => toggle(quality)}
-                className="flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-foreground"
-              >
-                {quality}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              </button>
-            ))}
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+          selected.length > 0
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+        }`}
+      >
+        {buttonLabel}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="absolute left-0 top-full z-10 mt-1 w-64 rounded-lg border border-border bg-background shadow-lg">
+          <div className="border-b border-border p-2">
+            <input
+              type="text"
+              placeholder="품성 검색..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="h-7 w-full rounded border-none bg-muted px-2 text-xs
+                placeholder:text-muted-foreground focus:outline-none"
+              autoFocus
+            />
           </div>
-        )}
-
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex h-8 items-center gap-1.5 rounded-lg border border-input bg-background px-3 text-xs text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            품성 선택...
-          </button>
-
-          {isOpen && (
-            <div className="absolute left-0 top-full z-10 mt-1 w-64 rounded-lg border border-border bg-background shadow-lg">
-              <div className="border-b border-border p-2">
-                <input
-                  type="text"
-                  placeholder="품성 검색..."
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  className="h-7 w-full rounded border-none bg-muted px-2 text-xs
-                    placeholder:text-muted-foreground focus:outline-none"
-                  autoFocus
-                />
-              </div>
-              <div className="max-h-48 overflow-y-auto p-1">
-                {filteredQualities.length > 0 ? (
-                  filteredQualities.map((quality) => (
-                    <button
-                      key={quality}
-                      onClick={() => toggle(quality)}
-                      className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs transition-colors hover:bg-muted"
-                    >
-                      <div
-                        className={`flex size-4 shrink-0 items-center justify-center rounded border ${
-                          selected.includes(quality)
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-input"
-                        }`}
-                      >
-                        {selected.includes(quality) && (
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                        )}
-                      </div>
-                      {quality}
-                    </button>
-                  ))
-                ) : (
-                  <p className="px-2 py-3 text-center text-xs text-muted-foreground">
-                    결과 없음
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
+          <div className="max-h-48 overflow-y-auto p-1">
+            {filteredQualities.length > 0 ? (
+              filteredQualities.map((quality) => (
+                <button
+                  key={quality}
+                  onClick={() => toggle(quality)}
+                  className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs transition-colors hover:bg-muted"
+                >
+                  <div
+                    className={`flex size-4 shrink-0 items-center justify-center rounded border ${
+                      selected.includes(quality)
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-input"
+                    }`}
+                  >
+                    {selected.includes(quality) && (
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    )}
+                  </div>
+                  {quality}
+                </button>
+              ))
+            ) : (
+              <p className="px-2 py-3 text-center text-xs text-muted-foreground">
+                결과 없음
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
 
-function FilterSection({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
-      <span className="shrink-0 text-xs font-medium text-muted-foreground sm:w-16">
-        {label}
-      </span>
-      <div className="flex flex-wrap gap-1.5">{children}</div>
-    </div>
-  );
-}
-
-function FilterChip({
-  label,
-  isActive,
-  onClick,
-}: {
-  label: string;
-  isActive: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-        isActive
-          ? "bg-primary text-primary-foreground"
-          : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
