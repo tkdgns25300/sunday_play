@@ -1,13 +1,37 @@
 import Link from "next/link";
-import { Game } from "@/types/game";
+import { Game, GroupSize } from "@/types/game";
 import {
   ENERGY_LEVEL_LABELS,
   DIFFICULTY_LABELS,
   PREP_TIME_OPTIONS,
-  GROUP_SIZE_OPTIONS,
 } from "@/constants/game";
 import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
+
+const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
+  xs: { min: 1, max: 5 },
+  sm: { min: 5, max: 10 },
+  md: { min: 10, max: 30 },
+  lg: { min: 30, max: null },
+};
+
+const ALL_SIZES: GroupSize[] = ["xs", "sm", "md", "lg"];
+
+function getGroupSizeSummary(sizes: GroupSize[]): string {
+  if (sizes.length === ALL_SIZES.length) return "인원 무관";
+
+  const sorted = ALL_SIZES.filter((s) => sizes.includes(s));
+  const min = GROUP_SIZE_RANGE[sorted[0]].min;
+  const last = sorted[sorted.length - 1];
+  const max = GROUP_SIZE_RANGE[last].max;
+
+  if (max === null) return `${min}명 이상`;
+  if (min === max || sorted.length === 1) {
+    const range = GROUP_SIZE_RANGE[sorted[0]];
+    return range.max === null ? `${range.min}명 이상` : `${range.min}~${range.max}명`;
+  }
+  return `${min}~${max}명`;
+}
 
 type AccessLevel = "full" | "login_required" | "limit_reached" | "loading";
 
@@ -24,10 +48,7 @@ export default function GameDetail({
 }: GameDetailProps) {
   const prepTimeLabel =
     PREP_TIME_OPTIONS.find((o) => o.value === game.prepTime)?.label ?? "";
-  const groupSizeLabels = game.groupSizes
-    .map((s) => GROUP_SIZE_OPTIONS.find((o) => o.value === s)?.label)
-    .filter(Boolean)
-    .join(", ");
+  const groupSizeLabel = getGroupSizeSummary(game.groupSizes);
 
   const isLocked = accessLevel === "login_required" || accessLevel === "limit_reached";
   const isLoading = accessLevel === "loading";
@@ -45,6 +66,16 @@ export default function GameDetail({
           게임 목록으로
         </Link>
       </div>
+
+      {game.thumbnailUrl && (
+        <div className="overflow-hidden rounded-xl">
+          <img
+            src={game.thumbnailUrl}
+            alt={game.title}
+            className="w-full object-cover"
+          />
+        </div>
+      )}
 
       <section className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-1.5">
@@ -64,18 +95,26 @@ export default function GameDetail({
               {env}
             </span>
           ))}
+          {game.characterQualities.map((quality) => (
+            <span
+              key={quality}
+              className="rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700"
+            >
+              {quality}
+            </span>
+          ))}
         </div>
 
         <h1 className="text-3xl font-bold">{game.title}</h1>
         <p className="text-muted-foreground">{game.description}</p>
 
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <MetaItem label="소요 시간" value={`${game.durationMinutes}분`} />
-          <MetaItem label="활동성" value={ENERGY_LEVEL_LABELS[game.energyLevel]} />
-          <MetaItem label="난이도" value={DIFFICULTY_LABELS[game.difficulty]} />
-          <MetaItem label="인원" value={groupSizeLabels} />
-          <MetaItem label="준비" value={prepTimeLabel} />
-          <MetaItem
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+          <MetaCard label="소요 시간" value={`${game.durationMinutes}분`} />
+          <MetaCard label="인원" value={groupSizeLabel} />
+          <MetaCard label="활동성" value={ENERGY_LEVEL_LABELS[game.energyLevel]} />
+          <MetaCard label="난이도" value={DIFFICULTY_LABELS[game.difficulty]} />
+          <MetaCard label="준비" value={prepTimeLabel} />
+          <MetaCard
             label="심판"
             value={
               game.requiredStaff.min === game.requiredStaff.recommended
@@ -91,30 +130,6 @@ export default function GameDetail({
           </p>
         )}
       </section>
-
-      {game.bibleConnections.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <SectionTitle>말씀 연결</SectionTitle>
-          <div className="flex flex-col gap-4">
-            {game.bibleConnections.map((connection, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-primary/20 bg-primary/5 p-4"
-              >
-                <p className="text-xs font-medium text-primary">
-                  {connection.verseReference}
-                </p>
-                <blockquote className="mt-2 border-l-2 border-primary/30 pl-3 text-sm italic text-foreground">
-                  {connection.verseText}
-                </blockquote>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {connection.messageSummary}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {isLoading && (
         <div className="flex flex-col gap-3">
@@ -201,6 +216,30 @@ export default function GameDetail({
               </div>
             </section>
           )}
+
+          {game.bibleConnections.length > 0 && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>말씀 연결</SectionTitle>
+              <div className="flex flex-col gap-4">
+                {game.bibleConnections.map((connection, index) => (
+                  <div
+                    key={index}
+                    className="rounded-xl border border-primary/20 bg-primary/5 p-4"
+                  >
+                    <p className="text-xs font-medium text-primary">
+                      {connection.verseReference}
+                    </p>
+                    <blockquote className="mt-2 border-l-2 border-primary/30 pl-3 text-sm italic text-foreground">
+                      {connection.verseText}
+                    </blockquote>
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      {connection.messageSummary}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </>
       )}
     </div>
@@ -213,11 +252,11 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MetaItem({ label, value }: { label: string; value: string }) {
+function MetaCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-xs text-muted-foreground/70">{label}</span>
-      <span className="text-sm font-medium text-foreground">{value}</span>
+    <div className="flex flex-col gap-1 rounded-lg border border-border px-3 py-2">
+      <span className="text-[11px] text-muted-foreground">{label}</span>
+      <span className="text-sm font-semibold text-foreground">{value}</span>
     </div>
   );
 }
