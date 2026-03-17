@@ -94,7 +94,7 @@ export default function MypageContent() {
                 <span className="text-sm font-medium">프리미엄 구독 중</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                {SUBSCRIPTION_PRICE_LABEL} · 다음 결제일: {periodEnd}
+                {SUBSCRIPTION_PRICE_LABEL} · 만료일: {periodEnd}
               </p>
             </div>
           ) : (
@@ -119,17 +119,16 @@ export default function MypageContent() {
         </div>
       </section>
 
-      <section>
-        <Button
-          variant="outline"
-          onClick={async () => {
-            await signOut();
-            router.push("/");
-          }}
-        >
-          로그아웃
-        </Button>
-      </section>
+      <Button
+        variant="outline"
+        className="w-full border-red-200 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600"
+        onClick={async () => {
+          await signOut();
+          router.push("/");
+        }}
+      >
+        로그아웃
+      </Button>
     </div>
   );
 }
