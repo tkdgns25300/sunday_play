@@ -74,5 +74,6 @@ export type Game = {
   materials: GameMaterial[];
   bibleConnections: BibleConnection[];
   variations: GameVariation[];
+  safetyNotes: string[];
   assets: GameAsset[];
 };

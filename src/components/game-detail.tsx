@@ -240,6 +240,21 @@ export default function GameDetail({
               </div>
             </section>
           )}
+
+          {game.safetyNotes.length > 0 && (
+            <div className="flex flex-col gap-2">
+              {game.safetyNotes.map((note, index) => (
+                <div key={index} className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground/70">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-yellow-400">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+                    <path d="M12 9v4" />
+                    <path d="M12 17h.01" />
+                  </svg>
+                  {note}
+                </div>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>

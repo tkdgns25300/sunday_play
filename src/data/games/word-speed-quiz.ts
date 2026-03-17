@@ -47,6 +47,9 @@ const wordSpeedQuiz: Game = {
     },
   ],
   variations: [],
+  safetyNotes: [
+    "정답을 외칠 때 소리가 커질 수 있으므로 주변 공간을 고려하세요.",
+  ],
   assets: [],
 };
 

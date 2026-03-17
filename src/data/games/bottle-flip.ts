@@ -52,6 +52,10 @@ const bottleFlip: Game = {
     },
   ],
   variations: [],
+  safetyNotes: [
+    "물병이 튀어 주변 사람에게 맞지 않도록 적절한 간격을 유지하세요.",
+    "물이 쏟아질 수 있으니 뚜껑을 확실히 닫아주세요.",
+  ],
   assets: [],
 };
 
