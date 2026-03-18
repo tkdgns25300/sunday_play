@@ -65,13 +65,21 @@ export default function MypageContent() {
         <h2 className="text-lg font-bold">내 정보</h2>
         <div className="rounded-xl border border-border p-6">
           <div className="flex items-center gap-4">
-            {user.user_metadata.avatar_url && (
+            {user.user_metadata.avatar_url ? (
               <img
                 src={user.user_metadata.avatar_url}
                 alt="프로필"
                 className="size-12 rounded-full"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                  e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                }}
               />
-            )}
+            ) : null}
+            <div className={`flex size-12 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary ${user.user_metadata.avatar_url ? "hidden" : ""}`}>
+              {(user.user_metadata.full_name ?? "U").charAt(0)}
+            </div>
             <div>
               <p className="font-medium">
                 {user.user_metadata.full_name ?? "사용자"}
