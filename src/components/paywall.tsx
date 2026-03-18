@@ -15,11 +15,11 @@ export default function Paywall({ type, viewCount }: PaywallProps) {
           <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
-        <h3 className="text-lg font-bold">로그인이 필요해요</h3>
+        <h3 className="text-lg font-bold">더 자세한 내용이 궁금하신가요?</h3>
         <p className="text-sm text-muted-foreground">
-          상세 진행 가이드를 보려면 로그인하세요.
+          로그인하시면 준비물, 진행 방법 등
           <br />
-          매월 {FREE_MONTHLY_VIEW_LIMIT}개 게임을 무료로 열람할 수 있어요.
+          상세 가이드를 확인할 수 있어요.
         </p>
         <Link href="/login">
           <Button>로그인하기</Button>
@@ -39,9 +39,9 @@ export default function Paywall({ type, viewCount }: PaywallProps) {
         <br />
         구독하면 모든 게임 가이드를 무제한으로 이용할 수 있어요.
       </p>
-      <Button disabled>
-        구독하기 (준비 중)
-      </Button>
+      <Link href="/pricing">
+        <Button>구독하기</Button>
+      </Link>
     </div>
   );
 }

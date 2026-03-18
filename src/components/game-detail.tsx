@@ -131,6 +131,8 @@ export default function GameDetail({
         )}
       </section>
 
+      <DownloadsSection game={game} accessLevel={accessLevel} />
+
       {isLoading && (
         <div className="flex flex-col gap-3">
           <div className="h-6 w-20 animate-pulse rounded bg-muted" />
@@ -144,8 +146,6 @@ export default function GameDetail({
           viewCount={viewCount}
         />
       )}
-
-      <DownloadsSection game={game} accessLevel={accessLevel} />
 
       {accessLevel === "full" && (
         <>
@@ -346,8 +346,8 @@ function DownloadsSection({ game, accessLevel }: { game: Game; accessLevel: Acce
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-4 py-4">
-          <div className="grid w-full grid-cols-3 gap-2 opacity-40 blur-[2px]">
+        <div className="relative min-h-48">
+          <div className="grid w-full grid-cols-3 gap-2 opacity-30 blur-[2px]">
             {game.assets.map((asset) => (
               <DownloadCard
                 key={asset.fileName}
@@ -365,9 +365,9 @@ function DownloadsSection({ game, accessLevel }: { game: Game; accessLevel: Acce
               />
             ))}
           </div>
-          <div className="flex flex-col items-center gap-2 text-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
-              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
               <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
             <p className="text-sm font-medium">
