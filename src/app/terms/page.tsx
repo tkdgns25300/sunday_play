@@ -100,7 +100,28 @@ export default function TermsPage() {
           </p>
         </Section>
 
-        <Section title="제9조 (면책 조항)">
+        <Section title="제9조 (저작권 및 자료 이용)">
+          <ol className="flex list-decimal flex-col gap-2 pl-5">
+            <li>
+              서비스에서 제공하는 모든 콘텐츠(PPT, PDF, 스크립트, 활동지 등)의
+              저작권은 회사에 있습니다.
+            </li>
+            <li>
+              구독자는 다운로드한 자료를 본인이 속한 교회 및 단체 내에서 비상업적
+              목적으로 자유롭게 사용할 수 있습니다.
+            </li>
+            <li>
+              자료의 무단 복제, 재배포, 판매, 공유 플랫폼 업로드 등은 엄격히
+              금지됩니다.
+            </li>
+            <li>
+              구독 해지 후에도 이미 다운로드한 자료는 개인 사용 목적으로 보관할 수
+              있으나, 재배포는 허용되지 않습니다.
+            </li>
+          </ol>
+        </Section>
+
+        <Section title="제10조 (면책 조항)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
             <li>
               회사는 이용자가 서비스를 통해 얻은 정보를 활용하여 발생한 결과에
@@ -113,7 +134,7 @@ export default function TermsPage() {
           </ol>
         </Section>
 
-        <Section title="제10조 (준거법 및 관할법원)">
+        <Section title="제11조 (준거법 및 관할법원)">
           <p>
             이 약관의 해석 및 분쟁 해결은 대한민국 법률에 따르며, 서비스 이용과
             관련한 분쟁의 관할법원은 회사의 소재지를 관할하는 법원으로 합니다.
