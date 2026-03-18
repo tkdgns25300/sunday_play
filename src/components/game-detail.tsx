@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { Game, GroupSize } from "@/types/game";
 import {
@@ -148,8 +145,28 @@ export default function GameDetail({
         />
       )}
 
+      <DownloadsSection game={game} accessLevel={accessLevel} />
+
       {accessLevel === "full" && (
         <>
+
+          <section className="flex flex-col gap-3">
+            <SectionTitle>진행 방법</SectionTitle>
+            <ol className="flex flex-col gap-4">
+              {game.steps.map((step, index) => (
+                <li key={index} className="flex gap-4">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                    {index + 1}
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1 pt-1">
+                    <h4 className="font-semibold">{step.title}</h4>
+                    <p className="text-sm text-muted-foreground">{step.content}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
           {game.materials.length > 0 && (
             <section className="flex flex-col gap-3">
               <SectionTitle>준비물</SectionTitle>
@@ -179,15 +196,6 @@ export default function GameDetail({
                           선택
                         </span>
                       )}
-                      {material.downloadPath && (
-                        <a
-                          href={material.downloadPath}
-                          download
-                          className="rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
-                        >
-                          다운로드
-                        </a>
-                      )}
                       {material.purchaseUrl && (
                         <a
                           href={material.purchaseUrl}
@@ -202,34 +210,6 @@ export default function GameDetail({
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-
-          <StepsSection steps={game.steps} />
-
-          {game.assets.length > 0 && (
-            <section className="flex flex-col gap-3">
-              <SectionTitle>자료 다운로드</SectionTitle>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {game.assets.map((asset) => (
-                  <a
-                    key={asset.fileName}
-                    href={asset.storagePath}
-                    download
-                    className="flex items-center gap-3 rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:bg-muted/50"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-primary">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                      <polyline points="7 10 12 15 17 10" />
-                      <line x1="12" x2="12" y1="15" y2="3" />
-                    </svg>
-                    <div className="flex flex-1 flex-col">
-                      <span className="font-medium">{asset.fileName}</span>
-                      <span className="text-xs text-muted-foreground uppercase">{asset.fileType}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
             </section>
           )}
 
@@ -311,63 +291,101 @@ function MetaCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-function StepsSection({ steps }: { steps: Game["steps"] }) {
-  const hasScript = steps.some((s) => s.scriptKo || s.scriptEn);
-  const [scriptLang, setScriptLang] = useState<"ko" | "en" | null>(null);
+function DownloadCard({ href, name, type }: { href: string; name: string; type: string }) {
+  return (
+    <a
+      href={href}
+      download
+      className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center transition-colors hover:bg-amber-50"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" x2="12" y1="15" y2="3" />
+      </svg>
+      <span className="text-xs font-medium leading-tight">{name}</span>
+      <span className="text-[10px] text-muted-foreground uppercase">{type}</span>
+    </a>
+  );
+}
+
+function DownloadsSection({ game, accessLevel }: { game: Game; accessLevel: AccessLevel }) {
+  const downloadMaterials = game.materials.filter((m) => m.downloadPath);
+  const hasDownloads = game.assets.length > 0 || downloadMaterials.length > 0;
+
+  if (!hasDownloads) return null;
+
+  const isUnlocked = accessLevel === "full";
 
   return (
-    <section className="flex flex-col gap-3">
-      <div className="flex items-center justify-between">
-        <SectionTitle>진행 방법</SectionTitle>
-        {hasScript && (
-          <div className="flex items-center gap-1 rounded-lg border border-border p-0.5">
-            <button
-              onClick={() => setScriptLang(scriptLang === "ko" ? null : "ko")}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-                scriptLang === "ko"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              스크립트 (한)
-            </button>
-            <button
-              onClick={() => setScriptLang(scriptLang === "en" ? null : "en")}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-                scriptLang === "en"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Script (EN)
-            </button>
-          </div>
-        )}
+    <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 lg:p-5">
+      <div className="flex items-center gap-2">
+        <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
+        <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-medium text-white">
+          프리미엄
+        </span>
       </div>
-      <ol className="flex flex-col gap-4">
-        {steps.map((step, index) => {
-          const script = scriptLang === "ko" ? step.scriptKo : scriptLang === "en" ? step.scriptEn : null;
 
-          return (
-            <li key={index} className="flex gap-4">
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                {index + 1}
-              </div>
-              <div className="flex flex-1 flex-col gap-1 pt-1">
-                <h4 className="font-semibold">{step.title}</h4>
-                <p className="text-sm text-muted-foreground">{step.content}</p>
-                {script && (
-                  <div className="mt-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
-                    <p className="whitespace-pre-line text-sm leading-relaxed text-foreground">
-                      {script}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+      {isUnlocked ? (
+        <div className="grid grid-cols-3 gap-2">
+          {game.assets.map((asset) => (
+            <DownloadCard
+              key={asset.fileName}
+              href={asset.storagePath}
+              name={asset.fileName}
+              type={asset.fileType}
+            />
+          ))}
+          {downloadMaterials.map((material) => (
+            <DownloadCard
+              key={material.name}
+              href={material.downloadPath!}
+              name={material.name}
+              type="pdf"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-4 py-4">
+          <div className="grid w-full grid-cols-3 gap-2 opacity-40 blur-[2px]">
+            {game.assets.map((asset) => (
+              <DownloadCard
+                key={asset.fileName}
+                href="#"
+                name={asset.fileName}
+                type={asset.fileType}
+              />
+            ))}
+            {downloadMaterials.map((material) => (
+              <DownloadCard
+                key={material.name}
+                href="#"
+                name={material.name}
+                type="pdf"
+              />
+            ))}
+          </div>
+          <div className="flex flex-col items-center gap-2 text-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <p className="text-sm font-medium">
+              프리미엄 구독으로 진행 자료를 다운로드하세요
+            </p>
+            <p className="text-xs text-muted-foreground">
+              PPT, 대본 스크립트, 활동지 등 모든 자료 무제한 이용
+            </p>
+            <Link
+              href="/pricing"
+              className="mt-1 rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
+            >
+              ₩5,000/월 구독하기
+            </Link>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
+

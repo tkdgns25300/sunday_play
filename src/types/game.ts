@@ -29,7 +29,6 @@ export type GameStep = {
   title: string;
   content: string;
   scriptKo?: string;
-  scriptEn?: string;
 };
 
 export type GameMaterial = {
