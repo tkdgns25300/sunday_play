@@ -57,3 +57,31 @@ export async function logGameView(
       { onConflict: "user_id,game_id" }
     );
 }
+
+export async function getMonthlyDownloadedGames(
+  supabase: SupabaseClient,
+  userId: string
+): Promise<string[]> {
+  const now = new Date();
+  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+
+  const { data } = await supabase
+    .from("download_logs")
+    .select("game_id")
+    .eq("user_id", userId)
+    .gte("downloaded_at", firstDayOfMonth);
+
+  const uniqueGameIds = [...new Set((data ?? []).map((d) => d.game_id))];
+  return uniqueGameIds;
+}
+
+export async function logDownload(
+  supabase: SupabaseClient,
+  userId: string,
+  gameId: string,
+  fileName: string
+): Promise<void> {
+  await supabase
+    .from("download_logs")
+    .insert({ user_id: userId, game_id: gameId, file_name: fileName });
+}

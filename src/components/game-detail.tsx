@@ -7,6 +7,7 @@ import {
 } from "@/constants/game";
 import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
+import DownloadsSection from "@/components/downloads-section";
 
 const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
   xs: { min: 1, max: 5 },
@@ -291,101 +292,4 @@ function MetaCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-function DownloadCard({ href, name, type }: { href: string; name: string; type: string }) {
-  return (
-    <a
-      href={href}
-      download
-      className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center transition-colors hover:bg-amber-50"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" x2="12" y1="15" y2="3" />
-      </svg>
-      <span className="text-xs font-medium leading-tight">{name}</span>
-      <span className="text-[10px] text-muted-foreground uppercase">{type}</span>
-    </a>
-  );
-}
-
-function DownloadsSection({ game, accessLevel }: { game: Game; accessLevel: AccessLevel }) {
-  const downloadMaterials = game.materials.filter((m) => m.downloadPath);
-  const hasDownloads = game.assets.length > 0 || downloadMaterials.length > 0;
-
-  if (!hasDownloads) return null;
-
-  const isUnlocked = accessLevel === "full";
-
-  return (
-    <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 lg:p-5">
-      <div className="flex items-center gap-2">
-        <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
-        <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-medium text-white">
-          프리미엄
-        </span>
-      </div>
-
-      {isUnlocked ? (
-        <div className="grid grid-cols-3 gap-2">
-          {game.assets.map((asset) => (
-            <DownloadCard
-              key={asset.fileName}
-              href={asset.storagePath}
-              name={asset.fileName}
-              type={asset.fileType}
-            />
-          ))}
-          {downloadMaterials.map((material) => (
-            <DownloadCard
-              key={material.name}
-              href={material.downloadPath!}
-              name={material.name}
-              type="pdf"
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="relative min-h-48">
-          <div className="grid w-full grid-cols-3 gap-2 opacity-30 blur-[2px]">
-            {game.assets.map((asset) => (
-              <DownloadCard
-                key={asset.fileName}
-                href="#"
-                name={asset.fileName}
-                type={asset.fileType}
-              />
-            ))}
-            {downloadMaterials.map((material) => (
-              <DownloadCard
-                key={material.name}
-                href="#"
-                name={material.name}
-                type="pdf"
-              />
-            ))}
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            <p className="text-sm font-medium">
-              프리미엄 구독으로 진행 자료를 다운로드하세요
-            </p>
-            <p className="text-xs text-muted-foreground">
-              PPT, 대본 스크립트, 활동지 등 모든 자료 무제한 이용
-            </p>
-            <Link
-              href="/pricing"
-              className="mt-1 rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
-            >
-              ₩5,000/월 구독하기
-            </Link>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-}
 
