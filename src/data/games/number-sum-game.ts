@@ -21,20 +21,37 @@ const numberSumGame: Game = {
       title: "준비",
       content:
         "팀별로 숫자 카드를 나누어 갖고 원 모양으로 섭니다.",
+      scriptKo:
+        "여러분 안녕하세요! 지금부터 '계산합시다' 게임을 시작하겠습니다.\n먼저 각자 숫자 카드를 한 장씩 받으세요. 카드를 받으셨으면 팀별로 원 모양으로 서주세요.\n자기 카드의 숫자를 잘 기억해두세요! (약 2분)",
+      scriptEn:
+        "Hello everyone! We're going to play 'Number Sum Game'.\nFirst, each person please take one number card. Once you have your card, stand in a circle with your team.\nRemember your number well! (About 2 min)",
     },
     {
       title: "미션 부여",
       content:
         '진행자가 목표 숫자와 필요한 인원수를 외칩니다. (예: "3사람 합해서 15")',
+      scriptKo:
+        "자, 이제 제가 숫자를 부르겠습니다.\n예를 들어 '3명이서 합해서 15!'라고 하면, 숫자를 합쳐 15가 되는 3명이 빠르게 모여야 합니다.\n준비됐나요? 시작합니다! (약 10분)\n\n'2명이서 합해서 10!'\n'3명이서 합해서 20!'\n'4명이서 합해서 25!'",
+      scriptEn:
+        "Now I'll call out numbers.\nFor example, if I say '3 people, make 15!', three people whose cards add up to 15 must gather quickly.\nReady? Let's go! (About 10 min)\n\n'2 people, make 10!'\n'3 people, make 20!'\n'4 people, make 25!'",
     },
     {
       title: "결합",
       content:
         "해당 숫자를 가진 팀원들이 빠르게 모여 카드를 머리 위로 들어 올리며 확인받습니다.",
+      scriptKo:
+        "숫자가 맞는 팀원들끼리 빠르게 모여주세요!\n모였으면 카드를 머리 위로 높이 들어올려 주세요.\n제가 확인하겠습니다. 가장 빨리 정확하게 모인 팀이 점수를 획득합니다! (약 3분)\n\n수고하셨습니다! 가장 많은 점수를 획득한 팀이 우승입니다!",
+      scriptEn:
+        "Gather quickly with teammates whose numbers match!\nOnce together, hold your cards high above your heads.\nI'll check — the fastest and correct team gets points! (About 3 min)\n\nGreat job! The team with the most points wins!",
     },
   ],
   materials: [
-    { name: "숫자 카드", quantity: "개인당 1매", isOptional: false },
+    {
+      name: "숫자 카드",
+      quantity: "개인당 1매",
+      isOptional: false,
+      downloadPath: "/downloads/games/number-sum-game/number-cards.pdf",
+    },
   ],
   bibleConnections: [
     {
@@ -55,7 +72,13 @@ const numberSumGame: Game = {
     "숫자를 맞추기 위해 급하게 뛰어다닐 수 있으므로 이동 범위를 지정하세요.",
     "어린 아이들은 숫자 범위를 작게 설정하세요.",
   ],
-  assets: [],
+  assets: [
+    {
+      fileName: "계산합시다 게임 규칙 PPT",
+      fileType: "ppt",
+      storagePath: "/downloads/games/number-sum-game/rules.pptx",
+    },
+  ],
 };
 
 export default numberSumGame;

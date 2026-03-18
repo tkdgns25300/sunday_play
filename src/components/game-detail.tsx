@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Game, GroupSize } from "@/types/game";
 import {
@@ -170,33 +173,65 @@ export default function GameDetail({
                         </span>
                       )}
                     </span>
-                    {material.isOptional && (
-                      <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                        선택
-                      </span>
-                    )}
+                    <span className="flex items-center gap-1.5">
+                      {material.isOptional && (
+                        <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                          선택
+                        </span>
+                      )}
+                      {material.downloadPath && (
+                        <a
+                          href={material.downloadPath}
+                          download
+                          className="rounded bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+                        >
+                          다운로드
+                        </a>
+                      )}
+                      {material.purchaseUrl && (
+                        <a
+                          href={material.purchaseUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          구매
+                        </a>
+                      )}
+                    </span>
                   </li>
                 ))}
               </ul>
             </section>
           )}
 
-          <section className="flex flex-col gap-3">
-            <SectionTitle>진행 방법</SectionTitle>
-            <ol className="flex flex-col gap-4">
-              {game.steps.map((step, index) => (
-                <li key={index} className="flex gap-4">
-                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                    {index + 1}
-                  </div>
-                  <div className="flex flex-1 flex-col gap-1 pt-1">
-                    <h4 className="font-semibold">{step.title}</h4>
-                    <p className="text-sm text-muted-foreground">{step.content}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
+          <StepsSection steps={game.steps} />
+
+          {game.assets.length > 0 && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>자료 다운로드</SectionTitle>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {game.assets.map((asset) => (
+                  <a
+                    key={asset.fileName}
+                    href={asset.storagePath}
+                    download
+                    className="flex items-center gap-3 rounded-lg border border-border px-4 py-3 text-sm transition-colors hover:bg-muted/50"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-primary">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                    <div className="flex flex-1 flex-col">
+                      <span className="font-medium">{asset.fileName}</span>
+                      <span className="text-xs text-muted-foreground uppercase">{asset.fileType}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
 
           {game.variations.length > 0 && (
             <section className="flex flex-col gap-3">
@@ -273,5 +308,66 @@ function MetaCard({ label, value }: { label: string; value: string }) {
       <span className="text-[11px] text-muted-foreground">{label}</span>
       <span className="text-sm font-semibold text-foreground">{value}</span>
     </div>
+  );
+}
+
+function StepsSection({ steps }: { steps: Game["steps"] }) {
+  const hasScript = steps.some((s) => s.scriptKo || s.scriptEn);
+  const [scriptLang, setScriptLang] = useState<"ko" | "en" | null>(null);
+
+  return (
+    <section className="flex flex-col gap-3">
+      <div className="flex items-center justify-between">
+        <SectionTitle>진행 방법</SectionTitle>
+        {hasScript && (
+          <div className="flex items-center gap-1 rounded-lg border border-border p-0.5">
+            <button
+              onClick={() => setScriptLang(scriptLang === "ko" ? null : "ko")}
+              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                scriptLang === "ko"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              스크립트 (한)
+            </button>
+            <button
+              onClick={() => setScriptLang(scriptLang === "en" ? null : "en")}
+              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                scriptLang === "en"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Script (EN)
+            </button>
+          </div>
+        )}
+      </div>
+      <ol className="flex flex-col gap-4">
+        {steps.map((step, index) => {
+          const script = scriptLang === "ko" ? step.scriptKo : scriptLang === "en" ? step.scriptEn : null;
+
+          return (
+            <li key={index} className="flex gap-4">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                {index + 1}
+              </div>
+              <div className="flex flex-1 flex-col gap-1 pt-1">
+                <h4 className="font-semibold">{step.title}</h4>
+                <p className="text-sm text-muted-foreground">{step.content}</p>
+                {script && (
+                  <div className="mt-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
+                    <p className="whitespace-pre-line text-sm leading-relaxed text-foreground">
+                      {script}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }

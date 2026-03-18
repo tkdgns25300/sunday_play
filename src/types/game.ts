@@ -36,6 +36,8 @@ export type GameMaterial = {
   name: string;
   quantity: string;
   isOptional: boolean;
+  purchaseUrl?: string;
+  downloadPath?: string;
 };
 
 export type BibleConnection = {
