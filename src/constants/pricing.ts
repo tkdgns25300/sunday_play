@@ -9,7 +9,7 @@ export const FREE_FEATURES = [
 
 export const PREMIUM_FEATURES = [
   "모든 상세 가이드 무제한 열람",
-  "진행 스크립트 (한/영)",
-  "PPT 자료 다운로드",
+  "진행 PPT 다운로드",
+  "준비물 자료 다운로드",
   "모든 무료 기능 포함",
 ];

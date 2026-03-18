@@ -28,7 +28,6 @@ export type CharacterQuality =
 export type GameStep = {
   title: string;
   content: string;
-  scriptKo?: string;
 };
 
 export type GameMaterial = {

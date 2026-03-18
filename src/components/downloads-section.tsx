@@ -140,7 +140,7 @@ export default function DownloadsSection({
               프리미엄 구독으로 진행 자료를 다운로드하세요
             </p>
             <p className="text-xs text-muted-foreground">
-              PPT, 대본 스크립트, 활동지 등 월 {MONTHLY_DOWNLOAD_LIMIT}개 다운로드
+              진행 PPT, 준비물 자료 등 월 {MONTHLY_DOWNLOAD_LIMIT}개 게임 다운로드
             </p>
             <Link
               href="/pricing"
