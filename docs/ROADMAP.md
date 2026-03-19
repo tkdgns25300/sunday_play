@@ -126,21 +126,22 @@
 
 #### 타입 확장
 - [x] safetyNotes 필드 추가
-- [ ] GameMaterial에 purchaseUrl(구매 링크), downloadPath(다운로드 파일 경로) 추가
-- [ ] GameStep의 scriptKo/scriptEn 활용 (이미 타입에 존재)
+- [x] GameMaterial에 purchaseUrl(구매 링크), downloadPath(다운로드 파일 경로) 추가
+- [x] scriptKo 제거 (PPT 발표자 노트로 대체)
 
-#### 진행 스크립트 (구독자 전용)
-- [ ] 상세 페이지에 스크립트 표시 영역 (한/영 탭 전환)
-- [ ] 구독자만 열람 가능하도록 접근 제어
+#### 다운로드 시스템
+- [x] 프리미엄 다운로드 UI (잠금/해제 상태, 골드 스타일)
+- [x] 다운로드 API (/api/download) — 구독 확인 + 다운로드 카운트
+- [x] 월 10개 게임 다운로드 제한 (download_logs 테이블)
+- [x] 비구독자용 프리미엄 유도 UI (블러 + 구독 버튼)
 
-#### PPT / 활동지 다운로드 (구독자 전용)
-- [ ] Supabase Storage에 파일 업로드 및 관리
-- [ ] GameAsset 활용한 다운로드 UI
-- [ ] 다운로드 권한 체크 (구독 여부)
+#### 진행 자료 제작
+- [ ] 진행 PPT 템플릿 제작 (Canva, 칠판 스타일) — 진행 중
+- [ ] 준비물 자료 PDF 제작 (숫자 카드 등)
+- [ ] 각 게임별 PPT + 준비물 자료 배치 (public/downloads/)
 
 #### 준비물 고도화
 - [ ] 구매 링크 연결 (쿠팡 등 외부 링크)
-- [ ] 자체 제작 자료(숫자 카드, 활동지 등) PDF/HWP 다운로드
 
 ### 2-3. 게임 데이터 확충
 
