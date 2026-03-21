@@ -19,10 +19,23 @@ src/
 ├── app/          # 라우트 전용 (page.tsx, layout.tsx만 배치)
 ├── components/   # 재사용 UI 컴포넌트
 ├── constants/    # 상수 데이터
+├── data/games/   # 게임 콘텐츠 데이터 (TypeScript 파일)
 ├── hooks/        # 커스텀 React 훅
 ├── lib/          # 유틸리티 함수, API 호출, Supabase 클라이언트
 └── types/        # 공유 TypeScript 타입/인터페이스
+
+public/
+├── images/games/{game-id}.png          # 게임 썸네일
+└── downloads/games/{game-id}/          # 게임별 다운로드 자료
+    ├── rules.pptx                      # 진행 PPT
+    └── {자료명}.pdf                     # 준비물 자료 등
 ```
+
+### 게임 파일 규칙
+- 게임 데이터 파일명: `src/data/games/{game-id}.ts` (kebab-case, 게임 id와 동일)
+- 썸네일 경로: `public/images/games/{game-id}.png`
+- 다운로드 자료 경로: `public/downloads/games/{game-id}/`
+- 폴더/파일명은 **영어 kebab-case**만 사용 (한글 금지, URL 인코딩 문제 방지)
 
 ## Code Conventions
 
