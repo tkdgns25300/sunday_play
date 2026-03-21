@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Game } from "@/types/game";
+import { Game, GameAsset } from "@/types/game";
 import { createClient } from "@/lib/supabase/client";
 import {
   getSubscriptionStatus,
@@ -11,6 +11,21 @@ import {
 import { MONTHLY_DOWNLOAD_LIMIT } from "@/constants/subscription";
 
 type AccessLevel = "full" | "login_required" | "limit_reached" | "loading";
+
+type AssetGroup = {
+  name: string;
+  variants: GameAsset[];
+};
+
+function groupAssets(assets: GameAsset[]): AssetGroup[] {
+  const map = new Map<string, GameAsset[]>();
+  for (const asset of assets) {
+    const existing = map.get(asset.fileName) ?? [];
+    existing.push(asset);
+    map.set(asset.fileName, existing);
+  }
+  return Array.from(map.entries()).map(([name, variants]) => ({ name, variants }));
+}
 
 export default function DownloadsSection({
   game,
@@ -43,6 +58,7 @@ export default function DownloadsSection({
 
   if (game.assets.length === 0) return null;
 
+  const groups = groupAssets(game.assets);
   const isUnlocked = accessLevel === "full" && isSubscribed;
   const isAlreadyDownloaded = downloadedGames.includes(game.id);
   const gameCount = downloadedGames.length;
@@ -92,25 +108,21 @@ export default function DownloadsSection({
       </div>
 
       {isUnlocked ? (
-        <div className="grid grid-cols-3 gap-2">
-          {game.assets.map((asset) => (
-            <button
-              key={`${asset.fileName}-${asset.fileType}`}
-              onClick={() => handleDownload(asset.fileName, asset.storagePath)}
-              disabled={!canDownload}
-              className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center transition-colors hover:bg-amber-50 disabled:opacity-50"
-            >
-              <DownloadIcon />
-              <span className="text-xs font-medium leading-tight">{asset.fileName}</span>
-              <span className="text-[10px] text-muted-foreground uppercase">{asset.fileType}</span>
-            </button>
+        <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+          {groups.map((group) => (
+            <AssetCard
+              key={group.name}
+              group={group}
+              canDownload={canDownload}
+              onDownload={handleDownload}
+            />
           ))}
         </div>
       ) : (
         <div className="relative min-h-48">
-          <div className="grid w-full grid-cols-3 gap-2 opacity-30 blur-[2px]">
-            {game.assets.map((asset) => (
-              <LockedCard key={`${asset.fileName}-${asset.fileType}`} name={asset.fileName} type={asset.fileType} />
+          <div className="flex w-full flex-col gap-2 opacity-30 blur-[2px] sm:grid sm:grid-cols-2">
+            {groups.map((group) => (
+              <LockedCard key={group.name} name={group.name} types={group.variants.map((v) => v.fileType)} />
             ))}
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
@@ -137,6 +149,60 @@ export default function DownloadsSection({
   );
 }
 
+function AssetCard({
+  group,
+  canDownload,
+  onDownload,
+}: {
+  group: AssetGroup;
+  canDownload: boolean;
+  onDownload: (fileName: string, filePath: string) => void;
+}) {
+  const isSingle = group.variants.length === 1;
+
+  if (isSingle) {
+    const asset = group.variants[0];
+    return (
+      <button
+        onClick={() => onDownload(asset.fileName, asset.storagePath)}
+        disabled={!canDownload}
+        className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 text-left transition-all hover:border-amber-300 hover:shadow-sm disabled:opacity-50"
+      >
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 transition-colors group-hover:bg-amber-200">
+          <DownloadIcon />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-sm font-medium">{asset.fileName}</span>
+          <span className="text-[11px] text-muted-foreground uppercase">{asset.fileType}</span>
+        </div>
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
+        <DownloadIcon />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-sm font-medium">{group.name}</span>
+        <div className="flex gap-1.5">
+          {group.variants.map((asset) => (
+            <button
+              key={asset.fileType}
+              onClick={() => onDownload(asset.fileName, asset.storagePath)}
+              disabled={!canDownload}
+              className="rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50"
+            >
+              {asset.fileType}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DownloadIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500">
@@ -147,12 +213,18 @@ function DownloadIcon() {
   );
 }
 
-function LockedCard({ name, type }: { name: string; type: string }) {
+function LockedCard({ name, types }: { name: string; types: string[] }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center">
-      <DownloadIcon />
-      <span className="text-xs font-medium leading-tight">{name}</span>
-      <span className="text-[10px] text-muted-foreground uppercase">{type}</span>
+    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
+        <DownloadIcon />
+      </div>
+      <div className="flex flex-col gap-0.5">
+        <span className="text-sm font-medium">{name}</span>
+        <span className="text-[11px] text-muted-foreground uppercase">
+          {types.join(" / ")}
+        </span>
+      </div>
     </div>
   );
 }
