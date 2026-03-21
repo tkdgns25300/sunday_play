@@ -51,7 +51,7 @@ export type GameVariation = {
 
 export type GameAsset = {
   fileName: string;
-  fileType: "ppt" | "pdf" | "image";
+  fileType: "pptx" | "pdf" | "hwpx" | "image";
   storagePath: string;
 };
 

@@ -18,18 +18,24 @@ const numberSumGame: Game = {
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {
-      title: "준비",
-      content: "팀별로 숫자 카드를 나누어 갖고 원 모양으로 섭니다.",
+      title: "카드 배분",
+      content:
+        "모든 참가자에게 숫자 카드를 1장씩 나눠줍니다.\n각자 자기 카드의 숫자를 확인하고 기억하도록 안내합니다.",
     },
     {
-      title: "미션 부여",
+      title: "숫자 맞추기",
       content:
-        '진행자가 목표 숫자와 필요한 인원수를 외칩니다. (예: "3사람 합해서 15")',
+        '진행자가 인원수와 목표 숫자를 부릅니다.\n예: "3명이서 합쳐서 15!"\n참가자들은 자기 카드 숫자를 합쳐 목표 숫자가 되는 조합을 찾아 빠르게 모입니다.',
     },
     {
-      title: "결합",
+      title: "확인 및 득점",
       content:
-        "해당 숫자를 가진 팀원들이 빠르게 모여 카드를 머리 위로 들어 올리며 확인받습니다.",
+        "모인 팀은 카드를 높이 들어 진행자에게 보여줍니다.\n가장 먼저 정확히 맞춘 팀이 1점을 획득합니다.\n틀린 팀은 점수 없이 다음 라운드로 넘어갑니다.",
+    },
+    {
+      title: "반복 및 우승",
+      content:
+        "여러 라운드를 반복 진행합니다.\n라운드마다 인원수와 목표 숫자를 바꿔가며 난이도를 조절합니다.\n모든 라운드가 끝난 후 가장 많은 점수를 얻은 팀이 우승합니다.",
     },
   ],
   materials: [
@@ -37,7 +43,6 @@ const numberSumGame: Game = {
       name: "숫자 카드",
       quantity: "개인당 1장",
       isOptional: false,
-      downloadPath: "/downloads/games/number-sum-game/number-cards.pdf",
     },
   ],
   bibleConnections: [
@@ -62,8 +67,18 @@ const numberSumGame: Game = {
   assets: [
     {
       fileName: "진행 PPT",
-      fileType: "ppt",
+      fileType: "pptx",
       storagePath: "/downloads/games/number-sum-game/rules.pptx",
+    },
+    {
+      fileName: "숫자 카드",
+      fileType: "pdf",
+      storagePath: "/downloads/games/number-sum-game/number-cards.pdf",
+    },
+    {
+      fileName: "숫자 카드",
+      fileType: "hwpx",
+      storagePath: "/downloads/games/number-sum-game/number-cards.hwpx",
     },
   ],
 };

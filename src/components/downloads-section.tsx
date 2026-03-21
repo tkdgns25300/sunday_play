@@ -19,9 +19,6 @@ export default function DownloadsSection({
   game: Game;
   accessLevel: AccessLevel;
 }) {
-  const downloadMaterials = game.materials.filter((m) => m.downloadPath);
-  const hasDownloads = game.assets.length > 0 || downloadMaterials.length > 0;
-
   const [downloadedGames, setDownloadedGames] = useState<string[]>([]);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -44,7 +41,7 @@ export default function DownloadsSection({
     load();
   }, []);
 
-  if (!hasDownloads) return null;
+  if (game.assets.length === 0) return null;
 
   const isUnlocked = accessLevel === "full" && isSubscribed;
   const isAlreadyDownloaded = downloadedGames.includes(game.id);
@@ -98,7 +95,7 @@ export default function DownloadsSection({
         <div className="grid grid-cols-3 gap-2">
           {game.assets.map((asset) => (
             <button
-              key={asset.fileName}
+              key={`${asset.fileName}-${asset.fileType}`}
               onClick={() => handleDownload(asset.fileName, asset.storagePath)}
               disabled={!canDownload}
               className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center transition-colors hover:bg-amber-50 disabled:opacity-50"
@@ -108,27 +105,12 @@ export default function DownloadsSection({
               <span className="text-[10px] text-muted-foreground uppercase">{asset.fileType}</span>
             </button>
           ))}
-          {downloadMaterials.map((material) => (
-            <button
-              key={material.name}
-              onClick={() => handleDownload(material.name, material.downloadPath!)}
-              disabled={!canDownload}
-              className="flex flex-col items-center gap-2 rounded-lg border border-amber-200 bg-background px-3 py-3 text-center transition-colors hover:bg-amber-50 disabled:opacity-50"
-            >
-              <DownloadIcon />
-              <span className="text-xs font-medium leading-tight">{material.name}</span>
-              <span className="text-[10px] text-muted-foreground">PDF</span>
-            </button>
-          ))}
         </div>
       ) : (
         <div className="relative min-h-48">
           <div className="grid w-full grid-cols-3 gap-2 opacity-30 blur-[2px]">
             {game.assets.map((asset) => (
-              <LockedCard key={asset.fileName} name={asset.fileName} type={asset.fileType} />
-            ))}
-            {downloadMaterials.map((material) => (
-              <LockedCard key={material.name} name={material.name} type="pdf" />
+              <LockedCard key={`${asset.fileName}-${asset.fileType}`} name={asset.fileName} type={asset.fileType} />
             ))}
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">

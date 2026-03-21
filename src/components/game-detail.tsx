@@ -161,7 +161,7 @@ export default function GameDetail({
                   </div>
                   <div className="flex flex-1 flex-col gap-1 pt-1">
                     <h4 className="font-semibold">{step.title}</h4>
-                    <p className="text-sm text-muted-foreground">{step.content}</p>
+                    <p className="whitespace-pre-line text-sm text-muted-foreground">{step.content}</p>
                   </div>
                 </li>
               ))}
