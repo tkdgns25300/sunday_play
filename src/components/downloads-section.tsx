@@ -64,30 +64,38 @@ export default function DownloadsSection({
   const gameCount = downloadedGames.length;
   const canDownload = isAlreadyDownloaded || gameCount < MONTHLY_DOWNLOAD_LIMIT;
 
+  const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
+
   async function handleDownload(fileName: string, filePath: string) {
     if (!canDownload) {
       alert(`이번 달 다운로드 한도(${MONTHLY_DOWNLOAD_LIMIT}개 게임)를 초과했습니다.`);
       return;
     }
 
-    const response = await fetch("/api/download", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gameId: game.id, fileName, filePath }),
-    });
+    setDownloadingPath(filePath);
 
-    const result = await response.json();
+    try {
+      const response = await fetch("/api/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ gameId: game.id, fileName, filePath }),
+      });
 
-    if (result.success) {
-      if (!isAlreadyDownloaded) {
-        setDownloadedGames((prev) => [...prev, game.id]);
+      const result = await response.json();
+
+      if (result.success) {
+        if (!isAlreadyDownloaded) {
+          setDownloadedGames((prev) => [...prev, game.id]);
+        }
+        const link = document.createElement("a");
+        link.href = result.filePath;
+        link.download = fileName;
+        link.click();
+      } else {
+        alert(result.message);
       }
-      const link = document.createElement("a");
-      link.href = result.filePath;
-      link.download = fileName;
-      link.click();
-    } else {
-      alert(result.message);
+    } finally {
+      setDownloadingPath(null);
     }
   }
 
@@ -114,6 +122,7 @@ export default function DownloadsSection({
               key={group.name}
               group={group}
               canDownload={canDownload}
+              downloadingPath={downloadingPath}
               onDownload={handleDownload}
             />
           ))}
@@ -152,28 +161,33 @@ export default function DownloadsSection({
 function AssetCard({
   group,
   canDownload,
+  downloadingPath,
   onDownload,
 }: {
   group: AssetGroup;
   canDownload: boolean;
+  downloadingPath: string | null;
   onDownload: (fileName: string, filePath: string) => void;
 }) {
   const isSingle = group.variants.length === 1;
 
   if (isSingle) {
     const asset = group.variants[0];
+    const isLoading = downloadingPath === asset.storagePath;
     return (
       <button
         onClick={() => onDownload(asset.fileName, asset.storagePath)}
-        disabled={!canDownload}
+        disabled={!canDownload || isLoading}
         className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 text-left transition-all hover:border-amber-300 hover:shadow-sm disabled:opacity-50"
       >
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 transition-colors group-hover:bg-amber-200">
-          <DownloadIcon />
+          {isLoading ? <Spinner /> : <DownloadIcon />}
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-sm font-medium">{asset.fileName}</span>
-          <span className="text-[11px] text-muted-foreground uppercase">{asset.fileType}</span>
+          <span className="text-[11px] text-muted-foreground uppercase">
+            {isLoading ? "다운로드 중..." : asset.fileType}
+          </span>
         </div>
       </button>
     );
@@ -187,19 +201,32 @@ function AssetCard({
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-medium">{group.name}</span>
         <div className="flex gap-1.5">
-          {group.variants.map((asset) => (
-            <button
-              key={asset.fileType}
-              onClick={() => onDownload(asset.fileName, asset.storagePath)}
-              disabled={!canDownload}
-              className="rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50"
-            >
-              {asset.fileType}
-            </button>
-          ))}
+          {group.variants.map((asset) => {
+            const isLoading = downloadingPath === asset.storagePath;
+            return (
+              <button
+                key={asset.fileType}
+                onClick={() => onDownload(asset.fileName, asset.storagePath)}
+                disabled={!canDownload || isLoading}
+                className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50"
+              >
+                {isLoading && <Spinner size={12} />}
+                {isLoading ? "다운로드 중..." : asset.fileType}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
+  );
+}
+
+function Spinner({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className="animate-spin text-amber-500">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-20" />
+      <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
   );
 }
 

@@ -78,9 +78,14 @@ const numberSumGame: Game = {
   ],
   assets: [
     {
-      fileName: "진행 PPT",
+      fileName: "진행 자료",
       fileType: "pptx",
       storagePath: "/downloads/games/number-sum-game/rules.pptx",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "pdf",
+      storagePath: "/downloads/games/number-sum-game/rules.pdf",
     },
     {
       fileName: "숫자 카드",
