@@ -33,7 +33,10 @@ export default function Footer() {
             훈테크 | 대표 이상훈 | 사업자등록번호 165-41-01202
           </p>
           <p>
-            경상북도 안동시 감나무5길 15 | 이메일 tkdgns25300@naver.com
+            경상북도 안동시 감나무5길 15 | 전화 010-6607-3927 | 이메일 tkdgns25300@naver.com
+          </p>
+          <p>
+            통신판매업 신고번호: 신고 예정
           </p>
         </div>
       </div>
