@@ -1,8 +1,36 @@
 "use client";
 
-import { signInWithGoogle } from "@/lib/auth";
+import { useState } from "react";
+import { signInWithGoogle, signInWithEmail } from "@/lib/auth";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+const AUTH_ERROR_MESSAGES: Record<string, string> = {
+  "Invalid login credentials": "이메일 또는 비밀번호가 올바르지 않습니다.",
+  "Email not confirmed": "이메일 인증이 완료되지 않았습니다.",
+};
 
 export default function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleEmailLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setErrorMessage("");
+    setIsSubmitting(true);
+
+    try {
+      await signInWithEmail(email, password);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setErrorMessage(AUTH_ERROR_MESSAGES[message] ?? message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <div className="flex w-full max-w-sm flex-col items-center gap-8">
       <div className="flex flex-col items-center gap-2 text-center">
@@ -37,6 +65,40 @@ export default function LoginForm() {
         </svg>
         Google로 로그인
       </button>
+
+      <div className="flex w-full items-center gap-3">
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-xs text-muted-foreground">또는</span>
+        <div className="h-px flex-1 bg-border" />
+      </div>
+
+      <form onSubmit={handleEmailLogin} className="flex w-full flex-col gap-3">
+        <Input
+          type="email"
+          placeholder="이메일"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          type="password"
+          placeholder="비밀번호"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        {errorMessage && (
+          <p className="text-xs text-red-500">{errorMessage}</p>
+        )}
+        <Button
+          type="submit"
+          variant="outline"
+          className="w-full"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "로그인 중..." : "이메일로 로그인"}
+        </Button>
+      </form>
 
       <p className="text-center text-xs text-muted-foreground">
         로그인 시{" "}

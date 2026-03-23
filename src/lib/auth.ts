@@ -11,6 +11,16 @@ export async function signInWithGoogle() {
   if (error) throw error;
 }
 
+export async function signInWithEmail(email: string, password: string) {
+  const supabase = createClient();
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (error) throw error;
+  window.location.href = "/";
+}
+
 export async function signOut() {
   const supabase = createClient();
   const { error } = await supabase.auth.signOut();
