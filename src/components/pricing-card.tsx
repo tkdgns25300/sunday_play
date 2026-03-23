@@ -44,7 +44,7 @@ export default function PricingCard() {
     setIsProcessing(true);
 
     try {
-      const paymentId = `payment-${userId}-${Date.now()}`;
+      const paymentId = `pay-${userId.slice(0, 8)}-${Date.now()}`;
 
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -84,8 +84,9 @@ export default function PricingCard() {
       } else {
         alert(`결제 검증 실패: ${result.message}`);
       }
-    } catch {
-      alert("결제 중 오류가 발생했습니다.");
+    } catch (error) {
+      console.error("결제 오류:", error);
+      alert(`결제 중 오류가 발생했습니다.\n${error instanceof Error ? error.message : String(error)}`);
     } finally {
       setIsProcessing(false);
     }
