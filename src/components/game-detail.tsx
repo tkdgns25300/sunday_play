@@ -99,7 +99,7 @@ export default function GameDetail({
           {game.characterQualities.map((quality) => (
             <span
               key={quality}
-              className="rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700"
+              className="rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-400"
             >
               {quality}
             </span>

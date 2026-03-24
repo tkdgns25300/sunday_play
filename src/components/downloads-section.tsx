@@ -100,7 +100,7 @@ export default function DownloadsSection({
   }
 
   return (
-    <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 lg:p-5">
+    <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-950/30 lg:p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
@@ -178,9 +178,9 @@ function AssetCard({
       <button
         onClick={() => onDownload(asset.fileName, asset.storagePath)}
         disabled={!canDownload || isLoading}
-        className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 text-left transition-all hover:border-amber-300 hover:shadow-sm disabled:opacity-50"
+        className="group flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 text-left transition-all hover:border-amber-300 hover:shadow-sm disabled:opacity-50 dark:border-amber-500/30 dark:hover:border-amber-500/50"
       >
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 transition-colors group-hover:bg-amber-200">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 transition-colors group-hover:bg-amber-200 dark:bg-amber-900/50 dark:group-hover:bg-amber-900/70">
           {isLoading ? <Spinner /> : <DownloadIcon />}
         </div>
         <div className="flex flex-col gap-0.5">
@@ -194,8 +194,8 @@ function AssetCard({
   }
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
+    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
         <DownloadIcon />
       </div>
       <div className="flex flex-col gap-1.5">
@@ -208,7 +208,7 @@ function AssetCard({
                 key={asset.fileType}
                 onClick={() => onDownload(asset.fileName, asset.storagePath)}
                 disabled={!canDownload || isLoading}
-                className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50"
+                className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50 dark:border-amber-500/30 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:border-amber-500/50 dark:hover:bg-amber-900/50"
               >
                 {isLoading && <Spinner size={12} />}
                 {isLoading ? "다운로드 중..." : asset.fileType}
@@ -242,8 +242,8 @@ function DownloadIcon() {
 
 function LockedCard({ name, types }: { name: string; types: string[] }) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
+    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
         <DownloadIcon />
       </div>
       <div className="flex flex-col gap-0.5">

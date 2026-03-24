@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import AuthButton from "@/components/auth-button";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function Header() {
             요금제
           </Link>
           <AuthButton />
+          <ThemeToggle />
         </nav>
 
         <button
@@ -67,6 +69,7 @@ export default function Header() {
               요금제
             </Link>
             <AuthButton />
+            <ThemeToggle />
           </div>
         </nav>
       )}
