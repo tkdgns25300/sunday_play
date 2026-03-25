@@ -87,9 +87,11 @@ export default function DownloadsSection({
         if (!isAlreadyDownloaded) {
           setDownloadedGames((prev) => [...prev, game.id]);
         }
+        const ext = filePath.split(".").pop() ?? "";
+        const downloadName = `[Sunday Play] ${game.title}.${ext}`;
         const link = document.createElement("a");
         link.href = result.filePath;
-        link.download = fileName;
+        link.download = downloadName;
         link.click();
       } else {
         alert(result.message);
