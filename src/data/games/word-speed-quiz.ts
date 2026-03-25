@@ -3,39 +3,50 @@ import { Game } from "@/types/game";
 const wordSpeedQuiz: Game = {
   id: "word-speed-quiz",
   title: "단어 스피드 퀴즈",
-  summary: "특정 알파벳으로 시작하는 단어와 성경 퀴즈를 맞히는 지혜 대결",
+  summary:
+    "매 라운드 다양한 주제로 단어를 빠르게 적어내는 팀 대결 게임",
   description:
-    "제시된 알파벳으로 시작하는 영어 단어를 많이 적고 성경 관련 추가 문제를 해결하는 게임입니다.",
+    "진행자가 제시하는 주제에 맞는 단어를 제한 시간 내에 팀별로 최대한 많이 적는 게임입니다. 영어 알파벳, 카테고리, 성경 관련 주제 등 매 라운드 달라지는 주제가 특징입니다.",
   thumbnailUrl: "/images/games/word-speed-quiz.png",
   ageGroups: ["유년부", "초등부", "중고등부"],
   energyLevel: 2,
   environments: ["실내교실"],
-  prepTime: "none",
-  groupSizes: ["sm", "md"],
+  prepTime: "quick",
+  groupSizes: ["md"],
   characterQualities: ["지혜", "경각심", "분별력"],
   durationMinutes: 15,
   difficulty: 3,
   requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {
-      title: "알파벳 퀴즈",
+      title: "준비",
       content:
-        "제시된 알파벳으로 시작하는 영어 단어를 제한 시간(1분) 내에 최대한 많이 적습니다.",
+        "팀을 나누고 각 팀에 화이트보드와 보드마카를 배분합니다.\n팀원들이 함께 볼 수 있도록 화이트보드를 팀 중앙에 위치시킵니다.",
     },
     {
-      title: "점수 계산",
+      title: "주제 발표",
       content:
-        "단어 1개당 10점이며, 플러스/마이너스 단어에 따라 추가 점수나 감점이 적용됩니다.",
+        '진행자가 라운드 주제를 발표합니다.\n예: "G로 시작하는 단어", "색깔 단어", "교회에서 하는 행동", "성경에 나오는 먹을 것"',
     },
     {
-      title: "성경 보너스",
+      title: "단어 적기",
       content:
-        "예수님의 기적이나 성경 인물과 관련된 퀴즈를 통해 보너스 점수를 획득합니다.",
+        "제한 시간(1분) 내에 팀원들과 상의하여 화이트보드에 주제에 맞는 단어를 최대한 많이 적습니다.\n다른 팀에게 보이지 않도록 화이트보드를 가립니다.",
+    },
+    {
+      title: "점수 및 우승",
+      content:
+        "시간이 끝나면 각 팀이 화이트보드를 공개합니다.\n다른 팀과 겹치지 않는 단어만 1점으로 인정합니다.\n여러 라운드를 반복하여 최다 점수 팀이 우승합니다.",
     },
   ],
   materials: [
-    { name: "화이트보드", quantity: "1개", isOptional: false },
-    { name: "보드마카", quantity: "1개", isOptional: false },
+    {
+      name: "화이트보드 + 보드마카 세트",
+      quantity: "팀당 1세트",
+      isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/vp/products/108161475?itemId=327387477&vendorItemId=3802387954",
+    },
   ],
   bibleConnections: [
     {
@@ -43,12 +54,29 @@ const wordSpeedQuiz: Game = {
       verseText:
         "선한 말은 꿀송이 같아서 마음에 달고 뼈에 양약이 되느니라",
       messageSummary:
-        "하나님이 주신 지혜로 아름다운 믿음의 고백을 나누는 친구들이 되어요.",
+        "우리가 알고 있는 수많은 단어 중에서 가장 소중한 말은 서로를 세워주는 선한 말이에요. 오늘 배운 단어들처럼, 좋은 말을 많이 나누는 친구들이 되어요.",
     },
   ],
-  variations: [],
+  variations: [
+    {
+      condition: "저학년 (유년부)",
+      suggestion:
+        '쉬운 주제 위주로 출제하고("동물 이름", "색깔"), 제한 시간을 2분으로 늘립니다.',
+    },
+    {
+      condition: "대규모 (20명 이상)",
+      suggestion:
+        "릴레이 형태로 팀원이 한 명씩 돌아가며 단어를 하나씩 적는 방식으로 진행합니다.",
+    },
+    {
+      condition: "성경 특화",
+      suggestion:
+        '모든 라운드를 성경 관련 주제로만 진행합니다. 예: "성경 인물", "예수님의 기적", "성경 속 장소"',
+    },
+  ],
   safetyNotes: [
-    "정답을 외칠 때 소리가 커질 수 있으므로 주변 공간을 고려하세요.",
+    "보드마카 뚜껑을 잘 닫도록 안내하세요. 옷에 묻으면 잘 지워지지 않습니다.",
+    "흥분하여 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
   ],
   assets: [],
 };

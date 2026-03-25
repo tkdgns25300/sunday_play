@@ -202,9 +202,14 @@ export default function GameDetail({
                           href={material.purchaseUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                          className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
                         >
-                          구매
+                          구매하기
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" x2="21" y1="14" y2="3" />
+                          </svg>
                         </a>
                       )}
                     </span>
