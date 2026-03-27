@@ -35,6 +35,7 @@ export type GameMaterial = {
   quantity: string;
   isOptional: boolean;
   purchaseUrl?: string;
+  purchaseUrls?: { label: string; url: string }[];
   downloadPath?: string;
 };
 

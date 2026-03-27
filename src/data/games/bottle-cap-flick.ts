@@ -38,18 +38,30 @@ const bottleCapFlick: Game = {
       name: "병뚜껑",
       quantity: "1인당 1개",
       isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/vp/products/7689270513?itemId=20972233691&vendorItemId=88037469667&q=%EB%AC%BC500ml&searchId=1f7f9c2f5797037&sourceType=search&itemsCount=35&searchRank=1&rank=1&traceId=mn8w9u91",
     },
     {
       name: "마스킹 테이프",
       quantity: "1롤",
       isOptional: false,
       purchaseUrl:
-        "https://www.coupang.com/vp/products/162098333?itemId=465611915&vendorItemId=93503824867&q=%EB%B0%94%EB%8B%A5%EC%84%A0+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=1931593c767484&sourceType=search&itemsCount=36&searchRank=12&rank=12&traceId=mn8vplxf",
+        "https://www.coupang.com/vp/products/8511069704?itemId=24636154242&vendorItemId=91647093392&pickType=COU_PICK&q=%EB%A7%88%EC%8A%A4%ED%82%B9+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=76a56cd56656897&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mn8yhv3h",
     },
     {
       name: "책상",
-      quantity: "팀당 1개",
+      quantity: "1개",
       isOptional: false,
+      purchaseUrls: [
+        {
+          label: "긴 책상",
+          url: "https://www.coupang.com/vp/products/7425478468?itemId=19273387023&vendorItemId=86388527586&sourceType=srp_product_ads&clickEventId=c1e60bb0-29e3-11f1-aa02-0957a64b3185&korePlacement=15&koreSubPlacement=1&traceId=mn8yjz3z",
+        },
+        {
+          label: "짧은 책상",
+          url: "https://www.coupang.com/vp/products/8670075687?itemId=25168124659&vendorItemId=92165667520&q=%EB%8B%A8%EC%B2%B4%20%EC%B1%85%EC%83%81&searchId=ecf8be045636810&sourceType=search&itemsCount=36&searchRank=2&rank=2&traceId=mn8yk9m6",
+        },
+      ],
     },
   ],
   bibleConnections: [
@@ -88,7 +100,18 @@ const bottleCapFlick: Game = {
     "책상 위에 물건이 없는지 확인하고 진행하세요.",
     "병뚜껑이 바닥에 떨어지면 미끄러질 수 있으니 즉시 치우도록 안내하세요.",
   ],
-  assets: [],
+  assets: [
+    {
+      fileName: "진행 자료",
+      fileType: "pptx",
+      storagePath: "/downloads/games/bottle-cap-flick/rules.pptx",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "pdf",
+      storagePath: "/downloads/games/bottle-cap-flick/rules.pdf",
+    },
+  ],
 };
 
 export default bottleCapFlick;

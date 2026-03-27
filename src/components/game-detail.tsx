@@ -9,6 +9,26 @@ import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
 import DownloadsSection from "@/components/downloads-section";
 
+const ExternalLinkIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" x2="21" y1="14" y2="3" />
+  </svg>
+);
+
+const PurchaseLink = ({ label, url }: { label: string; url: string }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+  >
+    {label}
+    <ExternalLinkIcon />
+  </a>
+);
+
 const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
   xs: { min: 1, max: 5 },
   sm: { min: 5, max: 10 },
@@ -197,21 +217,13 @@ export default function GameDetail({
                           선택
                         </span>
                       )}
-                      {material.purchaseUrl && (
-                        <a
-                          href={material.purchaseUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
-                        >
-                          구매하기
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                            <polyline points="15 3 21 3 21 9" />
-                            <line x1="10" x2="21" y1="14" y2="3" />
-                          </svg>
-                        </a>
-                      )}
+                      {material.purchaseUrls
+                        ? material.purchaseUrls.map(({ label, url }) => (
+                            <PurchaseLink key={label} label={label} url={url} />
+                          ))
+                        : material.purchaseUrl && (
+                            <PurchaseLink label="구매하기" url={material.purchaseUrl} />
+                          )}
                     </span>
                   </li>
                 ))}

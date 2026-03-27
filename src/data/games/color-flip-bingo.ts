@@ -46,7 +46,7 @@ const colorFlipBingo: Game = {
       quantity: "2줄",
       isOptional: true,
       purchaseUrl:
-        "https://www.coupang.com/vp/products/162098333?itemId=465611915&vendorItemId=93503824867&q=%EB%B0%94%EB%8B%A5%EC%84%A0+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=1931593c767484&sourceType=search&itemsCount=36&searchRank=12&rank=12&traceId=mn8vplxf",
+        "https://www.coupang.com/vp/products/8511069704?itemId=24636154242&vendorItemId=91647093392&pickType=COU_PICK&q=%EB%A7%88%EC%8A%A4%ED%82%B9+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=76a56cd56656897&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mn8yhv3h",
     },
   ],
   bibleConnections: [
