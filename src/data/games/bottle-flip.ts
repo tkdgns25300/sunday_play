@@ -35,9 +35,11 @@ const bottleFlip: Game = {
   ],
   materials: [
     {
-      name: "500ml 페트병 + 물",
+      name: "500ml 생수 페트병",
       quantity: "팀당 1개",
       isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/vp/products/7689270513?itemId=20972233691&vendorItemId=88037469667&q=%EB%AC%BC500ml&searchId=1f7f9c2f5797037&sourceType=search&itemsCount=35&searchRank=1&rank=1&traceId=mn8w9u91",
     },
   ],
   bibleConnections: [
@@ -75,7 +77,18 @@ const bottleFlip: Game = {
     "뚜껑을 단단히 닫지 않으면 물이 쏟아져 바닥이 미끄러워질 수 있습니다. 시작 전 반드시 점검하세요.",
     "딱딱한 바닥(타일, 마루)에서 진행할 경우 물병이 세게 튈 수 있으므로 주변 간격을 충분히 확보하세요.",
   ],
-  assets: [],
+  assets: [
+    {
+      fileName: "진행 자료",
+      fileType: "pptx",
+      storagePath: "/downloads/games/bottle-flip/rules.pptx",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "pdf",
+      storagePath: "/downloads/games/bottle-flip/rules.pdf",
+    },
+  ],
 };
 
 export default bottleFlip;
