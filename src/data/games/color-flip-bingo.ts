@@ -34,8 +34,20 @@ const colorFlipBingo: Game = {
         },
     ],
     materials: [
-        { name: "양면 색판 (2색)", quantity: "16개 (4×4 기준)", isOptional: false },
-        { name: "출발선 표시용 테이프", quantity: "2줄", isOptional: true },
+        {
+            name: "양면 색판 (2색)",
+            quantity: "16개 (4×4 기준)",
+            isOptional: false,
+            purchaseUrl:
+                "https://www.coupang.com/vp/products/6839870110?itemId=16261652806&vendorItemId=83496526440&q=%EC%83%89%ED%8C%90&searchId=2a9e75b35575799&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mn8vntay",
+        },
+        {
+            name: "출발선 표시용 테이프",
+            quantity: "2줄",
+            isOptional: true,
+            purchaseUrl:
+                "https://www.coupang.com/vp/products/162098333?itemId=465611915&vendorItemId=93503824867&q=%EB%B0%94%EB%8B%A5%EC%84%A0+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=1931593c767484&sourceType=search&itemsCount=36&searchRank=12&rank=12&traceId=mn8vplxf",
+        },
     ],
     bibleConnections: [
         {
