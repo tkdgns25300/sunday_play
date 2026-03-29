@@ -259,7 +259,7 @@ export default function GameDetail({
 
           {game.variations.length > 0 && (
             <section className="flex flex-col gap-3">
-              <SectionTitle>상황별 가이드</SectionTitle>
+              <SectionTitle>응용 아이디어</SectionTitle>
               <div className="flex flex-col gap-3">
                 {game.variations.map((variation, index) => (
                   <div
