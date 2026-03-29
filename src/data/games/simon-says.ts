@@ -18,7 +18,7 @@ const simonSays: Game = {
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {
-            title: "시작",
+            title: "따라하기",
             content:
                 '진행자가 "가라사대"를 앞에 붙여 행동을 지시합니다.\n예: "가라사대 손 들어!" → 모두 따라야 합니다.',
         },
@@ -51,7 +51,7 @@ const simonSays: Game = {
         {
             condition: "팀전",
             suggestion:
-                "팀별로 나눠 탈락자가 적게 남은 팀이 지는 방식으로 진행합니다. 개인 탈락이 아닌 팀 단위 경쟁으로 더 활기찬 분위기를 만들 수 있습니다.",
+                "팀별로 나눠 탈락자가 더 많이 나온 팀이 지는 방식으로 진행합니다. 개인 탈락이 아닌 팀 단위 경쟁으로 더 활기찬 분위기를 만들 수 있습니다.",
         },
         {
             condition: "벌칙 미션",
