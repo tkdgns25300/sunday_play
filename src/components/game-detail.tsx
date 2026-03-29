@@ -152,8 +152,6 @@ export default function GameDetail({
         )}
       </section>
 
-      <DownloadsSection game={game} accessLevel={accessLevel} />
-
       {isLoading && (
         <div className="flex flex-col gap-3">
           <div className="h-6 w-20 animate-pulse rounded bg-muted" />
@@ -162,31 +160,18 @@ export default function GameDetail({
       )}
 
       {isLocked && (
-        <Paywall
-          type={accessLevel === "login_required" ? "login" : "subscribe"}
-          viewCount={viewCount}
-        />
+        <>
+          <Paywall
+            type={accessLevel === "login_required" ? "login" : "subscribe"}
+            viewCount={viewCount}
+          />
+          <DownloadsSection game={game} accessLevel={accessLevel} />
+        </>
       )}
 
       {accessLevel === "full" && (
         <>
-
-          <section className="flex flex-col gap-3">
-            <SectionTitle>진행 방법</SectionTitle>
-            <ol className="flex flex-col gap-4">
-              {game.steps.map((step, index) => (
-                <li key={index} className="flex gap-4">
-                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                    {index + 1}
-                  </div>
-                  <div className="flex flex-1 flex-col gap-1 pt-1">
-                    <h4 className="font-semibold">{step.title}</h4>
-                    <p className="whitespace-pre-line text-sm text-muted-foreground">{step.content}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
+          <DownloadsSection game={game} accessLevel={accessLevel} />
 
           {game.materials.length > 0 && (
             <section className="flex flex-col gap-3">
@@ -231,24 +216,22 @@ export default function GameDetail({
             </section>
           )}
 
-          {game.variations.length > 0 && (
-            <section className="flex flex-col gap-3">
-              <SectionTitle>변형 팁</SectionTitle>
-              <div className="flex flex-col gap-3">
-                {game.variations.map((variation, index) => (
-                  <div
-                    key={index}
-                    className="rounded-lg border border-border bg-muted/30 p-4"
-                  >
-                    <p className="text-sm font-medium">{variation.condition}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {variation.suggestion}
-                    </p>
+          <section className="flex flex-col gap-3">
+            <SectionTitle>진행 방법</SectionTitle>
+            <ol className="flex flex-col gap-4">
+              {game.steps.map((step, index) => (
+                <li key={index} className="flex gap-4">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                    {index + 1}
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
+                  <div className="flex flex-1 flex-col gap-1 pt-1">
+                    <h4 className="font-semibold">{step.title}</h4>
+                    <p className="whitespace-pre-line text-sm text-muted-foreground">{step.content}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
 
           {game.bibleConnections.length > 0 && (
             <section className="flex flex-col gap-3">
@@ -267,6 +250,25 @@ export default function GameDetail({
                     </blockquote>
                     <p className="mt-3 text-sm text-muted-foreground">
                       {connection.messageSummary}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {game.variations.length > 0 && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>상황별 가이드</SectionTitle>
+              <div className="flex flex-col gap-3">
+                {game.variations.map((variation, index) => (
+                  <div
+                    key={index}
+                    className="rounded-lg border border-border bg-muted/30 p-4"
+                  >
+                    <p className="text-sm font-medium">{variation.condition}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {variation.suggestion}
                     </p>
                   </div>
                 ))}

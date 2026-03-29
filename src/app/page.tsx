@@ -29,7 +29,7 @@ const FEATURES = [
       </svg>
     ),
     title: "상세 진행 가이드",
-    description: "단계별 진행 방법, 준비물, 변형 팁까지. 처음 해보는 게임도 자신 있게.",
+    description: "단계별 진행 방법, 준비물, 상황별 가이드까지. 처음 해보는 게임도 자신 있게.",
   },
   {
     icon: (
@@ -132,22 +132,6 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-12 lg:grid-cols-4 lg:gap-6 lg:py-20">
-          {FEATURES.map((feature) => (
-            <div key={feature.title} className="flex flex-col gap-2 lg:gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 lg:size-12">
-                {feature.icon}
-              </div>
-              <h3 className="text-sm font-semibold lg:text-base">{feature.title}</h3>
-              <p className="text-xs leading-relaxed text-muted-foreground lg:text-sm">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section>
         <div className="mx-auto max-w-6xl px-4 py-12 lg:py-25">
           <div className="mb-8 flex items-end justify-between">
             <div>
@@ -173,6 +157,22 @@ export default function Home() {
               <Button variant="outline">전체 게임 보기</Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-12 lg:grid-cols-4 lg:gap-6 lg:py-20">
+          {FEATURES.map((feature) => (
+            <div key={feature.title} className="flex flex-col gap-2 lg:gap-3">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 lg:size-12">
+                {feature.icon}
+              </div>
+              <h3 className="text-sm font-semibold lg:text-base">{feature.title}</h3>
+              <p className="text-xs leading-relaxed text-muted-foreground lg:text-sm">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
