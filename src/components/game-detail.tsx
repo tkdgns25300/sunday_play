@@ -233,6 +233,38 @@ export default function GameDetail({
             </ol>
           </section>
 
+          {game.tips && game.tips.length > 0 && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>진행 팁</SectionTitle>
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800/50 dark:bg-amber-900/20">
+                <ul className="flex flex-col gap-2">
+                  {game.tips.map((tip, index) => (
+                    <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-amber-500">
+                        <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+                      </svg>
+                      {tip}
+                    </li>
+                  ))}
+                </ul>
+                {game.referenceVideoUrl && (
+                  <a
+                    href={game.referenceVideoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700 transition-colors hover:bg-amber-200 dark:bg-amber-800/40 dark:text-amber-300 dark:hover:bg-amber-800/60"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.8C6.8 19 12 19 12 19s4.8 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8z" />
+                      <polygon fill="white" points="10,8.5 16,12 10,15.5" />
+                    </svg>
+                    참고 영상 보기
+                  </a>
+                )}
+              </div>
+            </section>
+          )}
+
           {game.bibleConnections.length > 0 && (
             <section className="flex flex-col gap-3">
               <SectionTitle>말씀 연결</SectionTitle>

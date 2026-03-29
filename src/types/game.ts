@@ -77,4 +77,6 @@ export type Game = {
   variations: GameVariation[];
   safetyNotes: string[];
   assets: GameAsset[];
+  tips?: string[];
+  referenceVideoUrl?: string;
 };
