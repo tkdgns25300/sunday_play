@@ -19,8 +19,7 @@ const zoomOutQuiz: Game = {
   steps: [
     {
       title: "준비",
-      content:
-        "팀을 나누고 PPT를 실행합니다.",
+      content: "팀을 나눕니다.",
     },
     {
       title: "줌아웃",
