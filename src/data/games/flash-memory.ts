@@ -33,18 +33,19 @@ const flashMemory: Game = {
   ],
   materials: [
     {
-      name: "종이 + 펜",
+      name: "화이트보드 + 보드마카 세트",
       quantity: "팀당 1세트",
       isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/vp/products/108161475?itemId=327387477&vendorItemId=3802387954",
     },
   ],
   bibleConnections: [
     {
-      verseReference: "잠언 4:23",
-      verseText:
-        "모든 지킬 만한 것 중에 더욱 네 마음을 지키라 생명의 근원이 이에서 남이니라",
+      verseReference: "골로새서 3:2",
+      verseText: "위의 것을 생각하고 땅의 것을 생각하지 말라",
       messageSummary:
-        "순간을 포착하려면 온 마음을 집중해야 하듯, 하나님은 우리 마음이 가장 중요한 것을 바라보길 원하십니다. 무엇을 보고 기억하느냐가 우리의 생각과 삶을 만들어갑니다.",
+        "순간 포착 게임에서 무엇을 보고 기억하느냐가 승패를 가르듯, 우리 삶도 무엇을 마음에 담느냐가 중요합니다. 하나님은 우리가 위의 것, 선하고 참된 것들을 바라보고 기억하길 원하십니다.",
     },
   ],
   variations: [
