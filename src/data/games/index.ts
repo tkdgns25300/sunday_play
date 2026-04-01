@@ -9,5 +9,6 @@ import whoAmI from "./who-am-i";
 import flashMemory from "./flash-memory";
 import wordRelay from "./word-relay";
 import pingpongBingo from "./pingpong-bingo";
+import groupNunchi from "./group-nunchi";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi];
