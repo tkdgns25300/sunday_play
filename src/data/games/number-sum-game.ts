@@ -44,6 +44,13 @@ const numberSumGame: Game = {
       quantity: "개인당 1장",
       isOptional: false,
     },
+    {
+      name: "A4 화일",
+      quantity: "1개",
+      isOptional: true,
+      purchaseUrl:
+        "https://www.coupang.com/vp/products/8552491124?itemId=25072415229&vendorItemId=92076477589",
+    },
   ],
   bibleConnections: [
     {
