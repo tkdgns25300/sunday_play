@@ -7,7 +7,7 @@ const groupNunchi: Game = {
     description:
         "팀별로 손잡고 원을 그려 앉아, 1부터 숫자를 외치며 일어나는 눈치 대결 게임입니다. 마지막 번호를 부르거나 같은 번호가 겹치면 탈락! 준비물 없이 바로 즐길 수 있습니다.",
     thumbnailUrl: "/images/games/group-nunchi.png",
-    ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
@@ -43,7 +43,7 @@ const groupNunchi: Game = {
     ],
     variations: [
         {
-            condition: "저학년 (유년부)",
+            condition: "저학년 (초등부)",
             suggestion: "팀 인원을 적게 구성하고, 연습 라운드를 먼저 진행하여 규칙을 충분히 익히게 합니다.",
         },
         {
