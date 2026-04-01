@@ -35,18 +35,11 @@ const pingpongBingo: Game = {
     ],
     materials: [
         {
-            name: "계란판 (5×5, 30구)",
-            quantity: "팀당 1개",
+            name: "탁구공 + 계란판 세트",
+            quantity: "1세트",
             isOptional: false,
             purchaseUrl:
-                "https://www.coupang.com/vp/products/8188498498?itemId=23556932498&vendorItemId=90584989498",
-        },
-        {
-            name: "탁구공",
-            quantity: "10개 이상",
-            isOptional: false,
-            purchaseUrl:
-                "https://www.coupang.com/vp/products/7660498043?itemId=20390133498&vendorItemId=87473393498",
+                "https://www.coupang.com/vp/products/8502713166?itemId=22233890727&vendorItemId=91941714775&q=%ED%83%81%EA%B5%AC%EA%B3%B5+%EA%B2%8C%EC%9E%84+%EA%B3%84%EB%9E%80%ED%8C%90&searchId=4fd5bf313184522&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mng4s2f5",
         },
         {
             name: "출발선 표시용 테이프",
@@ -54,6 +47,21 @@ const pingpongBingo: Game = {
             isOptional: true,
             purchaseUrl:
                 "https://www.coupang.com/vp/products/8511069704?itemId=24636154242&vendorItemId=91647093392&pickType=COU_PICK&q=%EB%A7%88%EC%8A%A4%ED%82%B9+%ED%85%8C%EC%9D%B4%ED%94%84&searchId=76a56cd56656897&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mn8yhv3h",
+        },
+        {
+            name: "책상",
+            quantity: "1개",
+            isOptional: true,
+            purchaseUrls: [
+                {
+                    label: "긴 책상",
+                    url: "https://www.coupang.com/vp/products/7425478468?itemId=19273387023&vendorItemId=86388527586&sourceType=srp_product_ads&clickEventId=c1e60bb0-29e3-11f1-aa02-0957a64b3185&korePlacement=15&koreSubPlacement=1&traceId=mn8yjz3z",
+                },
+                {
+                    label: "짧은 책상",
+                    url: "https://www.coupang.com/vp/products/8670075687?itemId=25168124659&vendorItemId=92165667520&q=%EB%8B%A8%EC%B2%B4%20%EC%B1%85%EC%83%81&searchId=ecf8be045636810&sourceType=search&itemsCount=36&searchRank=2&rank=2&traceId=mn8yk9m6",
+                },
+            ],
         },
     ],
     bibleConnections: [
@@ -83,7 +91,18 @@ const pingpongBingo: Game = {
         "탁구공이 튀어 다른 친구를 맞힐 수 있으니 관전 구역을 분리하세요.",
         "바닥이 미끄러우면 계란판 아래에 미끄럼 방지 패드를 깔아주세요.",
     ],
-    assets: [],
+    assets: [
+        {
+            fileName: "진행 자료",
+            fileType: "pptx",
+            storagePath: "/downloads/games/pingpong-bingo/rules.pptx",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "pdf",
+            storagePath: "/downloads/games/pingpong-bingo/rules.pdf",
+        },
+    ],
 };
 
 export default pingpongBingo;
