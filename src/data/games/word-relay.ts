@@ -22,13 +22,13 @@ const wordRelay: Game = {
             content: "팀을 나눕니다.",
         },
         {
-            title: "문제 출제",
+            title: "게임 진행",
             content:
-                "진행자가 네 글자 단어의 앞 두 글자만 화면에 보여줍니다.\n예: '생로__', '우왕__', '천고__'\n팀별로 돌아가며 뒤 두 글자를 맞춥니다.\n맞추면 다음 문제로 넘어가고, 틀리면 탈락합니다.",
+                "한 팀씩 도전합니다.\n진행자가 네 글자 단어의 앞 두 글자만 화면에 보여줍니다.\n예: '생로__', '우왕__', '천고__'\n뒤 두 글자를 맞추면 다음 문제로 넘어가고, 틀리면 도전이 끝납니다.\n모든 팀이 도전을 마칠 때까지 반복합니다.",
         },
         {
-            title: "점수 및 우승",
-            content: "틀릴 때까지 계속 진행하며, 가장 많이 맞춘 팀이 우승합니다.",
+            title: "우승",
+            content: "가장 많은 문제를 맞춘 팀이 우승합니다.",
         },
     ],
     materials: [],
@@ -72,11 +72,6 @@ const wordRelay: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/word-relay/rules.pdf",
-        },
-        {
-            fileName: "네 글자 단어 모음",
-            fileType: "pdf",
-            storagePath: "/downloads/games/word-relay/words.pdf",
         },
     ],
 };
