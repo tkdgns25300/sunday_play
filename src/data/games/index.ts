@@ -7,5 +7,6 @@ import zoomOutQuiz from "./zoom-out-quiz";
 import simonSays from "./simon-says";
 import whoAmI from "./who-am-i";
 import flashMemory from "./flash-memory";
+import wordRelay from "./word-relay";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay];
