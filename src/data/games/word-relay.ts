@@ -5,7 +5,7 @@ const wordRelay: Game = {
     title: "이어말하기",
     summary: "네 글자 단어의 앞 두 글자를 보고 뒤 두 글자를 맞추는 팀 대결 퀴즈 게임",
     description:
-        "진행자가 네 글자 단어(사자성어, 일상 표현 등)의 앞 두 글자만 보여주면, 팀별로 뒤 두 글자를 맞추는 게임입니다. 빠른 판단력과 어휘력을 겨루는 재미있는 퀴즈 게임입니다.",
+        "진행자가 네 글자 단어(사자성어, 일상 표현 등)의 앞 두 글자만 보여주면, 한 팀씩 도전하여 뒤 두 글자를 맞춥니다. 틀릴 때까지 계속 진행하며, 가장 많이 맞춘 팀이 우승합니다. 빠른 판단력과 어휘력을 겨루는 재미있는 퀴즈 게임입니다.",
     thumbnailUrl: "/images/games/word-relay.png",
     ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
     energyLevel: 2,
@@ -55,7 +55,8 @@ const wordRelay: Game = {
         },
         {
             condition: "성경 특화",
-            suggestion: "성경 관련 네 글자 표현만 사용합니다. 예: '십자가상', '부활절날', '오병이어', '선한목자'",
+            suggestion:
+                "성경 관련 네 글자 표현만 사용합니다. 예: '할렐루야', '천지창조', '동방박사', '오병이어', '선한목자'",
         },
     ],
     safetyNotes: [
@@ -72,6 +73,16 @@ const wordRelay: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/word-relay/rules.pdf",
+        },
+        {
+            fileName: "네 글자 단어 모음",
+            fileType: "pdf",
+            storagePath: "/downloads/games/word-relay/words.pdf",
+        },
+        {
+            fileName: "네 글자 단어 모음",
+            fileType: "hwpx",
+            storagePath: "/downloads/games/word-relay/words.hwpx",
         },
     ],
 };
