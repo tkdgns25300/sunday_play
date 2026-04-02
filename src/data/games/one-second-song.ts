@@ -79,6 +79,16 @@ const oneSecondSong: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/one-second-song/rules.pdf",
         },
+        {
+            fileName: "노래 목록",
+            fileType: "pdf",
+            storagePath: "/downloads/games/one-second-song/songs.pdf",
+        },
+        {
+            fileName: "노래 목록",
+            fileType: "hwpx",
+            storagePath: "/downloads/games/one-second-song/songs.hwpx",
+        },
     ],
 };
 
