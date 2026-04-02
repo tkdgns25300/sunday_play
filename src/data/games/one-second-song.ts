@@ -33,9 +33,11 @@ const oneSecondSong: Game = {
     ],
     materials: [
         {
-            name: "스피커",
+            name: "휴대용 스피커",
             quantity: "1개",
             isOptional: true,
+            purchaseUrl:
+                "https://www.coupang.com/vp/products/7456542331?itemId=19425189583&vendorItemId=86536553267&pickType=COU_PICK&q=%ED%9C%B4%EB%8C%80%EC%9A%A9+%EC%8A%A4%ED%94%BC%EC%BB%A4&searchId=6f2205096623020&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mnhhhl3k",
         },
     ],
     bibleConnections: [
