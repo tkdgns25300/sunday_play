@@ -11,5 +11,6 @@ import wordRelay from "./word-relay";
 import pingpongBingo from "./pingpong-bingo";
 import groupNunchi from "./group-nunchi";
 import emojiMovieQuiz from "./emoji-movie-quiz";
+import liarGame from "./liar-game";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame];
