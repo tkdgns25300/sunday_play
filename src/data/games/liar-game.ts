@@ -86,7 +86,18 @@ const liarGame: Game = {
         "라이어로 지목된 사람이 기분 나빠하지 않도록 게임 전 분위기를 밝게 만들어주세요.",
         "투표 시 특정인을 집중 공격하지 않도록 서로 존중하는 규칙을 정하세요.",
     ],
-    assets: [],
+    assets: [
+        {
+            fileName: "진행 자료",
+            fileType: "pptx",
+            storagePath: "/downloads/games/liar-game/rules.pptx",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "pdf",
+            storagePath: "/downloads/games/liar-game/rules.pdf",
+        },
+    ],
 };
 
 export default liarGame;
