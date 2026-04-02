@@ -62,7 +62,18 @@ const emojiMovieQuiz: Game = {
         "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
         "참가자 연령에 맞는 영화를 선별하세요. 초등부에게 공포·폭력적인 영화가 정답으로 나오지 않도록 주의합니다.",
     ],
-    assets: [],
+    assets: [
+        {
+            fileName: "진행 자료",
+            fileType: "pptx",
+            storagePath: "/downloads/games/emoji-movie-quiz/rules.pptx",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "pdf",
+            storagePath: "/downloads/games/emoji-movie-quiz/rules.pdf",
+        },
+    ],
 };
 
 export default emojiMovieQuiz;
