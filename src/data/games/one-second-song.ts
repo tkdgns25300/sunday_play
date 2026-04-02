@@ -56,6 +56,10 @@ const oneSecondSong: Game = {
             suggestion: "재생 시간을 0.5초로 줄이거나, 노래 중간 부분을 재생합니다.",
         },
         {
+            condition: "연속 재생 모드",
+            suggestion: "1초가 아닌 처음부터 계속 재생하며, 가장 먼저 맞추는 팀이 득점합니다. 빨리 맞출수록 높은 점수를 부여하면 더 긴장감 있습니다.",
+        },
+        {
             condition: "소규모 (10명 이하)",
             suggestion: "팀전 없이 개인전으로 진행합니다. 누적 점수로 순위를 매깁니다.",
         },
@@ -64,7 +68,18 @@ const oneSecondSong: Game = {
         "스피커 볼륨을 미리 테스트하여 너무 크지 않게 조절하세요.",
         "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
     ],
-    assets: [],
+    assets: [
+        {
+            fileName: "진행 자료",
+            fileType: "pptx",
+            storagePath: "/downloads/games/one-second-song/rules.pptx",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "pdf",
+            storagePath: "/downloads/games/one-second-song/rules.pdf",
+        },
+    ],
 };
 
 export default oneSecondSong;
