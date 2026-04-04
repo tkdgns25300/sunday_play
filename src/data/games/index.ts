@@ -13,5 +13,6 @@ import groupNunchi from "./group-nunchi";
 import emojiMovieQuiz from "./emoji-movie-quiz";
 import liarGame from "./liar-game";
 import oneSecondSong from "./one-second-song";
+import personQuiz from "./person-quiz";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz];
