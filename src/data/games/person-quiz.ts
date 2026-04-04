@@ -5,7 +5,7 @@ const personQuiz: Game = {
     title: "인물퀴즈",
     summary: "화면에 나오는 인물 사진을 3초 안에 맞추는 릴레이 퀴즈 게임",
     description:
-        "팀원이 가로로 나란히 서서 한 명씩 화면의 인물 사진을 보고 3초 안에 맞추는 릴레이 게임입니다. 배우, 캐릭터, 유명인 등 다양한 인물이 출제되며, 틀리면 바로 탈락! 가장 많이 맞춘 팀이 승리합니다.",
+        "팀원이 가로로 나란히 서서 한 명씩 화면의 인물 사진을 보고 3초 안에 맞추는 릴레이 게임입니다. 배우, 캐릭터, 유명인 등 다양한 인물이 출제되며, 틀리면 바로 탈락! 끝까지 살아남은 팀이 우승합니다.",
     thumbnailUrl: "/images/games/person-quiz.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
@@ -13,7 +13,7 @@ const personQuiz: Game = {
     prepTime: "quick",
     groupSizes: ["sm", "md"],
     characterQualities: ["경각심", "민감성", "담대함"],
-    durationMinutes: 20,
+    durationMinutes: 15,
     difficulty: 2,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [
@@ -60,7 +60,18 @@ const personQuiz: Game = {
         },
     ],
     safetyNotes: ["탈락한 친구를 놀리지 않도록 서로 응원하는 분위기를 만들어주세요."],
-    assets: [],
+    assets: [
+        {
+            fileName: "진행 자료",
+            fileType: "pptx",
+            storagePath: "/downloads/games/person-quiz/rules.pptx",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "pdf",
+            storagePath: "/downloads/games/person-quiz/rules.pdf",
+        },
+    ],
 };
 
 export default personQuiz;
