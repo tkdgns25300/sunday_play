@@ -13,7 +13,7 @@ const eyeLevelQuiz: Game = {
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["지혜", "분별력", "기쁨"],
-    durationMinutes: 15,
+    durationMinutes: 10,
     difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
