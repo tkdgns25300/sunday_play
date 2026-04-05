@@ -114,8 +114,8 @@ export default function Home() {
             고민 끝.
           </h1>
           <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-            50+개 이상의 게임 중 딱 맞는 게임을 찾고,{" "}
-            <br className="hidden md:block" />
+            50+개 이상의 게임 중 딱 맞는 게임을 찾고,
+            <br />
             진행 PPT·준비물 자료까지 한 번에 준비하세요.
           </p>
           <div className="flex gap-3">
@@ -137,7 +137,7 @@ export default function Home() {
             <div>
               <h2 className="text-2xl font-bold">인기 게임</h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                선생님들이 가장 많이 찾는 게임을 만나보세요.
+                사용자들이 가장 많이 찾는 게임을 만나보세요.
               </p>
             </div>
             <Link
