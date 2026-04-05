@@ -8,6 +8,7 @@ import {
 import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
 import DownloadsSection from "@/components/downloads-section";
+import TimerGame from "@/components/timer-game";
 
 const ExternalLinkIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -172,6 +173,13 @@ export default function GameDetail({
       {accessLevel === "full" && (
         <>
           <DownloadsSection game={game} accessLevel={accessLevel} />
+
+          {game.id === "time-match" && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>게임 플레이</SectionTitle>
+              <TimerGame />
+            </section>
+          )}
 
           {game.materials.length > 0 && (
             <section className="flex flex-col gap-3">
