@@ -89,94 +89,82 @@ export default function PhotoStopGame() {
 
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-3"
+                    className="fixed inset-0 z-50 flex flex-col bg-black"
                     onClick={handleClose}
                 >
                     <div
-                        className="flex w-full max-w-lg flex-col rounded-3xl bg-background shadow-2xl"
+                        className="flex h-full w-full flex-col"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="flex items-center justify-between border-b border-border px-6 py-4">
-                            <h3 className="text-lg font-bold">사진 스탑</h3>
+                        <div className="flex items-center justify-between px-5 py-4">
+                            <h3 className="text-lg font-bold text-white">사진 스탑</h3>
                             <button
                                 onClick={handleClose}
                                 disabled={phase === "running"}
-                                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-30"
+                                className="rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30"
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <line x1="18" x2="6" y1="6" y2="18" />
                                     <line x1="6" x2="18" y1="6" y2="18" />
                                 </svg>
                             </button>
                         </div>
 
-                        <div className="flex flex-col gap-5 p-6">
-                            <div className="flex flex-col gap-2">
-                                <p className="text-xs font-medium text-muted-foreground">전환 속도</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {SPEED_OPTIONS.map((opt) => (
-                                        <button
-                                            key={opt.value}
-                                            onClick={() => setSpeed(opt.value)}
-                                            disabled={phase === "running"}
-                                            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-                                                speed === opt.value
-                                                    ? "bg-primary text-primary-foreground shadow-sm"
-                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                                            } disabled:opacity-50`}
-                                        >
-                                            {opt.label}
-                                        </button>
-                                    ))}
-                                </div>
+                        <div className="relative flex flex-1 items-center justify-center overflow-hidden">
+                            <Image
+                                src={displaySrc}
+                                alt="게임 사진"
+                                fill
+                                className="object-contain"
+                                sizes="100vw"
+                                priority
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-4 px-5 pb-6 pt-4">
+                            <div className="flex items-center justify-center gap-2">
+                                {SPEED_OPTIONS.map((opt) => (
+                                    <button
+                                        key={opt.value}
+                                        onClick={() => setSpeed(opt.value)}
+                                        disabled={phase === "running"}
+                                        className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+                                            speed === opt.value
+                                                ? "bg-white text-black"
+                                                : "bg-white/15 text-white/70 hover:bg-white/25"
+                                        } disabled:opacity-40`}
+                                    >
+                                        {opt.label}
+                                    </button>
+                                ))}
                             </div>
 
-                            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted">
-                                <Image
-                                    src={displaySrc}
-                                    alt="게임 사진"
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 512px) 100vw, 512px"
-                                    priority
-                                />
-                                {phase === "running" && (
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="rounded-full bg-black/50 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
-                                            사진이 넘어가는 중...
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                            {phase === "idle" && (
+                                <button
+                                    onClick={handleStart}
+                                    className="w-full rounded-2xl bg-white py-4 text-lg font-bold text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+                                >
+                                    시작
+                                </button>
+                            )}
 
-                            <div className="flex flex-col items-center gap-3">
-                                {phase === "idle" && (
-                                    <button
-                                        onClick={handleStart}
-                                        className="w-full rounded-xl bg-primary px-8 py-4 text-lg font-bold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-95"
-                                    >
-                                        시작
-                                    </button>
-                                )}
+                            {phase === "running" && (
+                                <button
+                                    onClick={handleStop}
+                                    className="w-full rounded-2xl bg-red-500 py-4 text-lg font-bold text-white shadow-lg shadow-red-500/30 transition-all active:scale-[0.98]"
+                                >
+                                    STOP
+                                </button>
+                            )}
 
-                                {phase === "running" && (
-                                    <button
-                                        onClick={handleStop}
-                                        className="w-full rounded-xl bg-red-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-transform active:scale-95"
-                                    >
-                                        STOP
-                                    </button>
-                                )}
-
-                                {phase === "result" && (
-                                    <button
-                                        onClick={handleNext}
-                                        className="w-full rounded-xl bg-primary px-8 py-4 text-lg font-bold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-110 active:scale-95"
-                                    >
-                                        다음 도전
-                                    </button>
-                                )}
-                            </div>
+                            {phase === "result" && (
+                                <button
+                                    onClick={handleNext}
+                                    className="w-full rounded-2xl bg-white py-4 text-lg font-bold text-black transition-all hover:bg-white/90 active:scale-[0.98]"
+                                >
+                                    다음 도전
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -45,7 +45,7 @@ const photoStop: Game = {
     variations: [
         {
             condition: "난이도 상향",
-            suggestion: "사진 전환 속도를 더 빠르게 설정합니다.",
+            suggestion: "사진 전환 속도를 '매우 빠르게'로 설정합니다.",
         },
         {
             condition: "반대 버전",
@@ -53,9 +53,9 @@ const photoStop: Game = {
                 "사람이 가장 적은 사진에서 멈추면 우승하는 방식으로 변형합니다.",
         },
         {
-            condition: "성경 특화",
+            condition: "팀전",
             suggestion:
-                "성경 관련 사진(교회, 예배 등)을 사용합니다.",
+                "팀별로 나누어 한 명씩 도전하고, 팀원들의 사진 속 사람 수 합산으로 승부합니다.",
         },
     ],
     safetyNotes: [
