@@ -9,6 +9,7 @@ import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
 import DownloadsSection from "@/components/downloads-section";
 import TimerGame from "@/components/timer-game";
+import PhotoStopGame from "@/components/photo-stop-game";
 
 const ExternalLinkIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -178,6 +179,13 @@ export default function GameDetail({
             <section className="flex flex-col gap-3">
               <SectionTitle>게임 플레이</SectionTitle>
               <TimerGame />
+            </section>
+          )}
+
+          {game.id === "photo-stop" && (
+            <section className="flex flex-col gap-3">
+              <SectionTitle>게임 플레이</SectionTitle>
+              <PhotoStopGame />
             </section>
           )}
 

@@ -17,5 +17,6 @@ import personQuiz from "./person-quiz";
 import actionCommand from "./action-command";
 import eyeLevelQuiz from "./eye-level-quiz";
 import timeMatch from "./time-match";
+import photoStop from "./photo-stop";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop];
