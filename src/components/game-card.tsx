@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Game, GroupSize } from "@/types/game";
 
 const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
@@ -38,9 +39,12 @@ export default function GameCard({ game }: GameCardProps) {
       <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
         <div className="aspect-[16/10] overflow-hidden bg-muted">
           {game.thumbnailUrl ? (
-            <img
+            <Image
               src={game.thumbnailUrl}
               alt={game.title}
+              width={640}
+              height={400}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="size-full object-cover"
             />
           ) : (

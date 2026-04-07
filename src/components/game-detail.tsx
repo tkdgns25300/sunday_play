@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Game, GroupSize } from "@/types/game";
 import {
   ENERGY_LEVEL_LABELS,
@@ -92,9 +93,13 @@ export default function GameDetail({
 
       {game.thumbnailUrl && (
         <div className="overflow-hidden rounded-xl">
-          <img
+          <Image
             src={game.thumbnailUrl}
             alt={game.title}
+            width={1200}
+            height={750}
+            sizes="(max-width: 768px) 100vw, 768px"
+            priority
             className="w-full object-cover"
           />
         </div>
