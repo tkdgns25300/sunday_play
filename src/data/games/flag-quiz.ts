@@ -13,24 +13,18 @@ const flagQuiz: Game = {
     prepTime: "quick",
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["경청", "지혜", "창의성"],
-    durationMinutes: 15,
+    durationMinutes: 10,
     difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {
-            title: "팀 나누기",
-            content:
-                "팀별로 나누고 모여 앉습니다.\n전원이 화면을 볼 수 있도록 자리를 배치합니다.",
-        },
-        {
-            title: "규칙 설명",
-            content:
-                "화면에 국기가 나타나면 해당 나라 이름을 가장 먼저 외치는 팀이 1점을 얻습니다.\n정답을 외칠 때는 팀 이름을 먼저 말한 뒤 답을 말합니다.",
+            title: "준비",
+            content: "팀을 나눕니다.",
         },
         {
             title: "게임 진행",
             content:
-                "국기를 한 장씩 보여줍니다.\n쉬운 나라부터 시작해 점점 어려운 나라로 넘어갑니다.\n가장 먼저 정답을 외친 팀에 1점을 부여합니다.",
+                "화면에 국기를 한 장씩 보여줍니다.\n가장 먼저 나라 이름을 외친 팀이 1점을 얻습니다.\n쉬운 나라부터 시작해 점점 어려운 나라로 넘어갑니다.",
         },
         {
             title: "우승",
