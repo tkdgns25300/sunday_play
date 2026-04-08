@@ -11,7 +11,7 @@ const newspaperFolding: Game = {
     energyLevel: 4,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
-    groupSizes: ["sm", "md"],
+    groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "담대함", "포용"],
     durationMinutes: 15,
     difficulty: 2,
