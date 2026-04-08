@@ -15,7 +15,7 @@ const newspaperPuzzle: Game = {
     characterQualities: ["근면", "솔선", "창의성"],
     durationMinutes: 15,
     difficulty: 2,
-    requiredStaff: { min: 1, recommended: 2 },
+    requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {
             title: "준비",
