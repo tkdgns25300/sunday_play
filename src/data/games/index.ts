@@ -22,5 +22,6 @@ import flagQuiz from "./flag-quiz";
 import capitalQuiz from "./capital-quiz";
 import tongueTwister from "./tongue-twister";
 import newspaperPuzzle from "./newspaper-puzzle";
+import newspaperFolding from "./newspaper-folding";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding];
