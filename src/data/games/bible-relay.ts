@@ -33,7 +33,15 @@ const bibleRelay: Game = {
                 "가장 정확하고 빠르게 암송을 완성한 팀이 우승합니다.",
         },
     ],
-    materials: [],
+    materials: [
+        {
+            name: "성경책",
+            quantity: "팀당 1권",
+            isOptional: true,
+            purchaseUrl:
+                "https://www.coupang.com/np/search?component=&q=%EC%84%B1%EA%B2%BD%EC%B1%85&traceId=mnr9pu57&channel=user",
+        },
+    ],
     bibleConnections: [
         {
             verseReference: "시편 119:11",
