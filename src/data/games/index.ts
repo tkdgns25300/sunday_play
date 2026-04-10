@@ -27,5 +27,6 @@ import bibleRelay from "./bible-relay";
 import bibleSpeed from "./bible-speed";
 import commonSenseQuiz from "./common-sense-quiz";
 import speakTogether from "./speak-together";
+import historyQuiz from "./history-quiz";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz];
