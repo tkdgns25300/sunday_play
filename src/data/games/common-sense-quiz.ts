@@ -19,7 +19,7 @@ const commonSenseQuiz: Game = {
     steps: [
         {
             title: "준비",
-            content: "팀을 나눕니다.",
+            content: "팀을 나누고 각 팀의 구호를 정합니다.",
         },
         {
             title: "게임 진행",
@@ -70,6 +70,7 @@ const commonSenseQuiz: Game = {
     ],
     safetyNotes: [
         "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
+        "동시에 외쳤을 때를 대비해 판정 규칙을 미리 정하세요. (예: 진행자 판단, 가위바위보 등)",
     ],
     assets: [
         {
