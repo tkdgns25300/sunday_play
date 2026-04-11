@@ -29,5 +29,6 @@ import commonSenseQuiz from "./common-sense-quiz";
 import speakTogether from "./speak-together";
 import historyQuiz from "./history-quiz";
 import chosungQuiz from "./chosung-quiz";
+import telepathy from "./telepathy";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz, telepathy];
