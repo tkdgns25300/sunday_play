@@ -2,7 +2,7 @@ import { Game } from "@/types/game";
 
 const telepathy: Game = {
     id: "telepathy",
-    title: "텔레파시 게임",
+    title: "이심전심",
     summary: "제시어를 듣고 팀원들이 동시에 같은 동작을 하면 점수를 얻는 게임",
     description:
         "진행자가 제시어를 말하면 팀원들이 상의 없이 각자 떠오르는 동작을 생각합니다. '하나, 둘, 셋' 구호에 맞춰 동시에 동작을 하고, 같은 동작을 한 팀원이 많을수록 높은 점수를 얻습니다.",
@@ -14,7 +14,7 @@ const telepathy: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["민감성", "경청", "포용"],
     durationMinutes: 15,
-    difficulty: 1,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {
