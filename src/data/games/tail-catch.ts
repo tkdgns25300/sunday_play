@@ -33,9 +33,11 @@ const tailCatch: Game = {
     ],
     materials: [
         {
-            name: "꼬리용 천 또는 수건",
+            name: "꼬리",
             quantity: "팀 수만큼",
             isOptional: false,
+            purchaseUrl:
+                "https://www.coupang.com/np/search?component=&q=%EA%BC%AC%EB%A6%AC%EC%9E%A1%EA%B8%B0&traceId=mnvtwk14&channel=user",
         },
     ],
     bibleConnections: [
