@@ -43,7 +43,7 @@ const chainWords: Game = {
     variations: [
         {
             condition: "소규모 (10명 이하)",
-            suggestion: "팀 없이 전원이 원형으로 앉아 한 바퀴 돌며 진행합니다.",
+            suggestion: "팀 없이 전원이 원형으로 앉아 한 바퀴 돌며 진행합니다. 단어를 말하지 못한 사람은 탈락하고 마지막까지 남은 사람이 우승합니다.",
         },
         {
             condition: "난이도 상향",
@@ -51,7 +51,7 @@ const chainWords: Game = {
         },
         {
             condition: "탈락형",
-            suggestion: "단어를 말하지 못한 사람은 탈락하고, 마지막까지 남은 팀이 우승합니다.",
+            suggestion: "단어를 말하지 못한 팀은 탈락하고, 마지막까지 남은 팀이 우승합니다.",
         },
         {
             condition: "성경 특화",
