@@ -30,7 +30,7 @@ const pingpongBounce: Game = {
         {
             title: "우승",
             content:
-                "모든 팀이 도전한 후 가장 많은 컵을 채운 팀이 우승합니다.",
+                "모든 도전이 끝난 후 가장 많은 컵을 채운 팀이 우승합니다.",
         },
     ],
     materials: [
@@ -39,12 +39,14 @@ const pingpongBounce: Game = {
             quantity: "10개 이상",
             isOptional: false,
             purchaseUrl:
-                "https://www.coupang.com/np/search?component=&q=%ED%83%81%EA%B5%AC%EA%B3%B5",
+                "https://www.coupang.com/np/search?component=&q=%ED%83%81%EA%B5%AC%EA%B3%B5&traceId=mnylgtmy&channel=user",
         },
         {
             name: "종이컵",
             quantity: "10개",
             isOptional: false,
+            purchaseUrl:
+                "https://www.coupang.com/np/search?component=&q=%EC%A2%85%EC%9D%B4%EC%BB%B5&traceId=mnylpp0z&channel=user",
         },
     ],
     bibleConnections: [
