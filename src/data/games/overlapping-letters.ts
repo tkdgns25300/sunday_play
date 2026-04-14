@@ -9,7 +9,7 @@ const overlappingLetters: Game = {
     thumbnailUrl: "/images/games/overlapping-letters.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당", "온라인"],
+    environments: ["실내교실", "온라인"],
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["경각심", "민감성", "분별력"],
@@ -35,11 +35,11 @@ const overlappingLetters: Game = {
     materials: [],
     bibleConnections: [
         {
-            verseReference: "잠언 25:2",
+            verseReference: "예레미야 33:3",
             verseText:
-                "일을 숨기는 것은 하나님의 영화요 일을 살피는 것은 왕의 영화니라",
+                "너는 내게 부르짖으라 내가 네게 응답하겠고 네가 알지 못하는 크고 은밀한 일을 네게 보이리라",
             messageSummary:
-                "오늘 겹쳐진 글자 속에서 숨은 단어를 찾아냈는데, 하나님은 숨겨진 것을 찾아내는 지혜를 주시는 분이에요. 말씀 속에 숨겨진 보물을 발견하는 사람이 되어요.",
+                "오늘 겹쳐진 글자 속에서 숨겨진 단어를 찾아냈는데, 하나님도 우리가 구하면 숨겨진 것을 보여주신다고 약속하셨어요. 하나님께 구하면 우리가 몰랐던 것들을 알게 해주세요.",
         },
     ],
     variations: [
