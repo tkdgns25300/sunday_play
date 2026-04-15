@@ -38,5 +38,6 @@ import tailCatch from "./tail-catch";
 import voiceGuess from "./voice-guess";
 import overlappingLetters from "./overlapping-letters";
 import pingpongBounce from "./pingpong-bounce";
+import transparentImageQuiz from "./transparent-image-quiz";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz, telepathy, chainWords, touchGuess, twentyQuestions, bodyTalk, tailCatch, voiceGuess, overlappingLetters, pingpongBounce];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz, telepathy, chainWords, touchGuess, twentyQuestions, bodyTalk, tailCatch, voiceGuess, overlappingLetters, pingpongBounce, transparentImageQuiz];
