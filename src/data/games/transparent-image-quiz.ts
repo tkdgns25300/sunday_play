@@ -51,7 +51,7 @@ const transparentImageQuiz: Game = {
         {
             condition: "난이도 상향",
             suggestion:
-                "카테고리 힌트 없이 진행하거나, 겹치는 이미지 수를 늘립니다.",
+                "겹치는 이미지 수를 늘리거나, 비슷한 모양의 이미지끼리 겹칩니다.",
         },
         {
             condition: "점수 차등",
