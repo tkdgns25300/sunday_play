@@ -10,8 +10,8 @@ const pokerFace: Game = {
   ageGroups: ["초등부", "중고등부", "청년부"],
   energyLevel: 2,
   environments: ["실내교실", "실내강당"],
-  prepTime: "none",
-  groupSizes: ["xs", "sm"],
+  prepTime: "quick",
+  groupSizes: ["sm"],
   characterQualities: ["분별력", "신중", "담대함"],
   durationMinutes: 15,
   difficulty: 2,
@@ -40,9 +40,11 @@ const pokerFace: Game = {
       isOptional: false,
     },
     {
-      name: "눈가리개",
+      name: "안대",
       quantity: "1개",
       isOptional: true,
+      purchaseUrl:
+        "https://www.coupang.com/np/search?component=&q=%EC%95%88%EB%8C%80&traceId=mo4i2ggb&channel=user",
     },
   ],
   bibleConnections: [
@@ -70,6 +72,16 @@ const pokerFace: Game = {
         "동전을 쥐지 않은 사람도 일부러 긴장한 척, 웃는 척 등 연기를 할 수 있습니다. 추리 난이도가 올라갑니다.",
     },
     {
+      condition: "동전 여러 개",
+      suggestion:
+        "동전을 2~3개로 늘려 여러 사람에게 나눠줍니다. 탐정이 찾아야 할 동전이 많아져 난이도가 올라가고, 빈 손 확률이 낮아져 긴장감이 높아집니다.",
+    },
+    {
+      condition: "수비 보너스",
+      suggestion:
+        "동전을 쥔 사람이 해당 라운드에서 들키지 않고 살아남으면 +10점을 받습니다. 수비 측도 긴장감이 생깁니다.",
+    },
+    {
       condition: "성경 특화",
       suggestion:
         "동전 대신 성경 구절이 적힌 카드를 사용합니다. 범인을 찾으면 해당 구절을 다 같이 읽고 의미를 나눕니다.",
@@ -81,7 +93,7 @@ const pokerFace: Game = {
   ],
   tips: [
     "탐정에게 '스톱' 규칙을 꼭 설명해 주세요. 욕심 vs 안전의 전략이 이 게임의 핵심 재미입니다.",
-    "동전을 쥔 사람이 들키지 않고 끝까지 살아남으면 보너스 점수를 주면 수비 측도 긴장감이 생깁니다.",
+    "첫 라운드는 연습 라운드로 진행하면 점수 체계를 빠르게 이해할 수 있습니다.",
     "참가자들에게 표정 관리 시간을 5초 정도 준 뒤 탐정이 눈을 뜨게 하면 더 재밌습니다.",
   ],
   assets: [
