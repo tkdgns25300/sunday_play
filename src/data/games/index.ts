@@ -44,5 +44,6 @@ import cupSpeedStacking from "./cup-speed-stacking";
 import aiAnswer from "./ai-answer";
 import relayPortrait from "./relay-portrait";
 import pokerFace from "./poker-face";
+import wordAssociation from "./word-association";
 
-export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz, telepathy, chainWords, touchGuess, twentyQuestions, bodyTalk, tailCatch, voiceGuess, overlappingLetters, pingpongBounce, transparentImageQuiz, relayBallPipe, cupSpeedStacking, aiAnswer, relayPortrait, pokerFace];
+export const games = [colorFlipBingo, numberSumGame, wordSpeedQuiz, bottleFlip, bottleCapFlick, zoomOutQuiz, simonSays, whoAmI, flashMemory, wordRelay, pingpongBingo, groupNunchi, emojiMovieQuiz, liarGame, oneSecondSong, personQuiz, actionCommand, eyeLevelQuiz, timeMatch, photoStop, flagQuiz, capitalQuiz, tongueTwister, newspaperPuzzle, newspaperFolding, bibleRelay, bibleSpeed, commonSenseQuiz, speakTogether, historyQuiz, chosungQuiz, telepathy, chainWords, touchGuess, twentyQuestions, bodyTalk, tailCatch, voiceGuess, overlappingLetters, pingpongBounce, transparentImageQuiz, relayBallPipe, cupSpeedStacking, aiAnswer, relayPortrait, pokerFace, wordAssociation];
