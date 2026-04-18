@@ -11,9 +11,9 @@ const cupSpeedStacking: Game = {
     energyLevel: 4,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
-    groupSizes: ["sm", "md", "lg"],
+    groupSizes: ["md", "lg"],
     characterQualities: ["경각심", "끈기", "절제"],
-    durationMinutes: 20,
+    durationMinutes: 15,
     difficulty: 3,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [
@@ -88,6 +88,11 @@ const cupSpeedStacking: Game = {
             condition: "저학년 (초등부 저학년)",
             suggestion:
                 "2가지 색만 사용하고, 패턴을 단순하게(3단 피라미드, 일렬 배치 등) 구성합니다. 시간 제한 없이 정확도만으로 승부합니다.",
+        },
+        {
+            condition: "라운드별 점수 차등",
+            suggestion:
+                "뒤로 갈수록 패턴이 어려워지니 라운드마다 점수를 높게 설정하면 역전의 재미가 생깁니다. (예: 1R 10점, 2R 20점, 3R 30점)",
         },
         {
             condition: "성경 특화",
