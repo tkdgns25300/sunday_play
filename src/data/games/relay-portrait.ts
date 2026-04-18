@@ -11,21 +11,21 @@ const relayPortrait: Game = {
   energyLevel: 3,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
-  groupSizes: ["sm", "md", "lg"],
+  groupSizes: ["md", "lg"],
   characterQualities: ["창의성", "유연성", "기쁨"],
   durationMinutes: 15,
-  difficulty: 2,
+  difficulty: 3,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {
       title: "준비",
       content:
-        "팀을 나누고(팀당 최소 5명) 팀별로 도화지 1장과 펜 1개를 배분합니다.\n먼저 맞추는 사람 1명을 정해 뒤돌아 있거나 밖으로 나가게 합니다.\n그 후 모델 1명을 정하고 앞에 세웁니다.",
+        "팀을 나누고(팀당 최소 5명) 팀별로 스케치북 1장과 펜 1개를 배분합니다.\n먼저 맞추는 사람 1명을 정해 뒤돌아 있거나 밖으로 나가게 합니다.\n그 후 모델 1명을 정하고 앞에 세웁니다.",
     },
     {
       title: "게임 진행",
       content:
-        "화면에 그릴 부위가 나타나면 팀원 1명이 모델의 등 뒤로 가서 도화지에 해당 부위를 그리고 돌아옵니다.\n다음 지시가 나오면 다음 팀원이 등 뒤로 가서 이어 그리는 식으로 릴레이합니다.\n모든 부위를 다 그리면 맞추는 사람이 돌아옵니다.",
+        "화면에 그릴 부위가 나타나면 팀원 1명이 모델의 등 뒤로 가서 스케치북에 해당 부위를 그리고 돌아옵니다.\n다음 지시가 나오면 다음 팀원이 등 뒤로 가서 이어 그리는 식으로 릴레이합니다.\n모든 부위를 다 그리면 맞추는 사람이 돌아옵니다.",
     },
     {
       title: "우승",
@@ -35,14 +35,18 @@ const relayPortrait: Game = {
   ],
   materials: [
     {
-      name: "도화지",
-      quantity: "팀당 1장",
-      isOptional: false,
-    },
-    {
-      name: "굵은 펜 (마커)",
+      name: "스케치북",
       quantity: "팀당 1개",
       isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/np/search?component=&q=%EC%8A%A4%EC%BC%80%EC%B9%98%EB%B6%81&traceId=mo4h7rem&channel=user",
+    },
+    {
+      name: "마커",
+      quantity: "팀당 1개",
+      isOptional: false,
+      purchaseUrl:
+        "https://www.coupang.com/np/search?component=&q=%EB%A7%88%EC%BB%A4&traceId=mo4h7x4b&channel=user",
     },
   ],
   bibleConnections: [
@@ -81,7 +85,7 @@ const relayPortrait: Game = {
     },
   ],
   safetyNotes: [
-    "펜으로 등을 찌르거나 세게 누르지 않도록 주의하세요. 도화지를 받칠 판이 있으면 더 좋습니다.",
+    "펜으로 등을 찌르거나 세게 누르지 않도록 주의하세요. 스케치북를 받칠 판이 있으면 더 좋습니다.",
     "모델이 움직이면 그림이 흐트러지니 자세를 유지하도록 안내하세요.",
   ],
   tips: [
