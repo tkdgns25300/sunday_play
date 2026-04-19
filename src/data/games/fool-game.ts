@@ -11,7 +11,7 @@ const foolGame: Game = {
   energyLevel: 2,
   environments: ["실내교실", "실내강당"],
   prepTime: "none",
-  groupSizes: ["xs", "sm"],
+  groupSizes: ["sm", "md"],
   characterQualities: ["경각심", "과단성", "절제"],
   durationMinutes: 10,
   difficulty: 3,
