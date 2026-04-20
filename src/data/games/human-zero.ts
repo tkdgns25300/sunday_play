@@ -36,10 +36,10 @@ const humanZero: Game = {
   materials: [],
   bibleConnections: [
     {
-      verseReference: "잠언 27:19",
-      verseText: "물에 비추이면 얼굴이 서로 같은 것 같이 사람의 마음도 서로 비추느니라",
+      verseReference: "로마서 12:16",
+      verseText: "서로 마음을 같이하며",
       messageSummary:
-        "상대의 마음을 읽으려 애썼듯이, 서로의 마음을 이해하려는 노력이 관계에서 가장 중요해요.",
+        "팀원들이 말 없이도 마음을 맞춰야 했듯이, 함께하는 사람들과 마음을 하나로 모으는 것이 얼마나 중요한지 느꼈을 거예요.",
     },
   ],
   variations: [
@@ -51,7 +51,7 @@ const humanZero: Game = {
     {
       condition: "제로 보너스",
       suggestion:
-        "공격팀이 '0'을 외쳤는데 실제로 아무도 안 일어나면 보너스 점수를 줍니다. 가장 어려운 공격이니까요.",
+        "공격팀이 '0'을 외쳤는데 실제로 아무도 안 일어나면 즉시 승리합니다. 가장 어려운 공격인 만큼 최고의 보상!",
     },
     {
       condition: "성경 특화",
