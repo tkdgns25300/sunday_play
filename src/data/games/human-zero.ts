@@ -78,6 +78,11 @@ const humanZero: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/human-zero/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/human-zero/slides.zip",
+    },
   ],
 };
 
