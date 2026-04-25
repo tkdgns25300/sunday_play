@@ -107,6 +107,11 @@ const relayBallPipe: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/relay-ball-pipe/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/relay-ball-pipe/slides.zip",
+        },
     ],
 };
 
