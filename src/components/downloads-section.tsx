@@ -118,16 +118,19 @@ export default function DownloadsSection({
       </div>
 
       {isUnlocked ? (
-        <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
-          {groups.map((group) => (
-            <AssetCard
-              key={group.name}
-              group={group}
-              canDownload={canDownload}
-              downloadingPath={downloadingPath}
-              onDownload={handleDownload}
-            />
-          ))}
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+            {groups.map((group) => (
+              <AssetCard
+                key={group.name}
+                group={group}
+                canDownload={canDownload}
+                downloadingPath={downloadingPath}
+                onDownload={handleDownload}
+              />
+            ))}
+          </div>
+          <AssetNotes assets={game.assets} />
         </div>
       ) : (
         <div className="relative min-h-48">
@@ -195,49 +198,51 @@ function AssetCard({
     );
   }
 
-  const fileTypes = group.variants.map((v) => v.fileType);
-  const hasPptx = fileTypes.includes("pptx");
-  const hasZip = fileTypes.includes("zip");
-
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
-      <div className="flex items-center gap-3">
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
-          <DownloadIcon />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium">{group.name}</span>
-          <div className="flex flex-wrap gap-1.5">
-            {group.variants.map((asset) => {
-              const isLoading = downloadingPath === asset.storagePath;
-              return (
-                <button
-                  key={asset.fileType}
-                  onClick={() => onDownload(asset.fileName, asset.storagePath)}
-                  disabled={!canDownload || isLoading}
-                  className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50 dark:border-amber-500/30 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:border-amber-500/50 dark:hover:bg-amber-900/50"
-                >
-                  {isLoading && <Spinner size={12} />}
-                  {isLoading ? "다운로드 중..." : asset.fileType}
-                </button>
-              );
-            })}
-          </div>
+    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
+        <DownloadIcon />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-sm font-medium">{group.name}</span>
+        <div className="flex flex-wrap gap-1.5">
+          {group.variants.map((asset) => {
+            const isLoading = downloadingPath === asset.storagePath;
+            return (
+              <button
+                key={asset.fileType}
+                onClick={() => onDownload(asset.fileName, asset.storagePath)}
+                disabled={!canDownload || isLoading}
+                className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium uppercase text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 disabled:opacity-50 dark:border-amber-500/30 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:border-amber-500/50 dark:hover:bg-amber-900/50"
+              >
+                {isLoading && <Spinner size={12} />}
+                {isLoading ? "다운로드 중..." : asset.fileType}
+              </button>
+            );
+          })}
         </div>
       </div>
-      {(hasPptx || hasZip) && (
-        <div className="flex flex-col gap-0.5 pl-[52px]">
-          {hasPptx && (
-            <p className="text-[11px] text-muted-foreground">
-              * PPTX는 호환을 위해 기본 고딕체를 사용하였습니다.
-            </p>
-          )}
-          {hasZip && (
-            <p className="text-[11px] text-muted-foreground">
-              * ZIP에는 PNG 이미지가 포함되어 있습니다.
-            </p>
-          )}
-        </div>
+    </div>
+  );
+}
+
+function AssetNotes({ assets }: { assets: GameAsset[] }) {
+  const hasPptx = assets.some((a) => a.fileType === "pptx");
+  const hasZip = assets.some((a) => a.fileType === "zip");
+
+  if (!hasPptx && !hasZip) return null;
+
+  return (
+    <div className="flex flex-col gap-0.5 px-1">
+      {hasPptx && (
+        <p className="text-[11px] text-muted-foreground">
+          * PPTX는 호환을 위해 기본 고딕체를 사용하였습니다.
+        </p>
+      )}
+      {hasZip && (
+        <p className="text-[11px] text-muted-foreground">
+          * ZIP에는 PNG 이미지가 포함되어 있습니다.
+        </p>
       )}
     </div>
   );
