@@ -93,6 +93,11 @@ const pingpongBounce: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/pingpong-bounce/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/pingpong-bounce/slides.zip",
+        },
     ],
 };
 
