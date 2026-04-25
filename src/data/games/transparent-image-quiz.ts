@@ -81,6 +81,11 @@ const transparentImageQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/transparent-image-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/transparent-image-quiz/slides.zip",
+        },
     ],
 };
 
