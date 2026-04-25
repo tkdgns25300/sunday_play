@@ -104,6 +104,11 @@ const relayPortrait: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/relay-portrait/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/relay-portrait/slides.zip",
+    },
   ],
 };
 
