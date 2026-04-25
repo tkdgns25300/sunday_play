@@ -67,6 +67,7 @@ const twentyQuestions: Game = {
     ],
     tips: [
         "큰 범위부터 좁혀가는 질문 전략을 알려주면 게임이 더 재미있어집니다. (예: \"살아있는 건가요?\" → \"사람인가요?\" → \"한국 사람인가요?\")",
+        "PPT에 카테고리가 제공됩니다. 진행자가 카테고리에 맞는 정답을 미리 정해주세요.",
     ],
     safetyNotes: [
         "질문 시 소리가 커질 수 있으므로 한 팀씩 질문하는 규칙을 정하세요.",
@@ -82,6 +83,11 @@ const twentyQuestions: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/twenty-questions/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/twenty-questions/slides.zip",
         },
     ],
 };
