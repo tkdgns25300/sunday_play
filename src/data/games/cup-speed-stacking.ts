@@ -120,6 +120,11 @@ const cupSpeedStacking: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/cup-speed-stacking/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/cup-speed-stacking/slides.zip",
+    },
   ],
 };
 
