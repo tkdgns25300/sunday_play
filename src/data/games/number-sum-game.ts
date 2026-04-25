@@ -95,6 +95,11 @@ const numberSumGame: Game = {
       storagePath: "/downloads/games/number-sum-game/rules.pdf",
     },
     {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/number-sum-game/slides.zip",
+    },
+    {
       fileName: "숫자 카드",
       fileType: "pdf",
       storagePath: "/downloads/games/number-sum-game/number-cards.pdf",
