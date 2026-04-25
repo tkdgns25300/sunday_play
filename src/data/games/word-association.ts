@@ -84,6 +84,11 @@ const wordAssociation: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/word-association/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/word-association/slides.zip",
+    },
   ],
 };
 
