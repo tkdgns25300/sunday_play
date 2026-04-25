@@ -84,6 +84,11 @@ const voiceGuess: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/voice-guess/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/voice-guess/slides.zip",
+        },
     ],
 };
 
