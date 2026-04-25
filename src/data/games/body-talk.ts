@@ -81,6 +81,11 @@ const bodyTalk: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/body-talk/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/body-talk/slides.zip",
+        },
     ],
 };
 
