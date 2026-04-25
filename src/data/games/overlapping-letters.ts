@@ -81,6 +81,11 @@ const overlappingLetters: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/overlapping-letters/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/overlapping-letters/slides.zip",
+        },
     ],
 };
 
