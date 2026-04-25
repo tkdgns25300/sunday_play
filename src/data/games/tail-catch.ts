@@ -80,6 +80,11 @@ const tailCatch: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/tail-catch/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/tail-catch/slides.zip",
+        },
     ],
 };
 
