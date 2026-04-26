@@ -79,6 +79,11 @@ const actionCommand: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/action-command/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/action-command/slides.zip",
+        },
     ],
 };
 
