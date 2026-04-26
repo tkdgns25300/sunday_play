@@ -71,6 +71,11 @@ const personQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/person-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/person-quiz/slides.zip",
+        },
     ],
 };
 
