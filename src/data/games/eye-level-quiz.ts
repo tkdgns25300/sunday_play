@@ -76,6 +76,11 @@ const eyeLevelQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/eye-level-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/eye-level-quiz/slides.zip",
+        },
     ],
 };
 
