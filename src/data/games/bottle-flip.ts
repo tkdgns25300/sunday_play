@@ -88,6 +88,11 @@ const bottleFlip: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/bottle-flip/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/bottle-flip/slides.zip",
+    },
   ],
 };
 
