@@ -65,6 +65,9 @@ const zoomOutQuiz: Game = {
     },
   ],
   safetyNotes: [
+    "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
+  ],
+  tips: [
     "프로젝터 화면이 모든 팀에게 균등하게 잘 보이는지 사전에 확인하세요.",
   ],
   assets: [
@@ -77,6 +80,11 @@ const zoomOutQuiz: Game = {
       fileName: "진행 자료",
       fileType: "pdf",
       storagePath: "/downloads/games/zoom-out-quiz/rules.pdf",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/zoom-out-quiz/slides.zip",
     },
   ],
 };
