@@ -73,6 +73,11 @@ const timeMatch: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/time-match/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/time-match/slides.zip",
+        },
     ],
 };
 
