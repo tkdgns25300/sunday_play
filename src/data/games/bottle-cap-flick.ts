@@ -111,6 +111,11 @@ const bottleCapFlick: Game = {
       fileType: "pdf",
       storagePath: "/downloads/games/bottle-cap-flick/rules.pdf",
     },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/bottle-cap-flick/slides.zip",
+    },
   ],
 };
 
