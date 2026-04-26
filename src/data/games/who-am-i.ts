@@ -58,8 +58,10 @@ const whoAmI: Game = {
         },
     ],
     safetyNotes: [
-        "동시에 외쳤을 경우 진행자가 더 빨리 외친 팀을 판정합니다.",
         "흥분하여 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정해두세요.",
+    ],
+    tips: [
+        "동시에 외쳤을 경우를 대비해 판정 규칙을 미리 정해두세요. (예: 진행자 판단, 가위바위보 등)",
     ],
     assets: [
         {
@@ -71,6 +73,11 @@ const whoAmI: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/who-am-i/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/who-am-i/slides.zip",
         },
     ],
 };
