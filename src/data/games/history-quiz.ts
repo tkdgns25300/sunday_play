@@ -83,6 +83,11 @@ const historyQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/history-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/history-quiz/slides.zip",
+        },
     ],
 };
 
