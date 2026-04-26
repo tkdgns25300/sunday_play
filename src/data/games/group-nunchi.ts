@@ -67,6 +67,11 @@ const groupNunchi: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/group-nunchi/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/group-nunchi/slides.zip",
+        },
     ],
 };
 
