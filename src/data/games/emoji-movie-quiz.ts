@@ -73,6 +73,11 @@ const emojiMovieQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/emoji-movie-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/emoji-movie-quiz/slides.zip",
+        },
     ],
 };
 
