@@ -91,6 +91,9 @@ const pingpongBingo: Game = {
         "탁구공이 튀어 다른 친구를 맞힐 수 있으니 관전 구역을 분리하세요.",
         "바닥이 미끄러우면 계란판 아래에 미끄럼 방지 패드를 깔아주세요.",
     ],
+    tips: [
+        "양 팀 모두 빙고를 완성할 수 없는 상황이 되면 해당 판을 리셋하고 다시 시작합니다.",
+    ],
     assets: [
         {
             fileName: "진행 자료",
@@ -101,6 +104,11 @@ const pingpongBingo: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/pingpong-bingo/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/pingpong-bingo/slides.zip",
         },
     ],
 };
