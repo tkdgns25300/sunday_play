@@ -83,6 +83,11 @@ const chosungQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/chosung-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/chosung-quiz/slides.zip",
+        },
     ],
 };
 
