@@ -71,6 +71,9 @@ const flashMemory: Game = {
     },
   ],
   safetyNotes: [
+    "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
+  ],
+  tips: [
     "3초 타이머를 정확히 지켜야 공정합니다. 스톱워치나 PPT 타이머 활용을 권장합니다.",
     "항목을 적는 시간 제한을 사전에 정해두세요. 30초~1분이 적당합니다.",
   ],
@@ -84,6 +87,11 @@ const flashMemory: Game = {
       fileName: "진행 자료",
       fileType: "pdf",
       storagePath: "/downloads/games/flash-memory/rules.pdf",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/flash-memory/slides.zip",
     },
   ],
 };
