@@ -88,6 +88,11 @@ const bibleRelay: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/bible-relay/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/bible-relay/slides.zip",
+        },
     ],
 };
 
