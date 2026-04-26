@@ -83,6 +83,11 @@ const commonSenseQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/common-sense-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/common-sense-quiz/slides.zip",
+        },
     ],
 };
 
