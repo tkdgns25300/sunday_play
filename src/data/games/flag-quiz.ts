@@ -79,6 +79,11 @@ const flagQuiz: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/flag-quiz/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/flag-quiz/slides.zip",
+        },
     ],
 };
 
