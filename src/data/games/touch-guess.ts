@@ -93,6 +93,11 @@ const touchGuess: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/touch-guess/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/touch-guess/slides.zip",
+        },
     ],
 };
 
