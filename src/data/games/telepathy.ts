@@ -85,6 +85,11 @@ const telepathy: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/telepathy/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/telepathy/slides.zip",
+        },
     ],
 };
 
