@@ -64,7 +64,10 @@ const tongueTwister: Game = {
     ],
     safetyNotes: [
         "발음을 틀린 참가자를 놀리지 않도록 서로 응원하는 분위기를 만들어주세요.",
-        "진행 자료에 다양한 잰말놀이가 준비되어 있으니, 시간에 맞게 적절히 골라서 진행하세요.",
+    ],
+    tips: [
+        "진행 자료에 다양한 잰말놀이가 준비되어 있습니다. 팀별로 1개만 해도 되고 여러 개를 해도 되니 진행자가 시간에 맞게 골라 진행하세요.",
+        "짧은 문장은 대표 1명이 읽고 여러 문장을 돌아가며 진행해도 좋고, 긴 문장은 팀원이 순서를 정해 릴레이로 읽어도 좋습니다.",
     ],
     assets: [
         {
@@ -76,6 +79,11 @@ const tongueTwister: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/tongue-twister/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/tongue-twister/slides.zip",
         },
     ],
 };
