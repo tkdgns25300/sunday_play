@@ -54,6 +54,10 @@ const chainWords: Game = {
             suggestion: "단어를 말하지 못한 팀은 탈락하고, 마지막까지 남은 팀이 우승합니다.",
         },
         {
+            condition: "왕복 모드",
+            suggestion: "팀원 전원이 한 바퀴 성공하면 다시 역순으로 돌아옵니다. 왕복 완주 시 보너스 점수를 줍니다.",
+        },
+        {
             condition: "성경 특화",
             suggestion: "성경 관련 제시어를 사용합니다. (예: 성경 인물 이름, '사'자로 시작하는 성경 단어 등)",
         },
@@ -72,6 +76,11 @@ const chainWords: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/chain-words/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/chain-words/slides.zip",
         },
     ],
 };
