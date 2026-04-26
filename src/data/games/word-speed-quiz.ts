@@ -83,6 +83,9 @@ const wordSpeedQuiz: Game = {
     "보드마카 뚜껑을 잘 닫도록 안내하세요. 옷에 묻으면 잘 지워지지 않습니다.",
     "흥분하여 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
   ],
+  tips: [
+    "진행자가 일일이 점수를 계산하기 어려우면 팀별 선생님에게 점수 계산을 맡기세요.",
+  ],
   assets: [
     {
       fileName: "진행 자료",
@@ -93,6 +96,11 @@ const wordSpeedQuiz: Game = {
       fileName: "진행 자료",
       fileType: "pdf",
       storagePath: "/downloads/games/word-speed-quiz/rules.pdf",
+    },
+    {
+      fileName: "진행 자료",
+      fileType: "zip",
+      storagePath: "/downloads/games/word-speed-quiz/slides.zip",
     },
   ],
 };
