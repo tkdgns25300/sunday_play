@@ -75,6 +75,11 @@ const wordRelay: Game = {
             storagePath: "/downloads/games/word-relay/rules.pdf",
         },
         {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/word-relay/slides.zip",
+        },
+        {
             fileName: "네 글자 단어 모음",
             fileType: "pdf",
             storagePath: "/downloads/games/word-relay/words.pdf",
