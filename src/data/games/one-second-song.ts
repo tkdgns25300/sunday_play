@@ -82,6 +82,11 @@ const oneSecondSong: Game = {
             storagePath: "/downloads/games/one-second-song/rules.pdf",
         },
         {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/one-second-song/slides.zip",
+        },
+        {
             fileName: "노래 목록",
             fileType: "pdf",
             storagePath: "/downloads/games/one-second-song/songs.pdf",
