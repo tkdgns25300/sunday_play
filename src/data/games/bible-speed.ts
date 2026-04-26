@@ -84,6 +84,7 @@ const bibleSpeed: Game = {
     ],
     safetyNotes: [
         "진행 자료의 구절은 개역개정판 기준입니다. 다른 번역본을 사용하면 표현이 다를 수 있으니 사전에 안내하세요.",
+        "핸드폰 성경 앱 사용은 금지입니다. 반드시 종이 성경책으로 찾아야 합니다.",
         "성경책을 던지거나 거칠게 넘기지 않도록 사전에 안내하세요.",
         "찾지 못하는 참가자가 위축되지 않도록 힌트를 적극적으로 활용하세요.",
     ],
@@ -97,6 +98,11 @@ const bibleSpeed: Game = {
             fileName: "진행 자료",
             fileType: "pdf",
             storagePath: "/downloads/games/bible-speed/rules.pdf",
+        },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/bible-speed/slides.zip",
         },
     ],
 };
