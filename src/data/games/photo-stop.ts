@@ -72,6 +72,11 @@ const photoStop: Game = {
             fileType: "pdf",
             storagePath: "/downloads/games/photo-stop/rules.pdf",
         },
+        {
+            fileName: "진행 자료",
+            fileType: "zip",
+            storagePath: "/downloads/games/photo-stop/slides.zip",
+        },
     ],
 };
 
