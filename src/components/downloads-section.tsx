@@ -309,11 +309,11 @@ function PreviewButton({ gameId }: { gameId: string }) {
                   )`,
                 }}
               >
-                <div className="grid grid-cols-3 grid-rows-3 gap-8 -rotate-30 scale-150">
-                  {Array.from({ length: 9 }).map((_, i) => (
+                <div className="grid grid-cols-3 grid-rows-5 gap-x-6 gap-y-3 -rotate-30 scale-[2]">
+                  {Array.from({ length: 15 }).map((_, i) => (
                     <span
                       key={i}
-                      className="whitespace-nowrap text-lg font-bold tracking-widest text-black/10 sm:text-2xl"
+                      className="whitespace-nowrap text-xl font-extrabold tracking-[0.2em] text-black/[0.15] sm:text-2xl"
                     >
                       PREVIEW
                     </span>
@@ -343,6 +343,10 @@ function PreviewButton({ gameId }: { gameId: string }) {
                 </button>
               )}
             </div>
+
+            <p className="text-center text-sm font-medium text-amber-400">
+              미리보기 일부만 표시됩니다. 전체 자료는 구매 후 다운로드하세요.
+            </p>
           </div>
         </div>
       )}
