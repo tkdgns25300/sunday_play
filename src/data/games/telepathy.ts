@@ -74,6 +74,7 @@ const telepathy: Game = {
         "팀원끼리 상의하면 반칙입니다. 사전에 안내하세요.",
         "팀별 인원이 같도록 조정하세요. 인원이 다르면 불공정합니다.",
     ],
+    previewPages: [1, 2, 5, 6],
     assets: [
         {
             fileName: "진행 자료",

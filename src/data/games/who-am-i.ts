@@ -63,6 +63,7 @@ const whoAmI: Game = {
     tips: [
         "동시에 외쳤을 경우를 대비해 판정 규칙을 미리 정해두세요. (예: 진행자 판단, 가위바위보 등)",
     ],
+    previewPages: [1, 2, 5, 6, 7, 8],
     assets: [
         {
             fileName: "진행 자료",

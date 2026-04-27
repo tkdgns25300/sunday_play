@@ -79,4 +79,5 @@ export type Game = {
   assets: GameAsset[];
   tips?: string[];
   referenceVideoUrl?: string;
+  previewPages?: number[];
 };

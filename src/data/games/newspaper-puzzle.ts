@@ -89,6 +89,7 @@ const newspaperPuzzle: Game = {
         "신문지 잉크가 손에 묻을 수 있으므로 물티슈를 준비하세요.",
         "신문지가 없으면 잡지, 전단지, 광고지 등으로 대체할 수 있습니다.",
     ],
+    previewPages: [1, 2, 5, 6, 7],
     assets: [
         {
             fileName: "진행 자료",

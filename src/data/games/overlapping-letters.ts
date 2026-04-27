@@ -70,6 +70,7 @@ const overlappingLetters: Game = {
     safetyNotes: [
         "동시에 외쳤을 때를 대비해 판정 규칙을 미리 정하세요. (예: 진행자 판단, 가위바위보 등)",
     ],
+    previewPages: [1, 2, 5, 6, 7, 8],
     assets: [
         {
             fileName: "진행 자료",

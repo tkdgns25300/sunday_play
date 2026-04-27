@@ -70,6 +70,7 @@ const zoomOutQuiz: Game = {
   tips: [
     "프로젝터 화면이 모든 팀에게 균등하게 잘 보이는지 사전에 확인하세요.",
   ],
+  previewPages: [1, 2, 9, 10, 11, 12],
   assets: [
     {
       fileName: "진행 자료",

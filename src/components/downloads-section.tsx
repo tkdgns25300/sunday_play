@@ -126,6 +126,7 @@ export default function DownloadsSection({
                 key={group.name}
                 group={group}
                 gameId={game.id}
+                previewPages={game.previewPages}
                 canDownload={canDownload}
                 downloadingPath={downloadingPath}
                 onDownload={handleDownload}
@@ -146,7 +147,7 @@ export default function DownloadsSection({
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <PreviewButton gameId={game.id} />
+            <PreviewButton gameId={game.id} previewPages={game.previewPages} />
             <Link
               href="/pricing"
               className="rounded-full bg-amber-500 px-4 py-1.5 text-xs font-medium text-white transition-colors hover:bg-amber-600"
@@ -163,12 +164,14 @@ export default function DownloadsSection({
 function AssetCard({
   group,
   gameId,
+  previewPages,
   canDownload,
   downloadingPath,
   onDownload,
 }: {
   group: AssetGroup;
   gameId: string;
+  previewPages?: number[];
   canDownload: boolean;
   downloadingPath: string | null;
   onDownload: (fileName: string, filePath: string) => void;
@@ -219,34 +222,39 @@ function AssetCard({
               </button>
             );
           })}
-          {group.name === "진행 자료" && <PreviewButton gameId={gameId} />}
+          {group.name === "진행 자료" && <PreviewButton gameId={gameId} previewPages={previewPages} />}
         </div>
       </div>
     </div>
   );
 }
 
-function PreviewButton({ gameId }: { gameId: string }) {
+function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?: number[] }) {
   const [previewPaths, setPreviewPaths] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    async function checkPreviews() {
+    if (previewPages) {
+      setPreviewPaths(previewPages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
+      return;
+    }
+    async function findAll() {
       const paths: string[] = [];
-      for (let i = 1; i <= 4; i++) {
-        const path = `/downloads/games/${gameId}/preview/preview-${i}.png`;
+      for (let i = 1; i <= 200; i++) {
+        const path = `/downloads/games/${gameId}/preview/${i}.png`;
         try {
           const res = await fetch(path, { method: "HEAD" });
           if (res.ok) paths.push(path);
+          else break;
         } catch {
           break;
         }
       }
       setPreviewPaths(paths);
     }
-    checkPreviews();
-  }, [gameId]);
+    findAll();
+  }, [gameId, previewPages]);
 
   if (previewPaths.length === 0) return null;
 

@@ -65,6 +65,7 @@ const eyeLevelQuiz: Game = {
     safetyNotes: [
         "정답을 외칠 때 소리가 커질 수 있으므로 시작 전 볼륨 규칙을 정하세요.",
     ],
+    previewPages: [1, 2, 5, 6, 7],
     assets: [
         {
             fileName: "진행 자료",

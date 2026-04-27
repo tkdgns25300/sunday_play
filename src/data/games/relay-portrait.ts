@@ -93,6 +93,7 @@ const relayPortrait: Game = {
     "완성된 그림을 나란히 전시하면 관전 재미가 올라갑니다.",
     "라운드마다 모델과 맞추는 사람 역할을 바꾸면 모두가 다양하게 참여할 수 있습니다.",
   ],
+  previewPages: [1, 2, 5, 6, 7],
   assets: [
     {
       fileName: "진행 자료",

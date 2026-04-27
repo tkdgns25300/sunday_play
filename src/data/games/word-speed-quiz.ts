@@ -86,6 +86,7 @@ const wordSpeedQuiz: Game = {
   tips: [
     "진행자가 일일이 점수를 계산하기 어려우면 팀별 선생님에게 점수 계산을 맡기세요.",
   ],
+  previewPages: [1, 2, 5, 6],
   assets: [
     {
       fileName: "진행 자료",

@@ -60,6 +60,7 @@ const personQuiz: Game = {
         },
     ],
     safetyNotes: ["탈락한 친구를 놀리지 않도록 서로 응원하는 분위기를 만들어주세요."],
+    previewPages: [1, 2, 5, 6, 7, 8, 9, 10],
     assets: [
         {
             fileName: "진행 자료",

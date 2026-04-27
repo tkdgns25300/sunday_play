@@ -79,6 +79,7 @@ const oxSurvival: Game = {
   tips: [
     "이동 제한 시간(예: 10초)을 주면 고민할 틈이 줄어 긴박감이 올라갑니다.",
   ],
+  previewPages: [1, 2, 10, 11],
   assets: [
     {
       fileName: "진행 자료",

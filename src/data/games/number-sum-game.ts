@@ -83,6 +83,7 @@ const numberSumGame: Game = {
     "저학년은 1~5 범위의 작은 숫자 카드를 사용하세요.",
     "매 라운드 시작 전 참가자들이 제자리에 있는지 확인하세요.",
   ],
+  previewPages: [1, 2, 5, 6],
   assets: [
     {
       fileName: "진행 자료",

@@ -70,6 +70,7 @@ const bodyTalk: Game = {
         "과격한 동작은 자제하도록 안내하세요.",
         "다른 팀이 힌트를 주거나 방해하면 반칙입니다. 사전에 안내하세요.",
     ],
+    previewPages: [1, 2, 5, 13, 14],
     assets: [
         {
             fileName: "진행 자료",

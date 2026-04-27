@@ -73,6 +73,7 @@ const twentyQuestions: Game = {
         "질문 시 소리가 커질 수 있으므로 한 팀씩 질문하는 규칙을 정하세요.",
         "동시에 정답을 외쳤을 때를 대비해 판정 규칙을 미리 정하세요.",
     ],
+    previewPages: [1, 2, 7, 8],
     assets: [
         {
             fileName: "진행 자료",

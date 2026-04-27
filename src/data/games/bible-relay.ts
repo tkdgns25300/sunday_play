@@ -77,6 +77,7 @@ const bibleRelay: Game = {
         "암송에 실패하더라도 격려하는 분위기를 만들어주세요.",
         "팀원 간 비난이 나오지 않도록 사전에 안내하세요.",
     ],
+    previewPages: [1, 2, 5, 6],
     assets: [
         {
             fileName: "진행 자료",
