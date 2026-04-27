@@ -90,6 +90,7 @@ const historyQuiz: Game = {
             storagePath: "/downloads/games/history-quiz/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default historyQuiz;

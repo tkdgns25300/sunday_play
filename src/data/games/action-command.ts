@@ -86,6 +86,7 @@ const actionCommand: Game = {
             storagePath: "/downloads/games/action-command/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default actionCommand;

@@ -90,6 +90,7 @@ const chosungQuiz: Game = {
             storagePath: "/downloads/games/chosung-quiz/slides.zip",
         },
     ],
+  creditPrice: 2000,
 };
 
 export default chosungQuiz;

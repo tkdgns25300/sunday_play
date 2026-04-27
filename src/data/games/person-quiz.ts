@@ -78,6 +78,7 @@ const personQuiz: Game = {
             storagePath: "/downloads/games/person-quiz/slides.zip",
         },
     ],
+  creditPrice: 2000,
 };
 
 export default personQuiz;

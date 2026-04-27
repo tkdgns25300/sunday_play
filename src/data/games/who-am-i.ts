@@ -81,6 +81,7 @@ const whoAmI: Game = {
             storagePath: "/downloads/games/who-am-i/slides.zip",
         },
     ],
+  creditPrice: 2000,
 };
 
 export default whoAmI;

@@ -84,6 +84,7 @@ const humanZero: Game = {
       storagePath: "/downloads/games/human-zero/slides.zip",
     },
   ],
+  creditPrice: 500,
 };
 
 export default humanZero;

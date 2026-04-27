@@ -107,6 +107,7 @@ const newspaperPuzzle: Game = {
             storagePath: "/downloads/games/newspaper-puzzle/slides.zip",
         },
     ],
+  creditPrice: 1000,
 };
 
 export default newspaperPuzzle;

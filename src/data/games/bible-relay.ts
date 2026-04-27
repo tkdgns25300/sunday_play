@@ -95,6 +95,7 @@ const bibleRelay: Game = {
             storagePath: "/downloads/games/bible-relay/slides.zip",
         },
     ],
+  creditPrice: 1000,
 };
 
 export default bibleRelay;

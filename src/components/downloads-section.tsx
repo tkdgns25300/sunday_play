@@ -5,13 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Game, GameAsset } from "@/types/game";
 import { createClient } from "@/lib/supabase/client";
-import {
-  getSubscriptionStatus,
-  getMonthlyDownloadedGames,
-} from "@/lib/subscription";
-import { MONTHLY_DOWNLOAD_LIMIT } from "@/constants/subscription";
-
-type AccessLevel = "full" | "login_required" | "limit_reached" | "loading";
+import { hasPurchasedGame, getCreditBalance } from "@/lib/credit";
+import { CREDIT_PRICE_LABELS } from "@/constants/credit";
 
 type AssetGroup = {
   name: string;
@@ -28,15 +23,11 @@ function groupAssets(assets: GameAsset[]): AssetGroup[] {
   return Array.from(map.entries()).map(([name, variants]) => ({ name, variants }));
 }
 
-export default function DownloadsSection({
-  game,
-  accessLevel,
-}: {
-  game: Game;
-  accessLevel: AccessLevel;
-}) {
-  const [downloadedGames, setDownloadedGames] = useState<string[]>([]);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+export default function DownloadsSection({ game }: { game: Game }) {
+  const [isPurchased, setIsPurchased] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isPurchasing, setIsPurchasing] = useState(false);
+  const [creditBalance, setCreditBalance] = useState(0);
 
   useEffect(() => {
     async function load() {
@@ -46,33 +37,44 @@ export default function DownloadsSection({
       } = await supabase.auth.getUser();
       if (!user) return;
 
-      const subscribed = await getSubscriptionStatus(supabase, user.id);
-      setIsSubscribed(subscribed);
-
-      if (subscribed) {
-        const games = await getMonthlyDownloadedGames(supabase, user.id);
-        setDownloadedGames(games);
-      }
+      setIsLoggedIn(true);
+      const purchased = await hasPurchasedGame(supabase, user.id, game.id);
+      setIsPurchased(purchased);
+      const balance = await getCreditBalance(supabase, user.id);
+      setCreditBalance(balance);
     }
     load();
-  }, []);
+  }, [game.id]);
 
   if (game.assets.length === 0) return null;
 
   const groups = groupAssets(game.assets);
-  const isUnlocked = accessLevel === "full" && isSubscribed;
-  const isAlreadyDownloaded = downloadedGames.includes(game.id);
-  const gameCount = downloadedGames.length;
-  const canDownload = isAlreadyDownloaded || gameCount < MONTHLY_DOWNLOAD_LIMIT;
-
   const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
 
-  async function handleDownload(fileName: string, filePath: string) {
-    if (!canDownload) {
-      alert(`이번 달 다운로드 한도(${MONTHLY_DOWNLOAD_LIMIT}개 게임)를 초과했습니다.`);
-      return;
+  async function handlePurchase() {
+    setIsPurchasing(true);
+    try {
+      const response = await fetch("/api/credit/purchase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          gameId: game.id,
+          creditPrice: game.creditPrice,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setIsPurchased(true);
+        setCreditBalance((prev) => prev - game.creditPrice);
+      } else {
+        alert(result.message);
+      }
+    } finally {
+      setIsPurchasing(false);
     }
+  }
 
+  async function handleDownload(fileName: string, filePath: string) {
     setDownloadingPath(filePath);
 
     try {
@@ -85,9 +87,6 @@ export default function DownloadsSection({
       const result = await response.json();
 
       if (result.success) {
-        if (!isAlreadyDownloaded) {
-          setDownloadedGames((prev) => [...prev, game.id]);
-        }
         const ext = filePath.split(".").pop() ?? "";
         const downloadName = `[Sunday Play] ${game.title}.${ext}`;
         const link = document.createElement("a");
@@ -102,23 +101,31 @@ export default function DownloadsSection({
     }
   }
 
+  const priceLabel = CREDIT_PRICE_LABELS[game.creditPrice] ?? String(game.creditPrice);
+
   return (
     <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-950/30 lg:p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
-          <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-medium text-white">
-            프리미엄
-          </span>
+          {isPurchased ? (
+            <span className="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-medium text-white">
+              구매 완료
+            </span>
+          ) : (
+            <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-medium text-white">
+              {priceLabel} 크레딧
+            </span>
+          )}
         </div>
-        {isUnlocked && (
+        {isLoggedIn && (
           <span className="text-xs text-muted-foreground">
-            이번 달 {gameCount}/{MONTHLY_DOWNLOAD_LIMIT}개 게임
+            보유 {creditBalance.toLocaleString()} 크레딧
           </span>
         )}
       </div>
 
-      {isUnlocked ? (
+      {isPurchased ? (
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
             {groups.map((group) => (
@@ -127,7 +134,7 @@ export default function DownloadsSection({
                 group={group}
                 gameId={game.id}
                 previewPages={game.previewPages}
-                canDownload={canDownload}
+                canDownload
                 downloadingPath={downloadingPath}
                 onDownload={handleDownload}
               />
@@ -137,24 +144,37 @@ export default function DownloadsSection({
         </div>
       ) : (
         <div className="flex flex-col items-center gap-3 py-2 text-center">
-          <div className="flex items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            <p className="text-sm font-medium">
-              진행 자료 (PPT · PDF · PNG)
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <PreviewButton gameId={game.id} previewPages={game.previewPages} />
+          <PreviewButton gameId={game.id} previewPages={game.previewPages} />
+          {isLoggedIn ? (
+            creditBalance >= game.creditPrice ? (
+              <button
+                onClick={handlePurchase}
+                disabled={isPurchasing}
+                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600 disabled:opacity-50"
+              >
+                {isPurchasing ? "구매 중..." : `${priceLabel} 크레딧으로 구매`}
+              </button>
+            ) : (
+              <div className="flex flex-col items-center gap-1.5">
+                <p className="text-xs text-muted-foreground">
+                  크레딧이 부족합니다 (보유: {creditBalance.toLocaleString()})
+                </p>
+                <Link
+                  href="/pricing"
+                  className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
+                >
+                  크레딧 충전하기
+                </Link>
+              </div>
+            )
+          ) : (
             <Link
-              href="/pricing"
-              className="rounded-full bg-amber-500 px-4 py-1.5 text-xs font-medium text-white transition-colors hover:bg-amber-600"
+              href="/login"
+              className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
             >
-              구독하고 다운로드
+              로그인하고 구매하기
             </Link>
-          </div>
+          )}
         </div>
       )}
     </section>

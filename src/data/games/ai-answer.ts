@@ -109,6 +109,7 @@ const aiAnswer: Game = {
       storagePath: "/downloads/games/ai-answer/slides.zip",
     },
   ],
+  creditPrice: 1000,
 };
 
 export default aiAnswer;

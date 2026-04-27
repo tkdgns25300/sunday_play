@@ -73,6 +73,7 @@ const groupNunchi: Game = {
             storagePath: "/downloads/games/group-nunchi/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default groupNunchi;

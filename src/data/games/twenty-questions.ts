@@ -91,6 +91,7 @@ const twentyQuestions: Game = {
             storagePath: "/downloads/games/twenty-questions/slides.zip",
         },
     ],
+  creditPrice: 1000,
 };
 
 export default twentyQuestions;

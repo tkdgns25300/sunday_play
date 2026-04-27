@@ -111,6 +111,7 @@ const relayPortrait: Game = {
       storagePath: "/downloads/games/relay-portrait/slides.zip",
     },
   ],
+  creditPrice: 1000,
 };
 
 export default relayPortrait;

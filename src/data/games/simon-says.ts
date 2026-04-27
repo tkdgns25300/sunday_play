@@ -82,6 +82,7 @@ const simonSays: Game = {
             storagePath: "/downloads/games/simon-says/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default simonSays;

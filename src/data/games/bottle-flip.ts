@@ -94,6 +94,7 @@ const bottleFlip: Game = {
       storagePath: "/downloads/games/bottle-flip/slides.zip",
     },
   ],
+  creditPrice: 500,
 };
 
 export default bottleFlip;

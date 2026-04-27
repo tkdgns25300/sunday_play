@@ -88,6 +88,7 @@ const zoomOutQuiz: Game = {
       storagePath: "/downloads/games/zoom-out-quiz/slides.zip",
     },
   ],
+  creditPrice: 1500,
 };
 
 export default zoomOutQuiz;

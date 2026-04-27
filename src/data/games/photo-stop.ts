@@ -78,6 +78,7 @@ const photoStop: Game = {
             storagePath: "/downloads/games/photo-stop/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default photoStop;

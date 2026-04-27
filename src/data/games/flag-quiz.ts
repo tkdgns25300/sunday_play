@@ -86,6 +86,7 @@ const flagQuiz: Game = {
             storagePath: "/downloads/games/flag-quiz/slides.zip",
         },
     ],
+  creditPrice: 2000,
 };
 
 export default flagQuiz;

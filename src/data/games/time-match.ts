@@ -79,6 +79,7 @@ const timeMatch: Game = {
             storagePath: "/downloads/games/time-match/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default timeMatch;

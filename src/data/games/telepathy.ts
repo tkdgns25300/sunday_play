@@ -92,6 +92,7 @@ const telepathy: Game = {
             storagePath: "/downloads/games/telepathy/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default telepathy;

@@ -117,6 +117,7 @@ const bottleCapFlick: Game = {
       storagePath: "/downloads/games/bottle-cap-flick/slides.zip",
     },
   ],
+  creditPrice: 500,
 };
 
 export default bottleCapFlick;

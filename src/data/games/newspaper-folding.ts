@@ -91,6 +91,7 @@ const newspaperFolding: Game = {
             storagePath: "/downloads/games/newspaper-folding/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default newspaperFolding;

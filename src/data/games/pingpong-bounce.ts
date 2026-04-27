@@ -99,6 +99,7 @@ const pingpongBounce: Game = {
             storagePath: "/downloads/games/pingpong-bounce/slides.zip",
         },
     ],
+  creditPrice: 500,
 };
 
 export default pingpongBounce;

@@ -172,13 +172,13 @@ export default function GameDetail({
             type={accessLevel === "login_required" ? "login" : "subscribe"}
             viewCount={viewCount}
           />
-          <DownloadsSection game={game} accessLevel={accessLevel} />
+          <DownloadsSection game={game} />
         </>
       )}
 
       {accessLevel === "full" && (
         <>
-          <DownloadsSection game={game} accessLevel={accessLevel} />
+          <DownloadsSection game={game} />
 
           {game.id === "time-match" && (
             <section className="flex flex-col gap-3">

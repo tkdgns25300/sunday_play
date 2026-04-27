@@ -108,6 +108,7 @@ const bibleSpeed: Game = {
             storagePath: "/downloads/games/bible-speed/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default bibleSpeed;

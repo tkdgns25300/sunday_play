@@ -87,6 +87,7 @@ const tongueTwister: Game = {
             storagePath: "/downloads/games/tongue-twister/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default tongueTwister;

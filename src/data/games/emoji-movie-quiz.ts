@@ -80,6 +80,7 @@ const emojiMovieQuiz: Game = {
             storagePath: "/downloads/games/emoji-movie-quiz/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default emojiMovieQuiz;

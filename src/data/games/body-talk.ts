@@ -88,6 +88,7 @@ const bodyTalk: Game = {
             storagePath: "/downloads/games/body-talk/slides.zip",
         },
     ],
+  creditPrice: 1500,
 };
 
 export default bodyTalk;

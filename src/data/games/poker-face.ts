@@ -113,6 +113,7 @@ const pokerFace: Game = {
       storagePath: "/downloads/games/poker-face/slides.zip",
     },
   ],
+  creditPrice: 500,
 };
 
 export default pokerFace;
