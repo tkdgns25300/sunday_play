@@ -2,11 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { games } from "@/data/games";
 import GameCard from "@/components/game-card";
-import { SUBSCRIPTION_PRICE_LABEL } from "@/constants/subscription";
-import {
-  FREE_FEATURES as FREE_FEATURE_LIST,
-  PREMIUM_FEATURES as PREMIUM_FEATURE_LIST,
-} from "@/constants/pricing";
+import { CREDIT_PACKAGES } from "@/constants/credit";
 
 const PREVIEW_GAMES = games.slice(0, 3);
 
@@ -206,49 +202,44 @@ export default function Home() {
       <section className="bg-muted/20">
         <div className="mx-auto max-w-6xl px-4 py-12 lg:py-25">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold">요금제</h2>
+            <h2 className="text-2xl font-bold">크레딧 충전</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              무료로 시작하고, 필요할 때 업그레이드하세요.
+              게임 가이드는 무료! 진행 자료만 크레딧으로 구매하세요.
             </p>
           </div>
-          <div className="mx-auto grid max-w-2xl gap-6 sm:grid-cols-2">
-            <div className="flex flex-col rounded-xl border border-border bg-background p-6">
-              <h3 className="text-lg font-bold">무료</h3>
-              <p className="mt-1 text-3xl font-bold">₩0</p>
-              <ul className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-                {FREE_FEATURE_LIST.map((f) => (
-                  <PricingItem key={f}>{f}</PricingItem>
-                ))}
-              </ul>
-              <div className="mt-auto pt-6">
-                <Link href="/games">
-                  <Button variant="outline" className="w-full">
-                    시작하기
-                  </Button>
-                </Link>
+          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {CREDIT_PACKAGES.map((pkg, index) => (
+              <div
+                key={pkg.amount}
+                className={`flex flex-col rounded-xl bg-background p-5 ${
+                  index === 2 ? "border-2 border-primary" : "border border-border"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold">{pkg.label}</h3>
+                  {pkg.bonus > 0 && (
+                    <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">
+                      +{pkg.bonus}%
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-xl font-bold text-primary">
+                  {pkg.credits.toLocaleString()}
+                  <span className="text-xs font-normal text-muted-foreground"> 크레딧</span>
+                </p>
+                <div className="mt-auto pt-4">
+                  <Link href="/pricing">
+                    <Button
+                      size="sm"
+                      variant={index === 2 ? "default" : "outline"}
+                      className="w-full"
+                    >
+                      충전하기
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col rounded-xl border-2 border-primary bg-background p-6">
-              <div className="flex items-center gap-2">
-                <h3 className="text-lg font-bold">프리미엄</h3>
-                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                  추천
-                </span>
-              </div>
-              <p className="mt-1 text-3xl font-bold">
-                {SUBSCRIPTION_PRICE_LABEL}
-              </p>
-              <ul className="mt-6 flex flex-col gap-2 text-sm">
-                {PREMIUM_FEATURE_LIST.map((f) => (
-                  <PricingItem key={f} highlighted>{f}</PricingItem>
-                ))}
-              </ul>
-              <div className="mt-auto pt-6">
-                <Link href="/pricing">
-                  <Button className="w-full">구독하기</Button>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -256,31 +247,3 @@ export default function Home() {
   );
 }
 
-function PricingItem({
-  children,
-  highlighted,
-}: {
-  children: React.ReactNode;
-  highlighted?: boolean;
-}) {
-  return (
-    <li className="flex items-center gap-2">
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={highlighted ? "text-primary" : "text-muted-foreground"}
-      >
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-      <span className={highlighted ? "text-foreground" : "text-muted-foreground"}>
-        {children}
-      </span>
-    </li>
-  );
-}

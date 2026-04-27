@@ -2,21 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/auth";
+import { getCreditBalance, getPurchasedGames } from "@/lib/credit";
 import { Button } from "@/components/ui/button";
-import { SUBSCRIPTION_PRICE_LABEL } from "@/constants/subscription";
-
-type SubscriptionInfo = {
-  status: string;
-  current_period_end: string | null;
-} | null;
+import { games } from "@/data/games";
 
 export default function MypageContent() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
-  const [subscription, setSubscription] = useState<SubscriptionInfo>(null);
+  const [creditBalance, setCreditBalance] = useState(0);
+  const [purchasedGameIds, setPurchasedGameIds] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,13 +29,12 @@ export default function MypageContent() {
 
       setUser(user);
 
-      const { data } = await supabase
-        .from("subscriptions")
-        .select("status, current_period_end")
-        .eq("user_id", user.id)
-        .single();
+      const balance = await getCreditBalance(supabase, user.id);
+      setCreditBalance(balance);
 
-      setSubscription(data);
+      const purchased = await getPurchasedGames(supabase, user.id);
+      setPurchasedGameIds(purchased);
+
       setIsLoading(false);
     }
     loadData();
@@ -54,10 +51,7 @@ export default function MypageContent() {
 
   if (!user) return null;
 
-  const isActive = subscription?.status === "active";
-  const periodEnd = subscription?.current_period_end
-    ? new Date(subscription.current_period_end).toLocaleDateString("ko-KR")
-    : null;
+  const purchasedGames = games.filter((g) => purchasedGameIds.includes(g.id));
 
   return (
     <div className="flex flex-col gap-8">
@@ -91,40 +85,59 @@ export default function MypageContent() {
       </section>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-lg font-bold">구독 상태</h2>
+        <h2 className="text-lg font-bold">크레딧</h2>
         <div className="rounded-xl border border-border p-6">
-          {isActive ? (
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700">
-                  활성
-                </span>
-                <span className="text-sm font-medium">프리미엄 구독 중</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                {SUBSCRIPTION_PRICE_LABEL} · 만료일: {periodEnd}
-              </p>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-1">
+              <p className="text-2xl font-bold">{creditBalance.toLocaleString()}</p>
+              <p className="text-sm text-muted-foreground">보유 크레딧</p>
             </div>
-          ) : (
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
-                  무료
-                </span>
-                <span className="text-sm font-medium">무료 플랜 이용 중</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                프리미엄 구독으로 모든 기능을 이용하세요.
-              </p>
-              <Button
-                className="w-fit"
-                onClick={() => router.push("/pricing")}
-              >
-                구독하기
-              </Button>
-            </div>
-          )}
+            <Button
+              variant="outline"
+              onClick={() => router.push("/pricing")}
+            >
+              충전하기
+            </Button>
+          </div>
         </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-bold">구매한 게임 ({purchasedGames.length})</h2>
+        {purchasedGames.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            {purchasedGames.map((game) => (
+              <Link
+                key={game.id}
+                href={`/games/${game.id}`}
+                className="flex items-center gap-3 rounded-xl border border-border p-4 transition-colors hover:bg-muted/50"
+              >
+                <img
+                  src={game.thumbnailUrl}
+                  alt={game.title}
+                  className="size-12 rounded-lg object-cover"
+                />
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-sm font-medium">{game.title}</p>
+                  <p className="text-xs text-muted-foreground">{game.summary}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-border p-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              아직 구매한 게임이 없습니다.
+            </p>
+            <Button
+              variant="outline"
+              className="mt-3"
+              onClick={() => router.push("/games")}
+            >
+              게임 둘러보기
+            </Button>
+          </div>
+        )}
       </section>
 
       <Button

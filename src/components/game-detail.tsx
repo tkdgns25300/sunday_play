@@ -6,7 +6,6 @@ import {
   DIFFICULTY_LABELS,
   PREP_TIME_OPTIONS,
 } from "@/constants/game";
-import { FREE_MONTHLY_VIEW_LIMIT } from "@/constants/subscription";
 import Paywall from "@/components/paywall";
 import DownloadsSection from "@/components/downloads-section";
 import TimerGame from "@/components/timer-game";
@@ -57,24 +56,22 @@ function getGroupSizeSummary(sizes: GroupSize[]): string {
   return `${min}~${max}명`;
 }
 
-type AccessLevel = "full" | "login_required" | "limit_reached" | "loading";
+type AccessLevel = "full" | "login_required" | "loading";
 
 type GameDetailProps = {
   game: Game;
   accessLevel?: AccessLevel;
-  viewCount?: number;
 };
 
 export default function GameDetail({
   game,
   accessLevel = "full",
-  viewCount,
 }: GameDetailProps) {
   const prepTimeLabel =
     PREP_TIME_OPTIONS.find((o) => o.value === game.prepTime)?.label ?? "";
   const groupSizeLabel = getGroupSizeSummary(game.groupSizes);
 
-  const isLocked = accessLevel === "login_required" || accessLevel === "limit_reached";
+  const isLocked = accessLevel === "login_required";
   const isLoading = accessLevel === "loading";
 
   return (
@@ -152,11 +149,6 @@ export default function GameDetail({
           />
         </div>
 
-        {accessLevel === "full" && viewCount !== undefined && viewCount > 0 && (
-          <p className="text-xs text-muted-foreground">
-            이번 달 무료 열람 {viewCount}/{FREE_MONTHLY_VIEW_LIMIT}
-          </p>
-        )}
       </section>
 
       {isLoading && (
@@ -169,8 +161,7 @@ export default function GameDetail({
       {isLocked && (
         <>
           <Paywall
-            type={accessLevel === "login_required" ? "login" : "subscribe"}
-            viewCount={viewCount}
+            type="login"
           />
           <DownloadsSection game={game} />
         </>

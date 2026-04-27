@@ -4,21 +4,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import * as PortOne from "@portone/browser-sdk/v2";
 import { createClient } from "@/lib/supabase/client";
-import { getSubscriptionStatus } from "@/lib/subscription";
+import { getCreditBalance } from "@/lib/credit";
 import { Button } from "@/components/ui/button";
-import {
-  SUBSCRIPTION_PRICE,
-  SUBSCRIPTION_PRICE_LABEL,
-  SUBSCRIPTION_NAME,
-} from "@/constants/subscription";
-import { FREE_FEATURES, PREMIUM_FEATURES } from "@/constants/pricing";
+import { CREDIT_PACKAGES } from "@/constants/credit";
 
 export default function PricingCard() {
   const router = useRouter();
   const [userId, setUserId] = useState<string | null>(null);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [creditBalance, setCreditBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [processingIndex, setProcessingIndex] = useState<number | null>(null);
 
   useEffect(() => {
     async function checkStatus() {
@@ -27,24 +22,25 @@ export default function PricingCard() {
 
       if (user) {
         setUserId(user.id);
-        const subscribed = await getSubscriptionStatus(supabase, user.id);
-        setIsSubscribed(subscribed);
+        const balance = await getCreditBalance(supabase, user.id);
+        setCreditBalance(balance);
       }
       setIsLoading(false);
     }
     checkStatus();
   }, []);
 
-  async function handleSubscribe() {
+  async function handleCharge(packageIndex: number) {
     if (!userId) {
       router.push("/login");
       return;
     }
 
-    setIsProcessing(true);
+    const pkg = CREDIT_PACKAGES[packageIndex];
+    setProcessingIndex(packageIndex);
 
     try {
-      const paymentId = `pay-${userId.slice(0, 8)}-${Date.now()}`;
+      const paymentId = `credit-${userId.slice(0, 8)}-${Date.now()}`;
 
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -52,8 +48,8 @@ export default function PricingCard() {
         storeId: process.env.NEXT_PUBLIC_PORTONE_STORE_ID!,
         channelKey: process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY!,
         paymentId,
-        orderName: SUBSCRIPTION_NAME,
-        totalAmount: SUBSCRIPTION_PRICE,
+        orderName: `Sunday Play 크레딧 ${pkg.credits.toLocaleString()}`,
+        totalAmount: pkg.amount,
         currency: "KRW",
         payMethod: "CARD",
         customer: {
@@ -66,20 +62,20 @@ export default function PricingCard() {
 
       if (response?.code) {
         alert(`결제 실패: ${response.message}`);
-        setIsProcessing(false);
+        setProcessingIndex(null);
         return;
       }
 
       const verifyResponse = await fetch("/api/payment/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ paymentId }),
+        body: JSON.stringify({ paymentId, credits: pkg.credits }),
       });
 
       const result = await verifyResponse.json();
 
       if (result.success) {
-        setIsSubscribed(true);
+        setCreditBalance((prev) => prev + pkg.credits);
         router.refresh();
       } else {
         alert(`결제 검증 실패: ${result.message}`);
@@ -88,93 +84,72 @@ export default function PricingCard() {
       console.error("결제 오류:", error);
       alert(`결제 중 오류가 발생했습니다.\n${error instanceof Error ? error.message : String(error)}`);
     } finally {
-      setIsProcessing(false);
+      setProcessingIndex(null);
     }
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <div className="flex flex-col rounded-xl border border-border p-6 lg:p-10">
-        <h3 className="text-lg font-bold">무료</h3>
-        <p className="mt-1 text-3xl font-bold">₩0</p>
-        <p className="mt-1 text-sm text-muted-foreground">영원히 무료</p>
-        <ul className="mt-6 flex flex-col gap-2">
-          {FREE_FEATURES.map((feature) => (
-            <FeatureItem key={feature} text={feature} />
-          ))}
-        </ul>
-        <div className="mt-auto pt-6">
-          {isSubscribed ? (
-            <Button variant="outline" className="w-full" disabled>
-              무료 플랜
-            </Button>
-          ) : (
-            <Button variant="outline" className="w-full" disabled>
-              현재 이용 중
-            </Button>
-          )}
+    <div className="flex flex-col gap-6">
+      {userId && (
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            보유 크레딧: <span className="font-bold text-foreground">{creditBalance.toLocaleString()}</span>
+          </p>
         </div>
+      )}
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {CREDIT_PACKAGES.map((pkg, index) => (
+          <div
+            key={pkg.amount}
+            className={`flex flex-col rounded-xl border p-5 ${
+              index === 2
+                ? "border-2 border-primary"
+                : "border-border"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg font-bold">{pkg.label}</h3>
+              {pkg.bonus > 0 && (
+                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                  +{pkg.bonus}%
+                </span>
+              )}
+            </div>
+            <p className="mt-1 text-2xl font-bold text-primary">
+              {pkg.credits.toLocaleString()}
+              <span className="text-sm font-normal text-muted-foreground"> 크레딧</span>
+            </p>
+            {pkg.bonus > 0 && (
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                {(pkg.amount).toLocaleString()}원 + 보너스 {(pkg.credits - pkg.amount).toLocaleString()}
+              </p>
+            )}
+            <div className="mt-auto pt-4">
+              {isLoading ? (
+                <Button className="w-full" size="sm" disabled>
+                  확인 중...
+                </Button>
+              ) : (
+                <Button
+                  className="w-full"
+                  size="sm"
+                  variant={index === 2 ? "default" : "outline"}
+                  onClick={() => handleCharge(index)}
+                  disabled={processingIndex !== null}
+                >
+                  {processingIndex === index ? "처리 중..." : "충전하기"}
+                </Button>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="flex flex-col rounded-xl border-2 border-primary p-6 lg:p-10">
-        <div className="flex items-center gap-2">
-          <h3 className="text-lg font-bold">프리미엄</h3>
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-            추천
-          </span>
-        </div>
-        <p className="mt-1 text-3xl font-bold">
-          {SUBSCRIPTION_PRICE_LABEL}
-        </p>
-        <p className="mt-1 text-sm text-muted-foreground">모든 기능 무제한</p>
-        <ul className="mt-6 flex flex-col gap-2">
-          {PREMIUM_FEATURES.map((feature) => (
-            <FeatureItem key={feature} text={feature} highlighted />
-          ))}
-        </ul>
-        <div className="mt-auto pt-6">
-          {isLoading ? (
-            <Button className="w-full" disabled>
-              확인 중...
-            </Button>
-          ) : isSubscribed ? (
-            <Button className="w-full" disabled>
-              구독 중
-            </Button>
-          ) : (
-            <Button
-              className="w-full"
-              onClick={handleSubscribe}
-              disabled={isProcessing}
-            >
-              {isProcessing ? "처리 중..." : "구독하기"}
-            </Button>
-          )}
-        </div>
+      <div className="mx-auto max-w-md text-center text-xs text-muted-foreground">
+        <p>크레딧으로 원하는 게임의 진행 자료(PPT, PDF, PNG)를 구매할 수 있습니다.</p>
+        <p className="mt-1">구매한 게임은 언제든 재다운로드 가능합니다.</p>
       </div>
     </div>
-  );
-}
-
-function FeatureItem({ text, highlighted }: { text: string; highlighted?: boolean }) {
-  return (
-    <li className="flex items-center gap-2 text-sm">
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={highlighted ? "text-primary" : "text-muted-foreground"}
-      >
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-      <span className={highlighted ? "text-foreground" : "text-muted-foreground"}>
-        {text}
-      </span>
-    </li>
   );
 }

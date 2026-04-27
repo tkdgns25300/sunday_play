@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getPortOnePayment } from "@/lib/portone";
-import { SUBSCRIPTION_PRICE } from "@/constants/subscription";
+import { chargeCredits } from "@/lib/credit";
+import { CREDIT_PACKAGES } from "@/constants/credit";
 
 export async function POST(request: NextRequest) {
   try {
-    const { paymentId } = await request.json();
+    const { paymentId, credits } = await request.json();
 
-    if (!paymentId) {
+    if (!paymentId || !credits) {
       return NextResponse.json(
-        { success: false, message: "paymentId가 필요합니다" },
+        { success: false, message: "paymentId와 credits가 필요합니다" },
         { status: 400 }
       );
     }
@@ -23,9 +24,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (payment.amount.total !== SUBSCRIPTION_PRICE) {
+    const validPackage = CREDIT_PACKAGES.find(
+      (pkg) => pkg.credits === credits && pkg.amount === payment.amount.total
+    );
+
+    if (!validPackage) {
       return NextResponse.json(
-        { success: false, message: "결제 금액이 일치하지 않습니다" },
+        { success: false, message: "결제 금액과 크레딧이 일치하지 않습니다" },
         { status: 400 }
       );
     }
@@ -40,31 +45,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const now = new Date();
-    const periodEnd = new Date(now);
-    periodEnd.setMonth(periodEnd.getMonth() + 1);
-
-    const { error } = await supabase
-      .from("subscriptions")
-      .upsert(
-        {
-          user_id: user.id,
-          status: "active",
-          current_period_start: now.toISOString(),
-          current_period_end: periodEnd.toISOString(),
-          payment_customer_id: payment.customer?.customerId ?? null,
-          payment_id: paymentId,
-          updated_at: now.toISOString(),
-        },
-        { onConflict: "user_id" }
-      );
-
-    if (error) {
-      return NextResponse.json(
-        { success: false, message: "구독 정보 저장 실패" },
-        { status: 500 }
-      );
-    }
+    await chargeCredits(
+      supabase,
+      user.id,
+      credits,
+      paymentId,
+      `크레딧 충전 ${validPackage.label} (${credits.toLocaleString()} 크레딧)`
+    );
 
     return NextResponse.json({ success: true });
   } catch {
