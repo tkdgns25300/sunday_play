@@ -54,7 +54,7 @@ export default function GameCard({ game, isPurchased }: GameCardProps) {
             </div>
           )}
           {isPurchased && (
-            <div className="absolute -right-8 top-3 rotate-45 bg-green-500 px-8 py-0.5 text-[10px] font-bold text-white shadow-sm">
+            <div className="absolute -right-9 top-4 rotate-45 bg-green-500 px-10 py-1 text-xs font-bold text-white shadow-md">
               구매 완료
             </div>
           )}
