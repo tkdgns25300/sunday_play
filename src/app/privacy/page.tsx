@@ -131,6 +131,10 @@ export default function PrivacyPage() {
             있습니다.
           </p>
           <p className="mt-2">
+            회원 탈퇴 및 개인정보 삭제를 원하시는 경우 tkdgns25300@naver.com으로
+            요청해주시면 영업일 기준 3일 이내에 처리됩니다.
+          </p>
+          <p className="mt-2">
             관련 문의는 아래 개인정보 보호책임자에게 연락해주시기 바랍니다.
           </p>
         </Section>

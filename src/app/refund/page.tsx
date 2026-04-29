@@ -3,24 +3,29 @@ export default function RefundPage() {
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-2xl font-bold">환불 정책</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        시행일: 2026년 3월 16일
+        시행일: 2026년 4월 27일
       </p>
 
       <div className="mt-8 flex flex-col gap-8 text-sm leading-relaxed text-muted-foreground">
         <Section title="제1조 (적용 범위)">
           <p>
-            이 환불 정책은 Sunday Play 프리미엄 구독 서비스(이하
-            &quot;구독&quot;)의 결제 및 환불에 적용됩니다.
+            이 환불 정책은 Sunday Play의 크레딧 충전 및 게임 진행 자료 구매(이하
+            &quot;유료 서비스&quot;)의 결제 및 환불에 적용됩니다.
           </p>
         </Section>
 
-        <Section title="제2조 (구독 서비스 안내)">
+        <Section title="제2조 (크레딧 서비스 안내)">
           <ul className="flex flex-col gap-2 pl-5">
-            <li className="list-disc">구독 금액: 월 5,000원</li>
-            <li className="list-disc">구독 기간: 결제일로부터 1개월</li>
+            <li className="list-disc">크레딧 충전 단위: ₩3,000 / ₩5,000 / ₩10,000 / ₩50,000</li>
+            <li className="list-disc">충전 금액에 따라 보너스 크레딧이 제공될 수 있습니다.</li>
             <li className="list-disc">
-              자동 갱신 없음: 구독 기간 만료 후 자동으로 결제되지 않으며,
-              이용자가 직접 재결제해야 합니다.
+              크레딧으로 게임별 진행 자료를 개별 구매할 수 있습니다.
+            </li>
+            <li className="list-disc">
+              구매한 게임의 자료는 계정이 유효한 동안 횟수 제한 없이 재다운로드 가능합니다.
+            </li>
+            <li className="list-disc">
+              크레딧의 유효기간은 충전일로부터 5년입니다.
             </li>
           </ul>
         </Section>
@@ -37,17 +42,22 @@ export default function RefundPage() {
               </thead>
               <tbody>
                 <tr className="border-b border-border/50">
-                  <td className="px-3 py-2">결제 후 7일 이내, 프리미엄 콘텐츠 미이용</td>
+                  <td className="px-3 py-2">충전 후 7일 이내, 크레딧 미사용</td>
                   <td className="px-3 py-2 text-foreground">환불 가능</td>
                   <td className="px-3 py-2">전액 환불</td>
                 </tr>
                 <tr className="border-b border-border/50">
-                  <td className="px-3 py-2">결제 후 7일 이내, 프리미엄 콘텐츠 이용</td>
+                  <td className="px-3 py-2">충전 후 7일 이내, 크레딧 일부 사용</td>
                   <td className="px-3 py-2 text-foreground">환불 가능</td>
-                  <td className="px-3 py-2">이용 일수에 따른 일할 계산 후 환불</td>
+                  <td className="px-3 py-2">충전 금액 × (미사용 기본 크레딧 ÷ 충전 기본 크레딧). 보너스 크레딧은 환불 대상이 아닙니다.</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="px-3 py-2">충전 후 7일 경과, 미사용 크레딧 잔여</td>
+                  <td className="px-3 py-2 text-foreground">환불 가능</td>
+                  <td className="px-3 py-2">미사용 기본 크레딧에 해당하는 금액의 90% (수수료 10% 공제)</td>
                 </tr>
                 <tr>
-                  <td className="px-3 py-2">결제 후 7일 경과</td>
+                  <td className="px-3 py-2">크레딧 전부 사용</td>
                   <td className="px-3 py-2 text-foreground">환불 불가</td>
                   <td className="px-3 py-2">-</td>
                 </tr>
@@ -72,9 +82,9 @@ export default function RefundPage() {
 
         <Section title="제5조 (환불이 불가능한 경우)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
-            <li>결제 후 7일이 경과한 경우</li>
+            <li>충전한 크레딧을 전부 사용한 경우</li>
             <li>이용자의 귀책 사유로 서비스 이용이 불가능한 경우</li>
-            <li>서비스를 통해 제공받은 자료를 다운로드하여 보관한 경우</li>
+            <li>부정한 방법으로 크레딧을 취득한 경우</li>
           </ol>
         </Section>
 
@@ -87,7 +97,7 @@ export default function RefundPage() {
         </Section>
 
         <div className="border-t border-border pt-4 text-xs text-muted-foreground/70">
-          <p>이 환불 정책은 2026년 3월 16일부터 시행합니다.</p>
+          <p>이 환불 정책은 2026년 4월 27일부터 시행합니다.</p>
         </div>
       </div>
     </div>

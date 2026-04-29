@@ -147,7 +147,7 @@ export default function PricingCard() {
       </div>
 
       <div className="mx-auto max-w-md text-center text-xs text-muted-foreground">
-        <p>크레딧으로 원하는 게임의 진행 자료(PPT, PDF, PNG)를 구매할 수 있습니다.</p>
+        <p>크레딧으로 원하는 게임의 진행 자료를 구매할 수 있습니다.</p>
         <p className="mt-1">구매한 게임은 언제든 재다운로드 가능합니다.</p>
       </div>
     </div>
