@@ -260,7 +260,11 @@ export default function DownloadsSection({ game }: { game: Game }) {
                   </div>
                 </div>
 
-                <div className="mt-5 flex gap-2">
+                <p className="mt-4 text-center text-[11px] text-muted-foreground">
+                  디지털 콘텐츠 특성상 구매 후 환불이 불가합니다.
+                </p>
+
+                <div className="mt-3 flex gap-2">
                   <button
                     onClick={() => setShowPurchaseModal(false)}
                     className="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"

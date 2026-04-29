@@ -80,15 +80,23 @@ export default function RefundPage() {
           </ol>
         </Section>
 
-        <Section title="제5조 (환불이 불가능한 경우)">
+        <Section title="제5조 (게임 구매 환불)">
+          <p>
+            크레딧으로 구매한 게임의 진행 자료는 디지털 콘텐츠 특성상 구매 후 환불이 불가합니다.
+            구매 전 미리보기를 통해 자료의 내용과 구성을 확인하신 후 구매해주세요.
+          </p>
+        </Section>
+
+        <Section title="제6조 (환불이 불가능한 경우)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
+            <li>크레딧으로 구매한 게임의 진행 자료 (미리보기 제공으로 사전 확인 가능)</li>
             <li>충전한 크레딧을 전부 사용한 경우</li>
             <li>이용자의 귀책 사유로 서비스 이용이 불가능한 경우</li>
             <li>부정한 방법으로 크레딧을 취득한 경우</li>
           </ol>
         </Section>
 
-        <Section title="제6조 (연락처)">
+        <Section title="제7조 (연락처)">
           <p>환불 관련 문의는 아래 연락처로 해주세요.</p>
           <ul className="mt-2 flex flex-col gap-1">
             <li>이메일: tkdgns25300@naver.com</li>
