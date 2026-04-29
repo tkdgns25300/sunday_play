@@ -30,7 +30,17 @@ export default function AuthButton() {
       setUser(session?.user ?? null);
     });
 
-    return () => subscription.unsubscribe();
+    function handleCreditChange(e: Event) {
+      const detail = (e as CustomEvent<number>).detail;
+      setCreditBalance(detail);
+    }
+
+    window.addEventListener("credit-change", handleCreditChange);
+
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener("credit-change", handleCreditChange);
+    };
   }, []);
 
   if (isLoading) {

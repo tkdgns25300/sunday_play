@@ -65,7 +65,9 @@ export default function DownloadsSection({ game }: { game: Game }) {
       const result = await response.json();
       if (result.success) {
         setIsPurchased(true);
-        setCreditBalance((prev) => prev - game.creditPrice);
+        const newBalance = creditBalance - game.creditPrice;
+        setCreditBalance(newBalance);
+        window.dispatchEvent(new CustomEvent("credit-change", { detail: newBalance }));
       } else {
         alert(result.message);
       }
