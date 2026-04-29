@@ -27,6 +27,7 @@ export default function DownloadsSection({ game }: { game: Game }) {
   const [isPurchased, setIsPurchased] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isPurchasing, setIsPurchasing] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [creditBalance, setCreditBalance] = useState(0);
 
   useEffect(() => {
@@ -150,11 +151,10 @@ export default function DownloadsSection({ game }: { game: Game }) {
           {isLoggedIn ? (
             creditBalance >= game.creditPrice ? (
               <button
-                onClick={handlePurchase}
-                disabled={isPurchasing}
-                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600 disabled:opacity-50"
+                onClick={() => setShowPurchaseModal(true)}
+                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
               >
-                {isPurchasing ? "구매 중..." : `${priceLabel} 크레딧으로 구매`}
+                {`${priceLabel} 크레딧으로 구매`}
               </button>
             ) : (
               <div className="flex flex-col items-center gap-1.5">
@@ -177,6 +177,55 @@ export default function DownloadsSection({ game }: { game: Game }) {
               로그인하고 구매하기
             </Link>
           )}
+        </div>
+      )}
+
+      {showPurchaseModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setShowPurchaseModal(false)}
+        >
+          <div
+            className="w-full max-w-sm rounded-2xl bg-background p-6 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-bold">진행 자료 구매</h3>
+            <div className="mt-4 flex flex-col gap-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">게임</span>
+                <span className="font-medium">{game.title}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">가격</span>
+                <span className="font-bold text-primary">{priceLabel} 크레딧</span>
+              </div>
+              <div className="border-t border-border pt-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">보유 크레딧</span>
+                  <span>{creditBalance.toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">구매 후 잔액</span>
+                  <span className="font-medium">{(creditBalance - game.creditPrice).toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flex gap-2">
+              <button
+                onClick={() => setShowPurchaseModal(false)}
+                className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+              >
+                취소
+              </button>
+              <button
+                onClick={() => { setShowPurchaseModal(false); handlePurchase(); }}
+                disabled={isPurchasing}
+                className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
+              >
+                {isPurchasing ? "구매 중..." : "구매하기"}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </section>
