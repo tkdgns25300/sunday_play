@@ -89,66 +89,104 @@ export default function PricingCard() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       {userId && (
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">
-            보유 크레딧: <span className="font-bold text-foreground">{creditBalance.toLocaleString()}</span>
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-sm text-muted-foreground">현재 보유 크레딧</p>
+          <p className="text-4xl font-bold text-primary">
+            {creditBalance.toLocaleString()}
           </p>
         </div>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {CREDIT_PACKAGES.map((pkg, index) => (
-          <div
-            key={pkg.amount}
-            className={`flex flex-col rounded-xl border p-5 ${
-              index === 2
-                ? "border-2 border-primary"
-                : "border-border"
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-bold">{pkg.label}</h3>
-              {pkg.bonus > 0 && (
-                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                  +{pkg.bonus}%
+        {CREDIT_PACKAGES.map((pkg, index) => {
+          const isRecommended = index === 2;
+          return (
+            <div
+              key={pkg.amount}
+              className={`relative flex flex-col rounded-2xl p-6 transition-shadow hover:shadow-lg ${
+                isRecommended
+                  ? "border-2 border-primary bg-primary/[0.03] shadow-md"
+                  : "border border-border bg-background"
+              }`}
+            >
+              {isRecommended && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[11px] font-semibold text-white">
+                  추천
                 </span>
               )}
-            </div>
-            <p className="mt-1 text-2xl font-bold text-primary">
-              {pkg.credits.toLocaleString()}
-              <span className="text-sm font-normal text-muted-foreground"> 크레딧</span>
-            </p>
-            {pkg.bonus > 0 && (
-              <p className="mt-0.5 text-xs text-muted-foreground">
-                {(pkg.amount).toLocaleString()}원 + 보너스 {(pkg.credits - pkg.amount).toLocaleString()}
-              </p>
-            )}
-            <div className="mt-auto pt-4">
-              {isLoading ? (
-                <Button className="w-full" size="sm" disabled>
-                  확인 중...
-                </Button>
-              ) : (
-                <Button
-                  className="w-full"
-                  size="sm"
-                  variant={index === 2 ? "default" : "outline"}
-                  onClick={() => handleCharge(index)}
-                  disabled={processingIndex !== null}
-                >
-                  {processingIndex === index ? "처리 중..." : "충전하기"}
-                </Button>
+
+              <div className="flex items-baseline gap-2">
+                <h3 className="text-xl font-bold">{pkg.label}</h3>
+                {pkg.bonus > 0 && (
+                  <span className="rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-bold text-green-600 dark:bg-green-900/50 dark:text-green-400">
+                    +{pkg.bonus}%
+                  </span>
+                )}
+              </div>
+
+              <div className="mt-3">
+                <p className="text-3xl font-extrabold text-primary">
+                  {pkg.credits.toLocaleString()}
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">크레딧</p>
+              </div>
+
+              {pkg.bonus > 0 && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  기본 {pkg.amount.toLocaleString()} + 보너스{" "}
+                  <span className="font-medium text-green-600 dark:text-green-400">
+                    {(pkg.credits - pkg.amount).toLocaleString()}
+                  </span>
+                </p>
               )}
+
+              <div className="mt-auto pt-5">
+                {isLoading ? (
+                  <Button className="w-full" disabled>
+                    확인 중...
+                  </Button>
+                ) : (
+                  <Button
+                    className={`w-full ${isRecommended ? "" : "variant-outline"}`}
+                    variant={isRecommended ? "default" : "outline"}
+                    onClick={() => handleCharge(index)}
+                    disabled={processingIndex !== null}
+                  >
+                    {processingIndex === index ? "처리 중..." : "충전하기"}
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <div className="mx-auto max-w-md text-center text-xs text-muted-foreground">
-        <p>크레딧으로 원하는 게임의 진행 자료를 구매할 수 있습니다.</p>
-        <p className="mt-1">구매한 게임은 언제든 재다운로드 가능합니다.</p>
+      <div className="mx-auto flex max-w-lg flex-col items-center gap-3 text-center">
+        <div className="flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            게임별 개별 구매
+          </div>
+          <div className="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            무제한 재다운로드
+          </div>
+          <div className="flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            유효기간 5년
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -120,7 +120,7 @@ export default function Home() {
             </Link>
             <Link href="/pricing">
               <Button variant="outline" size="lg">
-                요금제 보기
+                크레딧 충전
               </Button>
             </Link>
           </div>

@@ -28,7 +28,7 @@ export default function Header() {
             href="/pricing"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            요금제
+            크레딧 충전
           </Link>
           <AuthButton />
           <ThemeToggle />
