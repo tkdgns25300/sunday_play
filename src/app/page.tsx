@@ -4,7 +4,8 @@ import { games } from "@/data/games";
 import GameCard from "@/components/game-card";
 import { CREDIT_PACKAGES } from "@/constants/credit";
 
-const PREVIEW_GAMES = games.slice(0, 3);
+const PREVIEW_GAME_IDS = ["number-sum-game", "zoom-out-quiz", "flash-memory"];
+const PREVIEW_GAMES = PREVIEW_GAME_IDS.map((id) => games.find((g) => g.id === id)!).filter(Boolean);
 
 const FEATURES = [
   {

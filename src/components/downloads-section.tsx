@@ -152,7 +152,7 @@ export default function DownloadsSection({ game }: { game: Game }) {
                   key={group.name}
                   group={group}
                   gameId={game.id}
-                  previewPages={game.previewPages}
+                  isPurchased
                   canDownload
                   downloadingPath={downloadingPath}
                   onDownload={handleDownload}
@@ -290,14 +290,14 @@ export default function DownloadsSection({ game }: { game: Game }) {
 function AssetCard({
   group,
   gameId,
-  previewPages,
+  isPurchased,
   canDownload,
   downloadingPath,
   onDownload,
 }: {
   group: AssetGroup;
   gameId: string;
-  previewPages?: number[];
+  isPurchased?: boolean;
   canDownload: boolean;
   downloadingPath: string | null;
   onDownload: (fileName: string, filePath: string) => void;
@@ -348,22 +348,40 @@ function AssetCard({
               </button>
             );
           })}
-          {group.name === "진행 자료" && <PreviewButton gameId={gameId} previewPages={previewPages} />}
+          {group.name === "진행 자료" && <PreviewButton gameId={gameId} showAll={isPurchased} />}
         </div>
       </div>
     </div>
   );
 }
 
-function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?: number[] }) {
+function PreviewButton({ gameId, previewPages, showAll }: { gameId: string; previewPages?: number[]; showAll?: boolean }) {
   const [previewPaths, setPreviewPaths] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const pages = previewPages ?? [1, 2];
-    setPreviewPaths(pages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
-  }, [gameId, previewPages]);
+    if (showAll) {
+      async function findAll() {
+        const paths: string[] = [];
+        for (let i = 1; i <= 200; i++) {
+          const path = `/downloads/games/${gameId}/preview/${i}.png`;
+          try {
+            const res = await fetch(path, { method: "HEAD" });
+            if (res.ok) paths.push(path);
+            else break;
+          } catch {
+            break;
+          }
+        }
+        setPreviewPaths(paths);
+      }
+      findAll();
+    } else {
+      const pages = previewPages ?? [1, 2];
+      setPreviewPaths(pages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
+    }
+  }, [gameId, previewPages, showAll]);
 
   if (previewPaths.length === 0) return null;
 
@@ -405,39 +423,41 @@ function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?
               </button>
             </div>
 
-            <div className="relative select-none">
+            <div className={`relative ${showAll ? "" : "select-none"}`}>
               <Image
                 src={previewPaths[currentIndex]}
                 alt={`미리보기 ${currentIndex + 1}`}
                 width={1200}
                 height={675}
                 className="w-full rounded-lg"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
+                draggable={showAll ? undefined : false}
+                onContextMenu={showAll ? undefined : (e) => e.preventDefault()}
               />
-              <div
-                className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-lg"
-                style={{
-                  backgroundImage: `repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 80px,
-                    rgba(0,0,0,0.03) 80px,
-                    rgba(0,0,0,0.03) 81px
-                  )`,
-                }}
-              >
-                <div className="grid grid-cols-3 grid-rows-5 gap-x-6 gap-y-3 -rotate-30 scale-[2]">
-                  {Array.from({ length: 15 }).map((_, i) => (
-                    <span
-                      key={i}
-                      className="whitespace-nowrap text-xl font-extrabold tracking-[0.2em] text-black/[0.15] sm:text-2xl"
-                    >
-                      PREVIEW
-                    </span>
-                  ))}
+              {!showAll && (
+                <div
+                  className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-lg"
+                  style={{
+                    backgroundImage: `repeating-linear-gradient(
+                      -45deg,
+                      transparent,
+                      transparent 80px,
+                      rgba(0,0,0,0.03) 80px,
+                      rgba(0,0,0,0.03) 81px
+                    )`,
+                  }}
+                >
+                  <div className="grid grid-cols-3 grid-rows-5 gap-x-6 gap-y-3 -rotate-30 scale-[2]">
+                    {Array.from({ length: 15 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="whitespace-nowrap text-xl font-extrabold tracking-[0.2em] text-black/[0.15] sm:text-2xl"
+                      >
+                        PREVIEW
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {currentIndex > 0 && (
                 <button
@@ -462,9 +482,11 @@ function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?
               )}
             </div>
 
-            <p className="text-center text-sm font-medium text-amber-400">
-              미리보기 일부만 표시됩니다. 전체 자료는 구매 후 다운로드하세요.
-            </p>
+            {!showAll && (
+              <p className="text-center text-sm font-medium text-amber-400">
+                미리보기 일부만 표시됩니다. 전체 자료는 구매 후 다운로드하세요.
+              </p>
+            )}
           </div>
         </div>
       )}
