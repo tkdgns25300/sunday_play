@@ -107,124 +107,175 @@ export default function DownloadsSection({ game }: { game: Game }) {
   const priceLabel = CREDIT_PRICE_LABELS[game.creditPrice] ?? String(game.creditPrice);
 
   return (
-    <section className="flex flex-col gap-3 rounded-xl border-2 border-amber-300/50 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-950/30 lg:p-5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+    <section className="overflow-hidden rounded-2xl border-2 border-amber-300/50 bg-gradient-to-br from-amber-50 to-orange-50/50 dark:border-amber-500/30 dark:from-amber-950/30 dark:to-orange-950/20">
+      <div className="flex items-center justify-between border-b border-amber-200/50 px-5 py-3 dark:border-amber-500/20">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-amber-500/10">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" x2="12" y1="15" y2="3" />
+            </svg>
+          </div>
           <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
           {isPurchased ? (
-            <span className="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-medium text-white">
+            <span className="flex items-center gap-1 rounded-full bg-green-500 px-2.5 py-0.5 text-[11px] font-semibold text-white">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               구매 완료
             </span>
           ) : (
-            <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-medium text-white">
+            <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-[11px] font-semibold text-white">
               {priceLabel} 크레딧
             </span>
           )}
         </div>
         {isLoggedIn && (
-          <span className="text-xs text-muted-foreground">
-            보유 {creditBalance.toLocaleString()} 크레딧
-          </span>
+          <Link href="/pricing" className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v12" />
+              <path d="M6 12h12" />
+            </svg>
+            {creditBalance.toLocaleString()} 크레딧
+          </Link>
         )}
       </div>
 
-      {isPurchased ? (
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
-            {groups.map((group) => (
-              <AssetCard
-                key={group.name}
-                group={group}
-                gameId={game.id}
-                previewPages={game.previewPages}
-                canDownload
-                downloadingPath={downloadingPath}
-                onDownload={handleDownload}
-              />
-            ))}
+      <div className="p-5">
+        {isPurchased ? (
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+              {groups.map((group) => (
+                <AssetCard
+                  key={group.name}
+                  group={group}
+                  gameId={game.id}
+                  previewPages={game.previewPages}
+                  canDownload
+                  downloadingPath={downloadingPath}
+                  onDownload={handleDownload}
+                />
+              ))}
+            </div>
+            <AssetNotes assets={game.assets} />
           </div>
-          <AssetNotes assets={game.assets} />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center gap-3 py-2 text-center">
-          <PreviewButton gameId={game.id} previewPages={game.previewPages} />
-          {isLoggedIn ? (
-            creditBalance >= game.creditPrice ? (
-              <button
-                onClick={() => setShowPurchaseModal(true)}
-                className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
-              >
-                {`${priceLabel} 크레딧으로 구매`}
-              </button>
-            ) : (
-              <div className="flex flex-col items-center gap-1.5">
-                <p className="text-xs text-muted-foreground">
-                  크레딧이 부족합니다 (보유: {creditBalance.toLocaleString()})
-                </p>
-                <Link
-                  href="/pricing"
-                  className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
+        ) : (
+          <div className="flex flex-col items-center gap-4 py-4">
+            <PreviewButton gameId={game.id} previewPages={game.previewPages} />
+
+            <div className="flex flex-col items-center gap-1">
+              <p className="text-sm font-medium text-foreground/80">
+                게임 진행에 필요한 모든 자료가 포함되어 있습니다
+              </p>
+              <p className="text-xs text-muted-foreground">
+                PPT · PDF · PNG 이미지 · 구매 후 무제한 재다운로드
+              </p>
+            </div>
+
+            {isLoggedIn ? (
+              creditBalance >= game.creditPrice ? (
+                <button
+                  onClick={() => setShowPurchaseModal(true)}
+                  className="group relative overflow-hidden rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30 active:scale-[0.98]"
                 >
-                  크레딧 충전하기
-                </Link>
-              </div>
-            )
-          ) : (
-            <Link
-              href="/login"
-              className="rounded-full bg-amber-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600"
-            >
-              로그인하고 구매하기
-            </Link>
-          )}
-        </div>
-      )}
+                  <span className="relative z-10">{priceLabel} 크레딧으로 구매</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 transition-opacity group-hover:opacity-100" />
+                </button>
+              ) : (
+                <div className="flex flex-col items-center gap-2">
+                  <p className="text-xs text-red-500 dark:text-red-400">
+                    크레딧이 부족합니다 (보유: {creditBalance.toLocaleString()})
+                  </p>
+                  <Link
+                    href="/pricing"
+                    className="rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30"
+                  >
+                    크레딧 충전하기
+                  </Link>
+                </div>
+              )
+            ) : (
+              <Link
+                href="/login"
+                className="rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30"
+              >
+                로그인하고 구매하기
+              </Link>
+            )}
+          </div>
+        )}
+      </div>
 
       {showPurchaseModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          onClick={() => setShowPurchaseModal(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          onClick={() => !isPurchasing && setShowPurchaseModal(false)}
         >
           <div
-            className="w-full max-w-sm rounded-2xl bg-background p-6 shadow-xl"
+            className="w-full max-w-sm animate-in fade-in zoom-in-95 rounded-2xl border border-border bg-background p-6 shadow-2xl duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-bold">진행 자료 구매</h3>
-            <div className="mt-4 flex flex-col gap-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">게임</span>
-                <span className="font-medium">{game.title}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">가격</span>
-                <span className="font-bold text-primary">{priceLabel} 크레딧</span>
-              </div>
-              <div className="border-t border-border pt-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">보유 크레딧</span>
-                  <span>{creditBalance.toLocaleString()}</span>
+            {isPurchasing ? (
+              <div className="flex flex-col items-center gap-4 py-6">
+                <div className="flex size-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/50">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="animate-spin text-amber-500">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-20" />
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  </svg>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">구매 후 잔액</span>
-                  <span className="font-medium">{(creditBalance - game.creditPrice).toLocaleString()}</span>
-                </div>
+                <p className="text-sm font-medium">구매 처리 중...</p>
               </div>
-            </div>
-            <div className="mt-6 flex gap-2">
-              <button
-                onClick={() => setShowPurchaseModal(false)}
-                className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
-              >
-                취소
-              </button>
-              <button
-                onClick={() => { setShowPurchaseModal(false); handlePurchase(); }}
-                disabled={isPurchasing}
-                className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
-              >
-                {isPurchasing ? "구매 중..." : "구매하기"}
-              </button>
-            </div>
+            ) : (
+              <>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-900/50">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-600">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold">진행 자료 구매</h3>
+                    <p className="text-xs text-muted-foreground">{game.title}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-xl bg-muted/50 p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">가격</span>
+                    <span className="text-lg font-bold text-primary">{priceLabel} 크레딧</span>
+                  </div>
+                  <div className="mt-3 border-t border-border pt-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">보유 크레딧</span>
+                      <span>{creditBalance.toLocaleString()}</span>
+                    </div>
+                    <div className="mt-1 flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">구매 후 잔액</span>
+                      <span className="font-semibold">{(creditBalance - game.creditPrice).toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 flex gap-2">
+                  <button
+                    onClick={() => setShowPurchaseModal(false)}
+                    className="flex-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+                  >
+                    취소
+                  </button>
+                  <button
+                    onClick={async () => { await handlePurchase(); setShowPurchaseModal(false); }}
+                    className="flex-1 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98]"
+                  >
+                    구매하기
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
