@@ -131,7 +131,9 @@ export default function GameDetail({
         </div>
 
         <h1 className="text-3xl font-bold">{game.title}</h1>
-        <p className="text-muted-foreground">{game.description}</p>
+        <p className="max-w-2xl whitespace-pre-line leading-relaxed text-muted-foreground">
+          {game.description.replace(/\. /g, ".\n")}
+        </p>
 
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
           <MetaCard label="소요 시간" value={`${game.durationMinutes}분`} />
