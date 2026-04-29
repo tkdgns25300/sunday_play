@@ -54,12 +54,9 @@ export default function GameCard({ game, isPurchased }: GameCardProps) {
             </div>
           )}
           {isPurchased && (
-            <span className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-semibold text-white shadow-sm">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
+            <div className="absolute -right-8 top-3 rotate-45 bg-green-500 px-8 py-0.5 text-[10px] font-bold text-white shadow-sm">
               구매 완료
-            </span>
+            </div>
           )}
         </div>
 
