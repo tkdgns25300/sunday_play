@@ -29,15 +29,16 @@ function getGroupSizeSummary(sizes: GroupSize[]): string {
 
 type GameCardProps = {
   game: Game;
+  isPurchased?: boolean;
 };
 
-export default function GameCard({ game }: GameCardProps) {
+export default function GameCard({ game, isPurchased }: GameCardProps) {
   const groupSizeLabel = getGroupSizeSummary(game.groupSizes);
 
   return (
     <Link href={`/games/${game.id}`}>
       <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
-        <div className="aspect-[16/10] overflow-hidden bg-muted">
+        <div className="relative aspect-[16/10] overflow-hidden bg-muted">
           {game.thumbnailUrl ? (
             <Image
               src={game.thumbnailUrl}
@@ -51,6 +52,14 @@ export default function GameCard({ game }: GameCardProps) {
             <div className="flex size-full items-center justify-center bg-primary/5 text-4xl">
               🎮
             </div>
+          )}
+          {isPurchased && (
+            <span className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-semibold text-white shadow-sm">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              구매 완료
+            </span>
           )}
         </div>
 

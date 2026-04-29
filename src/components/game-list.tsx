@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { games } from "@/data/games";
+import { createClient } from "@/lib/supabase/client";
+import { getPurchasedGames } from "@/lib/credit";
 import GameCard from "@/components/game-card";
 import GameFilter, { FilterState } from "@/components/game-filter";
 
@@ -16,6 +18,18 @@ const INITIAL_FILTERS: FilterState = {
 
 export default function GameList() {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const [purchasedIds, setPurchasedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const ids = await getPurchasedGames(supabase, user.id);
+      setPurchasedIds(ids);
+    }
+    load();
+  }, []);
 
   const filteredGames = useMemo(() => {
     return games.filter((game) => {
@@ -74,7 +88,7 @@ export default function GameList() {
       {filteredGames.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredGames.map((game) => (
-            <GameCard key={game.id} game={game} />
+            <GameCard key={game.id} game={game} isPurchased={purchasedIds.includes(game.id)} />
           ))}
         </div>
       ) : (
