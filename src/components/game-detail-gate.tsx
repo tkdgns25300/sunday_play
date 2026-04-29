@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Game } from "@/types/game";
 import { createClient } from "@/lib/supabase/client";
 import GameDetail from "@/components/game-detail";
 
-type AccessLevel = "full" | "login_required";
-
 export default function GameDetailGate({ game }: { game: Game }) {
-  const [accessLevel, setAccessLevel] = useState<AccessLevel | null>(null);
+  const router = useRouter();
+  const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
 
   useEffect(() => {
     async function checkAccess() {
@@ -16,19 +16,19 @@ export default function GameDetailGate({ game }: { game: Game }) {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (!user) {
-        setAccessLevel("login_required");
+        router.replace("/login");
         return;
       }
 
-      setAccessLevel("full");
+      setIsAuthed(true);
     }
 
     checkAccess();
-  }, [game.id]);
+  }, [game.id, router]);
 
-  if (accessLevel === null) {
+  if (isAuthed === null) {
     return <GameDetail game={game} accessLevel="loading" />;
   }
 
-  return <GameDetail game={game} accessLevel={accessLevel} />;
+  return <GameDetail game={game} accessLevel="full" />;
 }
