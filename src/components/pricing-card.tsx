@@ -75,7 +75,9 @@ export default function PricingCard() {
       const result = await verifyResponse.json();
 
       if (result.success) {
-        setCreditBalance((prev) => prev + pkg.credits);
+        const newBalance = creditBalance + pkg.credits;
+        setCreditBalance(newBalance);
+        window.dispatchEvent(new CustomEvent("credit-change", { detail: newBalance }));
         router.refresh();
       } else {
         alert(`결제 검증 실패: ${result.message}`);
