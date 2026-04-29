@@ -357,25 +357,8 @@ function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (previewPages) {
-      setPreviewPaths(previewPages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
-      return;
-    }
-    async function findAll() {
-      const paths: string[] = [];
-      for (let i = 1; i <= 200; i++) {
-        const path = `/downloads/games/${gameId}/preview/${i}.png`;
-        try {
-          const res = await fetch(path, { method: "HEAD" });
-          if (res.ok) paths.push(path);
-          else break;
-        } catch {
-          break;
-        }
-      }
-      setPreviewPaths(paths);
-    }
-    findAll();
+    const pages = previewPages ?? [1, 2];
+    setPreviewPaths(pages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
   }, [gameId, previewPages]);
 
   if (previewPaths.length === 0) return null;
