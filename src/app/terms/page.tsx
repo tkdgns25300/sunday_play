@@ -3,7 +3,7 @@ export default function TermsPage() {
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-2xl font-bold">이용약관</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        시행일: 2026년 3월 16일
+        시행일: 2026년 4월 27일
       </p>
 
       <div className="mt-8 flex flex-col gap-8 text-sm leading-relaxed text-muted-foreground">
@@ -26,8 +26,8 @@ export default function TermsPage() {
               의미합니다.
             </li>
             <li>
-              &quot;구독&quot;이란 이용자가 월정액을 결제하고 프리미엄 콘텐츠에
-              접근할 수 있는 유료 서비스를 의미합니다.
+              &quot;크레딧&quot;이란 이용자가 충전하여 게임별 진행 자료를 구매할 수
+              있는 서비스 내 결제 단위를 의미합니다.
             </li>
           </ol>
         </Section>
@@ -49,8 +49,8 @@ export default function TermsPage() {
           <p>회사는 다음과 같은 서비스를 제공합니다.</p>
           <ol className="mt-2 flex list-decimal flex-col gap-2 pl-5">
             <li>교회 레크레이션 게임 검색 및 필터링</li>
-            <li>게임별 상세 진행 가이드 제공</li>
-            <li>프리미엄 구독 서비스 (진행 스크립트, 자료 다운로드 등)</li>
+            <li>게임별 상세 진행 가이드 제공 (로그인 시 무제한 무료)</li>
+            <li>크레딧 기반 진행 자료 구매 및 다운로드</li>
           </ol>
         </Section>
 
@@ -66,23 +66,48 @@ export default function TermsPage() {
           </ol>
         </Section>
 
-        <Section title="제6조 (유료 서비스 및 결제)">
+        <Section title="제6조 (크레딧 충전 및 결제)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
             <li>
-              프리미엄 구독은 월 단위로 결제되며, 결제일로부터 1개월간
-              유효합니다.
+              이용자는 크레딧을 충전하여 원하는 게임의 진행 자료를 개별 구매할 수 있습니다.
+            </li>
+            <li>
+              크레딧 충전은 회사가 정한 충전 단위(₩3,000, ₩5,000, ₩10,000, ₩50,000)로 가능하며,
+              충전 금액에 따라 보너스 크레딧이 제공될 수 있습니다.
             </li>
             <li>
               결제는 포트원(PortOne)을 통해 처리되며, 결제 수단은 신용카드 등
               회사가 지정한 수단으로 제한됩니다.
             </li>
             <li>
-              구독은 자동 갱신되지 않으며, 이용자가 직접 재결제해야 합니다.
+              구매한 게임의 진행 자료는 계정이 유효한 동안 횟수 제한 없이 재다운로드할 수 있습니다.
+            </li>
+            <li>
+              크레딧의 유효기간은 충전일로부터 5년이며, 유효기간이 경과한 크레딧은 소멸됩니다.
+            </li>
+            <li>
+              게임별 크레딧 가격은 변경될 수 있으며, 이미 구매한 게임에는 영향을 미치지 않습니다.
             </li>
           </ol>
         </Section>
 
-        <Section title="제7조 (이용자의 의무)">
+        <Section title="제7조 (회원 탈퇴)">
+          <ol className="flex list-decimal flex-col gap-2 pl-5">
+            <li>
+              회원 탈퇴를 원하는 경우 tkdgns25300@naver.com으로 요청해주세요.
+            </li>
+            <li>
+              탈퇴 시 미사용 크레딧이 있는 경우, 탈퇴 전 환불 요청이 가능합니다.
+              환불 요청 없이 탈퇴 처리된 경우 미사용 크레딧은 소멸됩니다.
+            </li>
+            <li>
+              탈퇴 후에도 이미 다운로드한 자료는 보관할 수 있으나,
+              재다운로드 및 서비스 이용은 불가합니다.
+            </li>
+          </ol>
+        </Section>
+
+        <Section title="제8조 (이용자의 의무)">
           <p>이용자는 다음 행위를 하여서는 안 됩니다.</p>
           <ol className="mt-2 flex list-decimal flex-col gap-2 pl-5">
             <li>타인의 정보를 도용하는 행위</li>
@@ -92,7 +117,7 @@ export default function TermsPage() {
           </ol>
         </Section>
 
-        <Section title="제8조 (서비스의 중단)">
+        <Section title="제9조 (서비스의 중단)">
           <p>
             회사는 천재지변, 시스템 장애 등 불가피한 사유가 발생한 경우 서비스의
             전부 또는 일부를 제한하거나 중단할 수 있습니다. 이 경우 사전에
@@ -100,28 +125,24 @@ export default function TermsPage() {
           </p>
         </Section>
 
-        <Section title="제9조 (저작권 및 자료 이용)">
+        <Section title="제10조 (저작권 및 자료 이용)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
             <li>
-              서비스에서 제공하는 모든 콘텐츠(PPT, PDF, 스크립트, 활동지 등)의
+              서비스에서 제공하는 모든 콘텐츠(진행 자료 등)의
               저작권은 회사에 있습니다.
             </li>
             <li>
-              구독자는 다운로드한 자료를 본인이 속한 교회 및 단체 내에서 비상업적
+              구매자는 다운로드한 자료를 본인이 속한 교회 및 단체 내에서 비상업적
               목적으로 자유롭게 사용할 수 있습니다.
             </li>
             <li>
               자료의 무단 복제, 재배포, 판매, 공유 플랫폼 업로드 등은 엄격히
               금지됩니다.
             </li>
-            <li>
-              구독 해지 후에도 이미 다운로드한 자료는 개인 사용 목적으로 보관할 수
-              있으나, 재배포는 허용되지 않습니다.
-            </li>
           </ol>
         </Section>
 
-        <Section title="제10조 (면책 조항)">
+        <Section title="제11조 (면책 조항)">
           <ol className="flex list-decimal flex-col gap-2 pl-5">
             <li>
               회사는 이용자가 서비스를 통해 얻은 정보를 활용하여 발생한 결과에
@@ -134,7 +155,7 @@ export default function TermsPage() {
           </ol>
         </Section>
 
-        <Section title="제11조 (준거법 및 관할법원)">
+        <Section title="제12조 (준거법 및 관할법원)">
           <p>
             이 약관의 해석 및 분쟁 해결은 대한민국 법률에 따르며, 서비스 이용과
             관련한 분쟁의 관할법원은 회사의 소재지를 관할하는 법원으로 합니다.
@@ -142,7 +163,7 @@ export default function TermsPage() {
         </Section>
 
         <div className="border-t border-border pt-4 text-xs text-muted-foreground/70">
-          <p>부칙: 이 약관은 2026년 3월 16일부터 시행합니다.</p>
+          <p>부칙: 이 약관은 2026년 4월 27일부터 시행합니다.</p>
         </div>
       </div>
     </div>
