@@ -371,13 +371,14 @@ function PreviewButton({ gameId, previewPages }: { gameId: string; previewPages?
     <>
       <button
         onClick={() => { setCurrentIndex(0); setIsOpen(true); }}
-        className="flex items-center gap-1 rounded-md border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium text-amber-700 transition-all hover:border-amber-400 hover:bg-amber-100 dark:border-amber-500/30 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:border-amber-500/50 dark:hover:bg-amber-900/50"
+        className="flex items-center gap-2 rounded-xl border border-amber-200 bg-white px-5 py-2.5 text-sm font-semibold text-amber-700 shadow-sm transition-all hover:border-amber-300 hover:shadow-md active:scale-[0.98] dark:border-amber-500/30 dark:bg-amber-950/50 dark:text-amber-400 dark:hover:bg-amber-900/50"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-          <circle cx="12" cy="12" r="3" />
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
         </svg>
-        미리보기
+        자료 미리보기
       </button>
 
       {isOpen && (
