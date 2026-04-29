@@ -207,39 +207,58 @@ export default function Home() {
               게임 가이드는 무료! 진행 자료만 크레딧으로 구매하세요.
             </p>
           </div>
-          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {CREDIT_PACKAGES.map((pkg, index) => (
-              <div
-                key={pkg.amount}
-                className={`flex flex-col rounded-xl bg-background p-5 ${
-                  index === 2 ? "border-2 border-primary" : "border border-border"
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <h3 className="text-base font-bold">{pkg.label}</h3>
-                  {pkg.bonus > 0 && (
-                    <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">
-                      +{pkg.bonus}%
+          <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 lg:grid-cols-4">
+            {CREDIT_PACKAGES.map((pkg, index) => {
+              const isRecommended = index === 2;
+              return (
+                <div
+                  key={pkg.amount}
+                  className={`relative flex flex-col rounded-2xl bg-background p-6 transition-shadow hover:shadow-lg ${
+                    isRecommended
+                      ? "border-2 border-primary bg-primary/[0.03] shadow-md"
+                      : "border border-border"
+                  }`}
+                >
+                  {isRecommended && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-[11px] font-semibold text-white">
+                      추천
                     </span>
                   )}
+                  <div className="flex items-baseline gap-2">
+                    <h3 className="text-xl font-bold">{pkg.label}</h3>
+                    {pkg.bonus > 0 && (
+                      <span className="rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-bold text-green-600 dark:bg-green-900/50 dark:text-green-400">
+                        +{pkg.bonus}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3">
+                    <p className="text-3xl font-extrabold text-primary">
+                      {pkg.credits.toLocaleString()}
+                    </p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">크레딧</p>
+                  </div>
+                  {pkg.bonus > 0 && (
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      기본 {pkg.amount.toLocaleString()} + 보너스{" "}
+                      <span className="font-medium text-green-600 dark:text-green-400">
+                        {(pkg.credits - pkg.amount).toLocaleString()}
+                      </span>
+                    </p>
+                  )}
+                  <div className="mt-auto pt-5">
+                    <Link href="/pricing">
+                      <Button
+                        className="w-full"
+                        variant={isRecommended ? "default" : "outline"}
+                      >
+                        충전하기
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-                <p className="mt-1 text-xl font-bold text-primary">
-                  {pkg.credits.toLocaleString()}
-                  <span className="text-xs font-normal text-muted-foreground"> 크레딧</span>
-                </p>
-                <div className="mt-auto pt-4">
-                  <Link href="/pricing">
-                    <Button
-                      size="sm"
-                      variant={index === 2 ? "default" : "outline"}
-                      className="w-full"
-                    >
-                      충전하기
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

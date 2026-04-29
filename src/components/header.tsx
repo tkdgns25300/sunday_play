@@ -66,10 +66,12 @@ export default function Header() {
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              요금제
+              크레딧 충전
             </Link>
-            <AuthButton />
-            <ThemeToggle />
+            <div className="flex items-center justify-between">
+              <AuthButton />
+              <ThemeToggle />
+            </div>
           </div>
         </nav>
       )}
