@@ -13,6 +13,7 @@ export default function PaymentComplete() {
   useEffect(() => {
     async function verify() {
       const paymentId = searchParams.get("paymentId");
+      const credits = searchParams.get("credits");
       const code = searchParams.get("code");
 
       if (code) {
@@ -21,7 +22,7 @@ export default function PaymentComplete() {
         return;
       }
 
-      if (!paymentId) {
+      if (!paymentId || !credits) {
         setStatus("fail");
         setMessage("결제 정보를 찾을 수 없습니다.");
         return;
@@ -31,7 +32,7 @@ export default function PaymentComplete() {
         const response = await fetch("/api/payment/verify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ paymentId }),
+          body: JSON.stringify({ paymentId, credits: Number(credits) }),
         });
 
         const result = await response.json();
@@ -68,12 +69,12 @@ export default function PaymentComplete() {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h2 className="text-xl font-bold">구독이 완료되었습니다!</h2>
+        <h2 className="text-xl font-bold">크레딧 충전 완료!</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          이제 모든 게임 가이드를 무제한으로 이용할 수 있습니다.
+          크레딧이 충전되었습니다. 원하는 게임의 진행 자료를 구매하세요.
         </p>
-        <Button className="mt-6" onClick={() => router.push("/")}>
-          홈으로 돌아가기
+        <Button className="mt-6" onClick={() => router.push("/games")}>
+          게임 둘러보기
         </Button>
       </div>
     );
