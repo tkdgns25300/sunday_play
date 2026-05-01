@@ -174,9 +174,10 @@
 ### 3-1. SEO 및 배포
 
 - [x] 커스텀 도메인 연결 (sundayplay.life)
-- [ ] Open Graph 태그 (카카오톡/슬랙 공유 미리보기)
+- [x] Open Graph 태그 (카카오톡/슬랙 공유 미리보기)
 - [x] 파비콘 및 사이트 타이틀
-- [ ] Google Search Console 등록
+- [x] Google Search Console 등록 + sitemap 제출
+- [x] Google Analytics 4 추가
 
 ### 3-2. 사용자 기능
 
