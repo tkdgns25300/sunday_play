@@ -53,10 +53,18 @@ export default function GameCard({ game, isPurchased }: GameCardProps) {
               🎮
             </div>
           )}
-          {isPurchased && (
+          {isPurchased ? (
             <div className="absolute -right-9 top-4 rotate-45 bg-green-500 px-10 py-1 text-xs font-bold text-white shadow-md">
               구매 완료
             </div>
+          ) : (
+            <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white shadow-md">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="11" opacity="0.3" />
+                <text x="12" y="17" textAnchor="middle" fontSize="15" fontWeight="bold">C</text>
+              </svg>
+              {game.creditPrice.toLocaleString()}
+            </span>
           )}
         </div>
 
