@@ -14,6 +14,7 @@ export default function PricingCard() {
   const [creditBalance, setCreditBalance] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [processingIndex, setProcessingIndex] = useState<number | null>(null);
+  const [chargedCredits, setChargedCredits] = useState<number | null>(null);
 
   useEffect(() => {
     async function checkStatus() {
@@ -77,8 +78,8 @@ export default function PricingCard() {
       if (result.success) {
         const newBalance = creditBalance + pkg.credits;
         setCreditBalance(newBalance);
+        setChargedCredits(pkg.credits);
         window.dispatchEvent(new CustomEvent("credit-change", { detail: newBalance }));
-        router.refresh();
       } else {
         alert(`결제 검증 실패: ${result.message}`);
       }
@@ -190,6 +191,45 @@ export default function PricingCard() {
           </div>
         </div>
       </div>
+
+      {chargedCredits !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          onClick={() => setChargedCredits(null)}
+        >
+          <div
+            className="w-full max-w-sm animate-in fade-in zoom-in-95 rounded-2xl border border-border bg-background p-6 shadow-2xl duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col items-center gap-4 py-2">
+              <div className="flex size-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold">충전 완료!</h3>
+              <p className="text-3xl font-extrabold text-primary">
+                +{chargedCredits.toLocaleString()} 크레딧
+              </p>
+              <p className="text-sm text-muted-foreground">
+                보유 크레딧: {creditBalance.toLocaleString()}
+              </p>
+              <Button
+                className="mt-2 w-full"
+                onClick={() => { setChargedCredits(null); router.push("/games"); }}
+              >
+                게임 둘러보기
+              </Button>
+              <button
+                onClick={() => setChargedCredits(null)}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                계속 충전하기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
