@@ -19,6 +19,21 @@ export const metadata: Metadata = {
   title: "Sunday Play",
   description:
     "주일학교 교사와 교회 리더를 위한 레크레이션 큐레이션 플랫폼. 대상별·상황별로 적합한 게임을 쉽게 찾고, 상세 진행 가이드와 함께 활용하세요.",
+  openGraph: {
+    title: "Sunday Play",
+    description:
+      "이번 주 레크레이션, 고민 끝. 50+개 게임 중 딱 맞는 게임을 찾고 진행 자료까지 한 번에.",
+    url: "https://sundayplay.life",
+    siteName: "Sunday Play",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sunday Play",
+    description:
+      "이번 주 레크레이션, 고민 끝. 50+개 게임 중 딱 맞는 게임을 찾고 진행 자료까지 한 번에.",
+  },
 };
 
 export default function RootLayout({

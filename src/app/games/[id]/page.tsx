@@ -21,6 +21,28 @@ export async function generateMetadata({ params }: GamePageProps) {
   return {
     title: `${game.title} — Sunday Play`,
     description: game.summary,
+    openGraph: {
+      title: `${game.title} — Sunday Play`,
+      description: game.description,
+      url: `https://sundayplay.life/games/${id}`,
+      siteName: "Sunday Play",
+      images: [
+        {
+          url: `https://sundayplay.life${game.thumbnailUrl}`,
+          width: 2752,
+          height: 1536,
+          alt: game.title,
+        },
+      ],
+      locale: "ko_KR",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${game.title} — Sunday Play`,
+      description: game.summary,
+      images: [`https://sundayplay.life${game.thumbnailUrl}`],
+    },
   };
 }
 
