@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getPortOnePayment } from "@/lib/portone";
+import { CREDIT_PACKAGES } from "@/constants/credit";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { type, data } = body;
 
-    if (type !== "Transaction.Paid" && type !== "Transaction.Cancelled") {
+    if (type !== "Transaction.Paid") {
       return NextResponse.json({ success: true });
     }
 
@@ -28,35 +29,45 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false }, { status: 400 });
     }
 
-    if (type === "Transaction.Paid") {
-      const now = new Date();
-      const periodEnd = new Date(now);
-      periodEnd.setMonth(periodEnd.getMonth() + 1);
+    const pkg = CREDIT_PACKAGES.find(
+      (p) => p.amount === payment.amount.total
+    );
 
-      await supabaseAdmin
-        .from("subscriptions")
-        .upsert(
-          {
-            user_id: customerId,
-            status: "active",
-            current_period_start: now.toISOString(),
-            current_period_end: periodEnd.toISOString(),
-            payment_id: paymentId,
-            updated_at: now.toISOString(),
-          },
-          { onConflict: "user_id" }
-        );
+    if (!pkg) {
+      return NextResponse.json(
+        { success: false, message: "유효하지 않은 결제 금액" },
+        { status: 400 }
+      );
     }
 
-    if (type === "Transaction.Cancelled") {
-      await supabaseAdmin
-        .from("subscriptions")
-        .update({
-          status: "canceled",
+    const { data: existing } = await supabaseAdmin
+      .from("user_credits")
+      .select("balance")
+      .eq("user_id", customerId)
+      .single();
+
+    const currentBalance = existing?.balance ?? 0;
+
+    await supabaseAdmin
+      .from("user_credits")
+      .upsert(
+        {
+          user_id: customerId,
+          balance: currentBalance + pkg.credits,
           updated_at: new Date().toISOString(),
-        })
-        .eq("payment_id", paymentId);
-    }
+        },
+        { onConflict: "user_id" }
+      );
+
+    await supabaseAdmin
+      .from("credit_transactions")
+      .insert({
+        user_id: customerId,
+        type: "charge",
+        amount: pkg.credits,
+        description: `크레딧 충전 ${pkg.label} (${pkg.credits.toLocaleString()} 크레딧)`,
+        payment_id: paymentId,
+      });
 
     return NextResponse.json({ success: true });
   } catch {

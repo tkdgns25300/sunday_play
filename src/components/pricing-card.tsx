@@ -56,7 +56,7 @@ export default function PricingCard() {
           customerId: userId,
         },
         ...(isMobile && {
-          redirectUrl: `${window.location.origin}/payment/complete`,
+          redirectUrl: `${window.location.origin}/payment/complete?credits=${pkg.credits}`,
         }),
       });
 
