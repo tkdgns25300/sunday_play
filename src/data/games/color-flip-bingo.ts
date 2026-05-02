@@ -7,7 +7,7 @@ const colorFlipBingo: Game = {
   description:
     "양면 색판을 4×4로 펼쳐놓고, 두 팀이 동시에 릴레이로 달려나가 자기 팀 색으로 뒤집는 전략 게임입니다. 상대 팀이 만들어놓은 색판도 뒤집을 수 있어 끝까지 승부를 알 수 없습니다.",
   thumbnailUrl: "/images/games/color-flip-bingo.png",
-  ageGroups: ["초등부", "중고등부", "청년부"],
+  ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
   energyLevel: 4,
   environments: ["실내강당", "야외"],
   prepTime: "quick",

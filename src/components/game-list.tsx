@@ -8,7 +8,7 @@ import GameCard from "@/components/game-card";
 import GameFilter, { FilterState } from "@/components/game-filter";
 
 const INITIAL_FILTERS: FilterState = {
-  ageGroup: null,
+  ageGroups: [],
   environment: null,
   prepTime: null,
   groupSize: null,
@@ -33,7 +33,10 @@ export default function GameList() {
 
   const filteredGames = useMemo(() => {
     return games.filter((game) => {
-      if (filters.ageGroup && !game.ageGroups.includes(filters.ageGroup)) {
+      if (
+        filters.ageGroups.length > 0 &&
+        !filters.ageGroups.some((age) => game.ageGroups.includes(age))
+      ) {
         return false;
       }
 

@@ -1,7 +1,6 @@
 import { AgeGroup, Environment, PrepTime, GroupSize, CharacterQuality } from "@/types/game";
 
 export const AGE_GROUP_OPTIONS: { value: AgeGroup; label: string }[] = [
-  { value: "영아부", label: "영아부" },
   { value: "유치부", label: "유치부" },
   { value: "유년부", label: "유년부" },
   { value: "초등부", label: "초등부" },

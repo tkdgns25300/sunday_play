@@ -7,7 +7,7 @@ const tailCatch: Game = {
     description:
         "팀 대표가 허리에 꼬리를 착용하고, 팀원들은 대표를 보호하면서 상대팀 대표의 꼬리를 잡습니다. 꼬리가 뽑히면 탈락! 마지막까지 꼬리를 지킨 팀이 우승합니다.",
     thumbnailUrl: "/images/games/tail-catch.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
     energyLevel: 5,
     environments: ["실내강당", "야외"],
     prepTime: "quick",

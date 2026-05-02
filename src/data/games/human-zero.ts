@@ -7,7 +7,7 @@ const humanZero: Game = {
   description:
     "공격팀이 0부터 상대팀 인원수까지 숫자를 외치면, 수비팀은 서로 상의 없이 각자 일어날지 앉아 있을지 결정합니다. 일어난 사람 수가 공격팀이 부른 숫자와 같으면 공격 성공! 상대의 심리를 읽는 것이 핵심인 팀 대결 게임입니다.",
   thumbnailUrl: "/images/games/human-zero.png",
-  ageGroups: ["초등부", "중고등부", "청년부"],
+  ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
   energyLevel: 2,
   environments: ["실내교실", "실내강당"],
   prepTime: "none",

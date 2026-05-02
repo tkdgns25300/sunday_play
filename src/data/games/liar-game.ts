@@ -7,7 +7,7 @@ const liarGame: Game = {
     description:
         "참가자 중 한 명만 라이어로, 나머지는 같은 단어를 받습니다. 돌아가며 단어에 대해 한 마디씩 설명하고, 투표로 라이어를 찾아냅니다. 라이어는 들키지 않게, 시민은 라이어를 찾아내는 심리 대결 게임입니다.",
     thumbnailUrl: "/images/games/liar-game.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실"],
     prepTime: "quick",

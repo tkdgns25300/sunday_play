@@ -12,7 +12,7 @@ import {
 } from "@/constants/game";
 
 export type FilterState = {
-  ageGroup: AgeGroup | null;
+  ageGroups: AgeGroup[];
   environment: Environment | null;
   prepTime: PrepTime | null;
   groupSize: GroupSize | null;
@@ -32,8 +32,16 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
     onFilterChange({ ...filters, [key]: filters[key] === value ? null : value });
   }
 
+  function toggleAgeGroup(age: AgeGroup) {
+    const current = filters.ageGroups;
+    const next = current.includes(age)
+      ? current.filter((a) => a !== age)
+      : [...current, age];
+    onFilterChange({ ...filters, ageGroups: next });
+  }
+
   const hasActiveFilters =
-    filters.ageGroup !== null ||
+    filters.ageGroups.length > 0 ||
     filters.environment !== null ||
     filters.prepTime !== null ||
     filters.groupSize !== null ||
@@ -48,23 +56,26 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        <DropdownFilter
+        <MultiSelectDropdown
           label="대상"
-          value={filters.ageGroup}
+          selected={filters.ageGroups}
           options={AGE_GROUP_OPTIONS}
-          onSelect={(value) => toggleFilter("ageGroup", value)}
+          onToggle={toggleAgeGroup}
+          onClear={() => onFilterChange({ ...filters, ageGroups: [] })}
         />
         <DropdownFilter
           label="인원"
           value={filters.groupSize}
           options={GROUP_SIZE_OPTIONS}
           onSelect={(value) => toggleFilter("groupSize", value)}
+          onClear={() => onFilterChange({ ...filters, groupSize: null })}
         />
         <DropdownFilter
           label="장소"
           value={filters.environment}
           options={ENVIRONMENT_OPTIONS}
           onSelect={(value) => toggleFilter("environment", value)}
+          onClear={() => onFilterChange({ ...filters, environment: null })}
         />
 
         {isDetailOpen && (
@@ -74,6 +85,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
               value={filters.prepTime}
               options={PREP_TIME_OPTIONS}
               onSelect={(value) => toggleFilter("prepTime", value)}
+              onClear={() => onFilterChange({ ...filters, prepTime: null })}
             />
             <DropdownFilter
               label="활동성"
@@ -83,6 +95,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
                 label: ENERGY_LEVEL_LABELS[level],
               }))}
               onSelect={(value) => toggleFilter("energyLevel", value)}
+              onClear={() => onFilterChange({ ...filters, energyLevel: null })}
             />
             <CharacterQualityDropdown
               selected={filters.characterQualities}
@@ -121,7 +134,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
         <button
           onClick={() =>
             onFilterChange({
-              ageGroup: null,
+              ageGroups: [],
               environment: null,
               prepTime: null,
               groupSize: null,
@@ -143,11 +156,13 @@ function DropdownFilter<T extends string | number>({
   value,
   options,
   onSelect,
+  onClear,
 }: {
   label: string;
   value: T | null;
   options: { value: T; label: string }[];
   onSelect: (value: T) => void;
+  onClear?: () => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -192,6 +207,22 @@ function DropdownFilter<T extends string | number>({
 
       {isOpen && (
         <div className="absolute left-0 top-full z-10 mt-1 min-w-32 rounded-lg border border-border bg-background py-1 shadow-lg">
+          <button
+            onClick={() => {
+              onClear?.();
+              setIsOpen(false);
+            }}
+            className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-muted ${
+              value === null ? "font-medium text-primary" : "text-foreground"
+            }`}
+          >
+            {value === null && (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+            전체
+          </button>
           {options.map((option) => (
             <button
               key={option.value}
@@ -211,6 +242,108 @@ function DropdownFilter<T extends string | number>({
               <span className={value === option.value ? "" : "pl-5"}>
                 {option.label}
               </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MultiSelectDropdown<T extends string>({
+  label,
+  selected,
+  options,
+  onToggle,
+  onClear,
+}: {
+  label: string;
+  selected: T[];
+  options: { value: T; label: string }[];
+  onToggle: (value: T) => void;
+  onClear: () => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const buttonLabel = selected.length > 0
+    ? `${label} (${selected.length})`
+    : label;
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+          selected.length > 0
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+        }`}
+      >
+        {buttonLabel}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="absolute left-0 top-full z-10 mt-1 min-w-32 rounded-lg border border-border bg-background py-1 shadow-lg">
+          <button
+            onClick={() => {
+              onClear();
+              setIsOpen(false);
+            }}
+            className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-muted ${
+              selected.length === 0 ? "font-medium text-primary" : "text-foreground"
+            }`}
+          >
+            {selected.length === 0 && (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+            <span className={selected.length === 0 ? "" : "pl-5"}>전체</span>
+          </button>
+          {options.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => onToggle(option.value)}
+              className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors hover:bg-muted"
+            >
+              <div
+                className={`flex size-4 shrink-0 items-center justify-center rounded border ${
+                  selected.includes(option.value)
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-input"
+                }`}
+              >
+                {selected.includes(option.value) && (
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+              </div>
+              {option.label}
             </button>
           ))}
         </div>

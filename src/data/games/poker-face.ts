@@ -7,7 +7,7 @@ const pokerFace: Game = {
   description:
     "참가자들이 원형으로 앉아 양 주먹을 내밀고, 그중 1명이 한쪽 손에 동전을 쥡니다. 탐정이 특정 사람의 왼손 또는 오른손을 지목해 펴게 하며, 동전을 찾으면 +50점! 하지만 빈 손이면 -10점입니다. '스톱'을 외치면 현재 점수를 확정하고 라운드를 끝낼 수 있어, 계속 찾을지 멈출지의 심리전이 핵심입니다.",
   thumbnailUrl: "/images/games/poker-face.png",
-  ageGroups: ["초등부", "중고등부", "청년부"],
+  ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
   energyLevel: 2,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
