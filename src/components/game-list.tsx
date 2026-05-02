@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { games } from "@/data/games";
 import { createClient } from "@/lib/supabase/client";
 import { getPurchasedGames } from "@/lib/credit";
@@ -16,9 +16,38 @@ const INITIAL_FILTERS: FilterState = {
   characterQualities: [],
 };
 
+type SortOption = "credit-low" | "duration-short" | "duration-long" | "difficulty-easy" | "difficulty-hard";
+
+const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "credit-low", label: "크레딧 낮은순" },
+  { value: "duration-short", label: "소요시간 짧은순" },
+  { value: "duration-long", label: "소요시간 긴순" },
+  { value: "difficulty-easy", label: "난이도 쉬운순" },
+  { value: "difficulty-hard", label: "난이도 어려운순" },
+];
+
+function loadSavedState(): { filters: FilterState; sortBy: SortOption } {
+  if (typeof window === "undefined") return { filters: INITIAL_FILTERS, sortBy: "credit-low" };
+  try {
+    const saved = sessionStorage.getItem("game-list-state");
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return { filters: INITIAL_FILTERS, sortBy: "credit-low" };
+}
+
 export default function GameList() {
-  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const saved = loadSavedState();
+  const [filters, setFilters] = useState<FilterState>(saved.filters);
+  const [sortBy, setSortBy] = useState<SortOption>(saved.sortBy);
   const [purchasedIds, setPurchasedIds] = useState<string[]>([]);
+
+  const saveState = useCallback(() => {
+    sessionStorage.setItem("game-list-state", JSON.stringify({ filters, sortBy }));
+  }, [filters, sortBy]);
+
+  useEffect(() => {
+    saveState();
+  }, [saveState]);
 
   useEffect(() => {
     async function load() {
@@ -32,7 +61,7 @@ export default function GameList() {
   }, []);
 
   const filteredGames = useMemo(() => {
-    return games.filter((game) => {
+    const filtered = games.filter((game) => {
       if (
         filters.ageGroups.length > 0 &&
         !filters.ageGroups.some((age) => game.ageGroups.includes(age))
@@ -76,7 +105,22 @@ export default function GameList() {
 
       return true;
     });
-  }, [filters]);
+
+    const sorted = [...filtered];
+    if (sortBy === "credit-low") {
+      sorted.sort((a, b) => a.creditPrice - b.creditPrice);
+    } else if (sortBy === "duration-short") {
+      sorted.sort((a, b) => a.durationMinutes - b.durationMinutes);
+    } else if (sortBy === "duration-long") {
+      sorted.sort((a, b) => b.durationMinutes - a.durationMinutes);
+    } else if (sortBy === "difficulty-easy") {
+      sorted.sort((a, b) => a.difficulty - b.difficulty);
+    } else if (sortBy === "difficulty-hard") {
+      sorted.sort((a, b) => b.difficulty - a.difficulty);
+    }
+
+    return sorted;
+  }, [filters, sortBy]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -86,6 +130,18 @@ export default function GameList() {
         <p className="text-sm text-muted-foreground">
           {filteredGames.length}개의 게임
         </p>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value as SortOption)}
+          className="cursor-pointer appearance-none rounded-full border border-border bg-background px-3 py-1.5 pr-7 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center" }}
+        >
+          {SORT_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {filteredGames.length > 0 ? (
