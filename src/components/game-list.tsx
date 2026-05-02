@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { games } from "@/data/games";
 import { createClient } from "@/lib/supabase/client";
 import { getPurchasedGames } from "@/lib/credit";
@@ -16,9 +16,10 @@ const INITIAL_FILTERS: FilterState = {
   characterQualities: [],
 };
 
-type SortOption = "credit-low" | "duration-short" | "duration-long" | "difficulty-easy" | "difficulty-hard";
+type SortOption = "recommend" | "credit-low" | "duration-short" | "duration-long" | "difficulty-easy" | "difficulty-hard";
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "recommend", label: "추천순" },
   { value: "credit-low", label: "크레딧 낮은순" },
   { value: "duration-short", label: "소요시간 짧은순" },
   { value: "duration-long", label: "소요시간 긴순" },
@@ -26,28 +27,10 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "difficulty-hard", label: "난이도 어려운순" },
 ];
 
-function loadSavedState(): { filters: FilterState; sortBy: SortOption } {
-  if (typeof window === "undefined") return { filters: INITIAL_FILTERS, sortBy: "credit-low" };
-  try {
-    const saved = sessionStorage.getItem("game-list-state");
-    if (saved) return JSON.parse(saved);
-  } catch {}
-  return { filters: INITIAL_FILTERS, sortBy: "credit-low" };
-}
-
 export default function GameList() {
-  const saved = loadSavedState();
-  const [filters, setFilters] = useState<FilterState>(saved.filters);
-  const [sortBy, setSortBy] = useState<SortOption>(saved.sortBy);
+  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const [sortBy, setSortBy] = useState<SortOption>("recommend");
   const [purchasedIds, setPurchasedIds] = useState<string[]>([]);
-
-  const saveState = useCallback(() => {
-    sessionStorage.setItem("game-list-state", JSON.stringify({ filters, sortBy }));
-  }, [filters, sortBy]);
-
-  useEffect(() => {
-    saveState();
-  }, [saveState]);
 
   useEffect(() => {
     async function load() {
@@ -107,7 +90,12 @@ export default function GameList() {
     });
 
     const sorted = [...filtered];
-    if (sortBy === "credit-low") {
+    if (sortBy === "recommend") {
+      sorted.sort((a, b) => {
+        if (b.recommendScore !== a.recommendScore) return b.recommendScore - a.recommendScore;
+        return a.creditPrice - b.creditPrice;
+      });
+    } else if (sortBy === "credit-low") {
       sorted.sort((a, b) => a.creditPrice - b.creditPrice);
     } else if (sortBy === "duration-short") {
       sorted.sort((a, b) => a.durationMinutes - b.durationMinutes);
