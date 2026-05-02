@@ -113,6 +113,7 @@ const pokerFace: Game = {
       storagePath: "/downloads/games/poker-face/slides.zip",
     },
   ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

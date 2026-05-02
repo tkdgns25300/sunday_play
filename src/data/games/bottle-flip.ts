@@ -94,6 +94,7 @@ const bottleFlip: Game = {
       storagePath: "/downloads/games/bottle-flip/slides.zip",
     },
   ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

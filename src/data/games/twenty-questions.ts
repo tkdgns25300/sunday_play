@@ -91,6 +91,7 @@ const twentyQuestions: Game = {
             storagePath: "/downloads/games/twenty-questions/slides.zip",
         },
     ],
+  recommendScore: 1,
   creditPrice: 1000,
 };
 

@@ -78,6 +78,7 @@ const photoStop: Game = {
             storagePath: "/downloads/games/photo-stop/slides.zip",
         },
     ],
+  recommendScore: 3,
   creditPrice: 500,
 };
 

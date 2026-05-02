@@ -91,6 +91,7 @@ const newspaperFolding: Game = {
             storagePath: "/downloads/games/newspaper-folding/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

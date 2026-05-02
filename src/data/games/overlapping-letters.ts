@@ -88,6 +88,7 @@ const overlappingLetters: Game = {
             storagePath: "/downloads/games/overlapping-letters/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 1500,
 };
 

@@ -90,6 +90,7 @@ const voiceGuess: Game = {
             storagePath: "/downloads/games/voice-guess/slides.zip",
         },
     ],
+  recommendScore: 1,
   creditPrice: 500,
 };
 

@@ -88,6 +88,7 @@ const zoomOutQuiz: Game = {
       storagePath: "/downloads/games/zoom-out-quiz/slides.zip",
     },
   ],
+  recommendScore: 5,
   creditPrice: 1500,
 };
 

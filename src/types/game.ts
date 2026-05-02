@@ -81,4 +81,5 @@ export type Game = {
   referenceVideoUrl?: string;
   previewPages?: number[];
   creditPrice: 500 | 1000 | 1500 | 2000;
+  recommendScore: 1 | 2 | 3 | 4 | 5;
 };

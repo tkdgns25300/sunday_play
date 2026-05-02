@@ -111,6 +111,7 @@ const numberSumGame: Game = {
       storagePath: "/downloads/games/number-sum-game/number-cards.hwpx",
     },
   ],
+  recommendScore: 4,
   creditPrice: 1000,
 };
 

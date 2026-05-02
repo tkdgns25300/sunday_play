@@ -104,6 +104,7 @@ const wordSpeedQuiz: Game = {
       storagePath: "/downloads/games/word-speed-quiz/slides.zip",
     },
   ],
+  recommendScore: 4,
   creditPrice: 1500,
 };
 

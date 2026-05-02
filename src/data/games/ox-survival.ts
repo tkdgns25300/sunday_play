@@ -97,6 +97,7 @@ const oxSurvival: Game = {
       storagePath: "/downloads/games/ox-survival/slides.zip",
     },
   ],
+  recommendScore: 4,
   creditPrice: 2000,
 };
 

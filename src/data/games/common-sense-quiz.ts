@@ -90,6 +90,7 @@ const commonSenseQuiz: Game = {
             storagePath: "/downloads/games/common-sense-quiz/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 1500,
 };
 

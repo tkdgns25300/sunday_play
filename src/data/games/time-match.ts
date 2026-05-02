@@ -79,6 +79,7 @@ const timeMatch: Game = {
             storagePath: "/downloads/games/time-match/slides.zip",
         },
     ],
+  recommendScore: 3,
   creditPrice: 500,
 };
 

@@ -90,6 +90,7 @@ const chosungQuiz: Game = {
             storagePath: "/downloads/games/chosung-quiz/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 2000,
 };
 

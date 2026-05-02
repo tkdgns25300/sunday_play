@@ -107,6 +107,7 @@ const newspaperPuzzle: Game = {
             storagePath: "/downloads/games/newspaper-puzzle/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 1000,
 };
 

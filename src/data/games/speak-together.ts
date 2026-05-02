@@ -94,6 +94,7 @@ const speakTogether: Game = {
             storagePath: "/downloads/games/speak-together/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 1500,
 };
 

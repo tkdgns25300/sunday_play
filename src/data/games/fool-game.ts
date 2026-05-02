@@ -89,6 +89,7 @@ const foolGame: Game = {
       storagePath: "/downloads/games/fool-game/slides.zip",
     },
   ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

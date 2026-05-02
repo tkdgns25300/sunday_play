@@ -83,6 +83,7 @@ const eyeLevelQuiz: Game = {
             storagePath: "/downloads/games/eye-level-quiz/slides.zip",
         },
     ],
+  recommendScore: 5,
   creditPrice: 2000,
 };
 

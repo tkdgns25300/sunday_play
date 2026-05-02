@@ -88,6 +88,7 @@ const transparentImageQuiz: Game = {
             storagePath: "/downloads/games/transparent-image-quiz/slides.zip",
         },
     ],
+  recommendScore: 5,
   creditPrice: 1500,
 };
 

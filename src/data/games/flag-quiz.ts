@@ -86,6 +86,7 @@ const flagQuiz: Game = {
             storagePath: "/downloads/games/flag-quiz/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 2000,
 };
 

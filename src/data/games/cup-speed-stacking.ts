@@ -127,6 +127,7 @@ const cupSpeedStacking: Game = {
       storagePath: "/downloads/games/cup-speed-stacking/slides.zip",
     },
   ],
+  recommendScore: 4,
   creditPrice: 1000,
 };
 

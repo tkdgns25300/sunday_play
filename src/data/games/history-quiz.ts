@@ -90,6 +90,7 @@ const historyQuiz: Game = {
             storagePath: "/downloads/games/history-quiz/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 1500,
 };
 

@@ -104,6 +104,7 @@ const liarGame: Game = {
             storagePath: "/downloads/games/liar-game/slides.zip",
         },
     ],
+  recommendScore: 3,
   creditPrice: 1000,
 };
 

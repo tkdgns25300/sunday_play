@@ -111,6 +111,7 @@ const pingpongBingo: Game = {
             storagePath: "/downloads/games/pingpong-bingo/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

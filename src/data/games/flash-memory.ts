@@ -95,6 +95,7 @@ const flashMemory: Game = {
       storagePath: "/downloads/games/flash-memory/slides.zip",
     },
   ],
+  recommendScore: 5,
   creditPrice: 1000,
 };
 

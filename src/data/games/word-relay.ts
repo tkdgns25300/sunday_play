@@ -90,6 +90,7 @@ const wordRelay: Game = {
             storagePath: "/downloads/games/word-relay/words.hwpx",
         },
     ],
+  recommendScore: 3,
   creditPrice: 500,
 };
 

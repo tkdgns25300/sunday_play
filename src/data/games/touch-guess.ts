@@ -99,6 +99,7 @@ const touchGuess: Game = {
             storagePath: "/downloads/games/touch-guess/slides.zip",
         },
     ],
+  recommendScore: 1,
   creditPrice: 500,
 };
 

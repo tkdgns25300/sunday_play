@@ -84,6 +84,7 @@ const chainWords: Game = {
             storagePath: "/downloads/games/chain-words/slides.zip",
         },
     ],
+  recommendScore: 3,
   creditPrice: 1500,
 };
 

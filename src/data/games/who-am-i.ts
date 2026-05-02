@@ -81,6 +81,7 @@ const whoAmI: Game = {
             storagePath: "/downloads/games/who-am-i/slides.zip",
         },
     ],
+  recommendScore: 5,
   creditPrice: 2000,
 };
 

@@ -97,6 +97,7 @@ const oneSecondSong: Game = {
             storagePath: "/downloads/games/one-second-song/songs.hwpx",
         },
     ],
+  recommendScore: 4,
   creditPrice: 500,
 };
 

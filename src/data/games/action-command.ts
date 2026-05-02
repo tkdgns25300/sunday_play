@@ -86,6 +86,7 @@ const actionCommand: Game = {
             storagePath: "/downloads/games/action-command/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 1500,
 };
 

@@ -78,6 +78,7 @@ const personQuiz: Game = {
             storagePath: "/downloads/games/person-quiz/slides.zip",
         },
     ],
+  recommendScore: 5,
   creditPrice: 2000,
 };
 

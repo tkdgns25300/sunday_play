@@ -86,6 +86,7 @@ const capitalQuiz: Game = {
             storagePath: "/downloads/games/capital-quiz/slides.zip",
         },
     ],
+  recommendScore: 4,
   creditPrice: 2000,
 };
 

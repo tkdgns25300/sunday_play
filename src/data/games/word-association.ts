@@ -91,6 +91,7 @@ const wordAssociation: Game = {
       storagePath: "/downloads/games/word-association/slides.zip",
     },
   ],
+  recommendScore: 3,
   creditPrice: 1000,
 };
 

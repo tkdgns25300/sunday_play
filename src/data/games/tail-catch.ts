@@ -86,6 +86,7 @@ const tailCatch: Game = {
             storagePath: "/downloads/games/tail-catch/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

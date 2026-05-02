@@ -108,6 +108,7 @@ const bibleSpeed: Game = {
             storagePath: "/downloads/games/bible-speed/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 1500,
 };
 

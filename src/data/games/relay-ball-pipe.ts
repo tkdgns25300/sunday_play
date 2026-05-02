@@ -113,6 +113,7 @@ const relayBallPipe: Game = {
             storagePath: "/downloads/games/relay-ball-pipe/slides.zip",
         },
     ],
+  recommendScore: 2,
   creditPrice: 500,
 };
 

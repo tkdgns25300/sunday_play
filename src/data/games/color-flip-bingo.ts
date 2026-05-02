@@ -103,6 +103,7 @@ const colorFlipBingo: Game = {
       storagePath: "/downloads/games/color-flip-bingo/slides.zip",
     },
   ],
+  recommendScore: 3,
   creditPrice: 500,
 };
 
