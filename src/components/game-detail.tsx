@@ -7,6 +7,7 @@ import {
   PREP_TIME_OPTIONS,
 } from "@/constants/game";
 import Paywall from "@/components/paywall";
+import ShareButton from "@/components/share-button";
 import DownloadsSection from "@/components/downloads-section";
 import TimerGame from "@/components/timer-game";
 import PhotoStopGame from "@/components/photo-stop-game";
@@ -152,6 +153,8 @@ export default function GameDetail({
         </div>
 
       </section>
+
+      <ShareButton />
 
       {isLoading && (
         <div className="flex flex-col gap-3">
