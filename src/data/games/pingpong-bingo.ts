@@ -14,7 +14,7 @@ const pingpongBingo: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["끈기", "절제", "인내"],
     durationMinutes: 20,
-    difficulty: 1,
+    difficulty: 3,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [
         {

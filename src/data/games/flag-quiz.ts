@@ -7,7 +7,7 @@ const flagQuiz: Game = {
     description:
         "화면에 국기를 보여주면, 모든 팀이 동시에 보고 가장 먼저 나라 이름을 외치는 팀이 득점합니다. 쉬운 나라부터 어려운 나라까지 단계별로 진행하며, 세계 여러 나라에 대한 관심을 넓히는 퀴즈 게임입니다.",
     thumbnailUrl: "/images/games/flag-quiz.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
     environments: ["실내교실", "실내강당", "온라인"],
     prepTime: "quick",

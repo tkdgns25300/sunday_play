@@ -7,13 +7,13 @@ const wordRelay: Game = {
     description:
         "진행자가 네 글자 단어(사자성어, 일상 표현 등)의 앞 두 글자만 보여주면, 한 팀씩 도전하여 뒤 두 글자를 맞춥니다. 틀릴 때까지 계속 진행하며, 가장 많이 맞춘 팀이 우승합니다. 빠른 판단력과 어휘력을 겨루는 재미있는 퀴즈 게임입니다.",
     thumbnailUrl: "/images/games/word-relay.png",
-    ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["지혜", "경각심", "끈기"],
-    durationMinutes: 20,
+    durationMinutes: 15,
     difficulty: 2,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [

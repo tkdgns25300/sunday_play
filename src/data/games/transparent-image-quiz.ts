@@ -7,7 +7,7 @@ const transparentImageQuiz: Game = {
     description:
         "화면에 여러 이미지가 투명하게 겹쳐진 그림을 보여줍니다. 가장 먼저 정답을 외친 팀에게 기회가 주어지고, 5초 안에 정답을 맞추면 점수를 얻습니다. 가장 많은 점수를 얻은 팀이 우승합니다.",
     thumbnailUrl: "/images/games/transparent-image-quiz.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실", "온라인"],
     prepTime: "quick",

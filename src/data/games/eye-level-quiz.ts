@@ -7,7 +7,7 @@ const eyeLevelQuiz: Game = {
     description:
         "어린아이가 세상을 바라보는 순수한 시선으로 설명한 문장을 읽고, 무엇을 말하는 건지 맞추는 게임입니다. 모든 팀이 동시에 문장을 보고 가장 먼저 정답을 외친 팀이 득점합니다.",
     thumbnailUrl: "/images/games/eye-level-quiz.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",

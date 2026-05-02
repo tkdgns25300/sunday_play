@@ -8,7 +8,7 @@ const speakTogether: Game = {
         "단어의 글자 수에 맞춰 팀원이 앞에 나와 한 글자씩 배정받고 동시에 외칩니다. 나머지 팀원이 섞인 소리를 듣고 단어를 맞추는 게임입니다. 빠르게 맞출수록 높은 점수를 얻습니다.",
     thumbnailUrl: "/images/games/speak-together.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],

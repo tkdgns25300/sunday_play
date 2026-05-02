@@ -7,7 +7,7 @@ const timeMatch: Game = {
     description:
         "목표 시간을 정하고 타이머를 시작한 뒤, 화면을 보지 않고 감각으로 시간을 맞춰 스탑하는 게임입니다. 목표 시간과 가장 가깝게 멈춘 사람이 우승합니다.",
     thumbnailUrl: "/images/games/time-match.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
     environments: ["실내교실"],
     prepTime: "none",

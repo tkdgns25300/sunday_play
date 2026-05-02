@@ -7,8 +7,8 @@ const tongueTwister: Game = {
     description:
         "발음하기 어려운 문장들을 팀원이 한 명씩 순서대로 읽습니다. 틀리면 처음부터 다시! 가장 빠르게 모든 문장을 완료한 팀이 우승합니다.",
     thumbnailUrl: "/images/games/tongue-twister.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
     groupSizes: ["sm", "md"],

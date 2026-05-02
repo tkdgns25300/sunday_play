@@ -7,7 +7,7 @@ const voiceGuess: Game = {
     description:
         "도전자가 뒤돌아 선 상태에서 다른 사람들이 한 명씩 같은 단어를 말합니다. 한 명이 말할 때마다 도전자는 누구인지 즉시 답하고, 진행자는 맞춘 사람은 왼쪽, 틀린 사람은 오른쪽으로 이동시킵니다. 모두 끝난 후 도전자가 뒤돌아 결과를 확인합니다. 가장 많이 맞춘 사람이 우승합니다.",
     thumbnailUrl: "/images/games/voice-guess.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
     environments: ["실내교실"],
     prepTime: "none",

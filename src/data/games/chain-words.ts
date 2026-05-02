@@ -7,7 +7,7 @@ const chainWords: Game = {
     description:
         "진행자의 제시어에 따라 팀원들이 한 명씩 3초 안에 순서대로 해당하는 단어를 말합니다. 끝나는 글자('리'자로 끝나는 말), 카테고리(분식 메뉴), 초성(초성이 'ㅅㅂ'인 단어) 등 다양한 유형으로 진행합니다. 팀원 전원이 성공하면 점수를 얻고, 실패하면 다른 팀이 이어서 도전합니다.",
     thumbnailUrl: "/images/games/chain-words.png",
-    ageGroups: ["초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
