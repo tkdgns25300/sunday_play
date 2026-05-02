@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { games } from "@/data/games";
 import { createClient } from "@/lib/supabase/client";
 import { getPurchasedGames } from "@/lib/credit";
@@ -130,18 +130,7 @@ export default function GameList() {
         <p className="text-sm text-muted-foreground">
           {filteredGames.length}개의 게임
         </p>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value as SortOption)}
-          className="cursor-pointer appearance-none rounded-full border border-border bg-background px-3 py-1.5 pr-7 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center" }}
-        >
-          {SORT_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <SortDropdown value={sortBy} onChange={setSortBy} />
       </div>
 
       {filteredGames.length > 0 ? (
@@ -157,6 +146,66 @@ export default function GameList() {
           <p className="text-sm text-muted-foreground">
             다른 필터 조합을 시도해보세요.
           </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SortDropdown({ value, onChange }: { value: SortOption; onChange: (v: SortOption) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const currentLabel = SORT_OPTIONS.find((o) => o.value === value)?.label ?? "정렬";
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m3 16 4 4 4-4" />
+          <path d="M7 20V4" />
+          <path d="m21 8-4-4-4 4" />
+          <path d="M17 4v16" />
+        </svg>
+        {currentLabel}
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 top-full z-10 mt-1 min-w-40 rounded-xl border border-border bg-background py-1 shadow-lg">
+          {SORT_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+              className={`flex w-full items-center gap-2 px-3 py-2 text-left text-xs transition-colors hover:bg-muted ${
+                value === option.value ? "font-semibold text-primary" : "text-foreground"
+              }`}
+            >
+              {value === option.value ? (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <span className="w-3" />
+              )}
+              {option.label}
+            </button>
+          ))}
         </div>
       )}
     </div>
