@@ -10,7 +10,7 @@ const colorFlipBingo: Game = {
   ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
   energyLevel: 4,
   environments: ["실내강당", "야외"],
-  prepTime: "quick",
+  prepTime: "advance",
   groupSizes: ["md", "lg"],
   characterQualities: ["책임감", "솔선", "끈기"],
   durationMinutes: 15,

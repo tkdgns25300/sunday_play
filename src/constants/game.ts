@@ -17,9 +17,9 @@ export const ENVIRONMENT_OPTIONS: { value: Environment; label: string }[] = [
 ];
 
 export const PREP_TIME_OPTIONS: { value: PrepTime; label: string }[] = [
-  { value: "none", label: "준비물 없음" },
-  { value: "quick", label: "5분 내 준비" },
-  { value: "advance", label: "사전 준비" },
+  { value: "none", label: "바로 시작" },
+  { value: "quick", label: "간단한 준비" },
+  { value: "advance", label: "미리 준비 필요" },
 ];
 
 export const GROUP_SIZE_OPTIONS: { value: GroupSize; label: string }[] = [

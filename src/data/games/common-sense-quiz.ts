@@ -10,7 +10,7 @@ const commonSenseQuiz: Game = {
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당", "온라인"],
-    prepTime: "quick",
+    prepTime: "none",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["지혜", "경청", "분별력"],
     durationMinutes: 15,

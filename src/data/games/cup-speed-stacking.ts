@@ -10,7 +10,7 @@ const cupSpeedStacking: Game = {
   ageGroups: ["초등부", "중고등부", "청년부"],
   energyLevel: 4,
   environments: ["실내교실", "실내강당"],
-  prepTime: "quick",
+  prepTime: "advance",
   groupSizes: ["md", "lg"],
   characterQualities: ["신뢰성", "끈기", "절제"],
   durationMinutes: 15,

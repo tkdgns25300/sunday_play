@@ -10,7 +10,7 @@ const emojiMovieQuiz: Game = {
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당"],
-    prepTime: "quick",
+    prepTime: "none",
     groupSizes: ["md", "lg"],
     characterQualities: ["지혜", "경각심", "민감성"],
     durationMinutes: 15,

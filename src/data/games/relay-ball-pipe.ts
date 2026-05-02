@@ -10,7 +10,7 @@ const relayBallPipe: Game = {
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 4,
     environments: ["실내강당", "야외"],
-    prepTime: "quick",
+    prepTime: "advance",
     groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "신뢰성", "조심성"],
     durationMinutes: 10,

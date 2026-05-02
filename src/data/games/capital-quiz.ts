@@ -10,7 +10,7 @@ const capitalQuiz: Game = {
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
     environments: ["실내교실", "실내강당", "온라인"],
-    prepTime: "quick",
+    prepTime: "none",
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["경청", "지혜", "창의성"],
     durationMinutes: 10,
