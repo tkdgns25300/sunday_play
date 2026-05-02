@@ -8,7 +8,7 @@ const whoAmI: Game = {
         "라운드마다 대상을 묘사하는 힌트 3개를 순서대로 공개합니다. 일찍 맞힐수록 높은 점수를 얻으며, 팀원이 함께 추리하는 과정에서 웃음과 집중이 넘칩니다.",
     thumbnailUrl: "/images/games/who-am-i.png",
     ageGroups: ["유년부", "초등부", "중고등부", "청년부", "장년부"],
-    energyLevel: 2,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],

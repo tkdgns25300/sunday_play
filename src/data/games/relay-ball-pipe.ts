@@ -8,7 +8,7 @@ const relayBallPipe: Game = {
         "팀원들이 일렬로 서서 U보드 위에 공을 굴립니다. 공이 자기 보드를 지나가면 빠르게 대열의 끝으로 달려가 공이 계속 굴러가도록 연결합니다. 공을 떨어뜨리지 않고 가장 먼저 컵에 골인시킨 팀이 승리합니다.",
     thumbnailUrl: "/images/games/relay-ball-pipe.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 4,
+    energyLevel: 3,
     environments: ["실내강당", "야외"],
     prepTime: "advance",
     groupSizes: ["md", "lg"],

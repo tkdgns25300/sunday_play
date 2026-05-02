@@ -23,10 +23,11 @@ export type FilterState = {
 type GameFilterProps = {
   filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
+  isDetailOpen: boolean;
+  onDetailToggle: (open: boolean) => void;
 };
 
-export default function GameFilter({ filters, onFilterChange }: GameFilterProps) {
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
+export default function GameFilter({ filters, onFilterChange, isDetailOpen, onDetailToggle }: GameFilterProps) {
 
   function toggleFilter<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     onFilterChange({ ...filters, [key]: filters[key] === value ? null : value });
@@ -90,7 +91,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
             <DropdownFilter
               label="활동성"
               value={filters.energyLevel as number | null}
-              options={[1, 2, 3, 4, 5].map((level) => ({
+              options={[1, 2, 3].map((level) => ({
                 value: level,
                 label: ENERGY_LEVEL_LABELS[level],
               }))}
@@ -105,7 +106,7 @@ export default function GameFilter({ filters, onFilterChange }: GameFilterProps)
         )}
 
         <button
-          onClick={() => setIsDetailOpen(!isDetailOpen)}
+          onClick={() => onDetailToggle(!isDetailOpen)}
           className={`ml-auto flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
             hasDetailFilters
               ? "border-primary text-primary"

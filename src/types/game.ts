@@ -63,7 +63,7 @@ export type Game = {
   description: string;
   thumbnailUrl: string;
   ageGroups: AgeGroup[];
-  energyLevel: 1 | 2 | 3 | 4 | 5;
+  energyLevel: 1 | 2 | 3;
   environments: Environment[];
   prepTime: PrepTime;
   groupSizes: GroupSize[];

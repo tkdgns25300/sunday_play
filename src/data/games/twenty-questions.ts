@@ -8,7 +8,7 @@ const twentyQuestions: Game = {
         "진행자가 정답을 정하고 카테고리를 알려줍니다. 팀별로 돌아가며 '예/아니오'로만 대답할 수 있는 질문을 하고, 20번의 질문 안에 정답을 맞추면 점수를 얻습니다.",
     thumbnailUrl: "/images/games/twenty-questions.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-    energyLevel: 2,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당", "온라인"],
     prepTime: "none",
     groupSizes: ["md", "lg"],

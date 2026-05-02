@@ -8,7 +8,7 @@ const foolGame: Game = {
     "차례대로 돌아가며 1초 안에 1~5 중 숫자를 외치면서 동시에 손가락으로는 다른 숫자를 펼칩니다. 입과 손이 같은 숫자면 탈락! 앞 사람이 말한 숫자도 사용할 수 없어서 머리가 점점 복잡해집니다.",
   thumbnailUrl: "/images/games/fool-game.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실", "실내강당"],
   prepTime: "none",
   groupSizes: ["sm", "md"],

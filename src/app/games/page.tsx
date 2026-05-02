@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import GameList from "@/components/game-list";
 
 export default function GamesPage() {
@@ -9,7 +10,9 @@ export default function GamesPage() {
           대상, 인원, 장소 등 상황에 맞는 게임을 찾아보세요.
         </p>
       </div>
-      <GameList />
+      <Suspense>
+        <GameList />
+      </Suspense>
     </div>
   );
 }

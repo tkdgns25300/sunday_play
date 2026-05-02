@@ -8,7 +8,7 @@ const emojiMovieQuiz: Game = {
         "진행자가 이모티콘 조합을 화면에 보여주면, 모든 팀이 동시에 보고 가장 먼저 영화 제목을 외치는 팀이 득점합니다. 준비물 없이 바로 즐길 수 있는 퀴즈 게임입니다.",
     thumbnailUrl: "/images/games/emoji-movie-quiz.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 2,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["md", "lg"],

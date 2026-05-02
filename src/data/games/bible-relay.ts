@@ -8,7 +8,7 @@ const bibleRelay: Game = {
         "성경 구절을 화면에 보여준 뒤, 팀원끼리 구절을 나눠 암기합니다. 암기 시간이 끝나면 팀별로 순서대로 이어서 암송하며, 가장 정확하고 빠르게 완성한 팀이 우승합니다.",
     thumbnailUrl: "/images/games/bible-relay.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 2,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],

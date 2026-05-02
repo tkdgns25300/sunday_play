@@ -8,7 +8,7 @@ const flashMemory: Game = {
     "라운드마다 이미지를 단 3초만 보여줍니다. 이미지가 사라지면 팀원이 함께 기억나는 항목을 최대한 많이 적어 정답과 일치하는 수만큼 점수를 얻습니다. 집중과 협력이 승패를 가릅니다.",
   thumbnailUrl: "/images/games/flash-memory.png",
   ageGroups: ["유년부", "초등부", "중고등부", "청년부", "장년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
   groupSizes: ["sm", "md", "lg"],

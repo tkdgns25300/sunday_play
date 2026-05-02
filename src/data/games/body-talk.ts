@@ -8,7 +8,7 @@ const bodyTalk: Game = {
         "팀 대표가 제시어를 보고 말 없이 몸동작으로만 표현하면 나머지 팀원이 정답을 맞추는 게임입니다. 팀당 3분 동안 최대한 많은 제시어를 맞추고, 가장 많이 맞춘 팀이 우승합니다.",
     thumbnailUrl: "/images/games/body-talk.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 4,
+    energyLevel: 3,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["md", "lg"],

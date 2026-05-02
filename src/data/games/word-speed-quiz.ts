@@ -9,7 +9,7 @@ const wordSpeedQuiz: Game = {
     "진행자가 제시하는 주제에 맞는 단어를 제한 시간 내에 팀별로 최대한 많이 적는 게임입니다. 단어를 적은 후 공개되는 플러스/마이너스 단어로 점수가 뒤집힐 수 있는 서프라이즈 요소가 특징입니다.",
   thumbnailUrl: "/images/games/word-speed-quiz.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실"],
   prepTime: "quick",
   groupSizes: ["md"],

@@ -8,7 +8,7 @@ const wordAssociation: Game = {
     "원형으로 앉아 진행자가 첫 단어를 제시하면, 오른쪽 방향으로 돌아가며 이전 단어와 연관된 단어를 5초 안에 말합니다. 바로 이전 단어와만 연관 있으면 되므로 단어가 점점 엉뚱한 방향으로 흘러가는 재미가 있습니다. 5초 초과하거나 연관 없는 단어를 말하면 탈락, 최후까지 살아남은 사람이 우승합니다.",
   thumbnailUrl: "/images/games/word-association.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실", "실내강당"],
   prepTime: "none",
   groupSizes: ["sm"],

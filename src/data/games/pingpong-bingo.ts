@@ -8,7 +8,7 @@ const pingpongBingo: Game = {
         "계란판(5×5)을 빙고판으로 사용합니다. 출발선에서 탁구공을 튕겨 계란판 칸에 넣고, 공이 들어간 칸을 체크하여 가로·세로·대각선 빙고를 먼저 완성하는 팀이 승리합니다. 단순하지만 컨트롤이 필요해 누구나 즐길 수 있는 게임입니다.",
     thumbnailUrl: "/images/games/pingpong-bingo.png",
     ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],

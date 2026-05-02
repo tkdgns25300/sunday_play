@@ -8,7 +8,7 @@ const actionCommand: Game = {
         "격자판에 흩어진 음절을 조합하여 숨겨진 행동지령을 알아내는 게임입니다. 제한 시간 안에 문장을 해독하고, 말 없이 해당 행동을 수행하면 통과! 정답을 입으로 말하면 안 되고 오직 행동으로만 보여줘야 합니다.",
     thumbnailUrl: "/images/games/action-command.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 4,
+    energyLevel: 3,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["md", "lg"],

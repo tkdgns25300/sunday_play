@@ -30,11 +30,9 @@ export const GROUP_SIZE_OPTIONS: { value: GroupSize; label: string }[] = [
 ];
 
 export const ENERGY_LEVEL_LABELS: Record<number, string> = {
-  1: "매우 정적",
-  2: "정적",
-  3: "보통",
-  4: "활동적",
-  5: "매우 활동적",
+  1: "정적",
+  2: "보통",
+  3: "활동적",
 };
 
 export const DIFFICULTY_LABELS: Record<number, string> = {

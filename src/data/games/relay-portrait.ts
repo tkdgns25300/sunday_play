@@ -8,7 +8,7 @@ const relayPortrait: Game = {
     "맞추는 사람 1명이 뒤돌아 있는 동안, 모델이 정해지면 나머지 팀원들이 모델의 등 뒤에서 한 부위씩 릴레이로 얼굴을 그립니다. 등 뒤라 모델 얼굴은 안 보이고 기억에만 의존해야 합니다. 완성 후 맞추는 사람이 그림만 보고 누구인지 맞히면 성공!",
   thumbnailUrl: "/images/games/relay-portrait.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
-  energyLevel: 3,
+  energyLevel: 2,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
   groupSizes: ["md", "lg"],

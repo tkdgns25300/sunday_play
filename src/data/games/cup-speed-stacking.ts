@@ -8,7 +8,7 @@ const cupSpeedStacking: Game = {
     "4가지 색(파랑, 노랑, 빨강, 초록) 스피드 스태킹 컵을 사용합니다. 화면(PPT)에 컵 배치 패턴이 나타나면, 팀원이 한 명씩 달려가 컵 하나를 놓고 돌아옵니다. 바톤터치 후 다음 사람이 이어서 쌓아 가장 먼저 패턴을 완성한 팀이 승리합니다.",
   thumbnailUrl: "/images/games/cup-speed-stacking.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
-  energyLevel: 4,
+  energyLevel: 3,
   environments: ["실내교실", "실내강당"],
   prepTime: "advance",
   groupSizes: ["md", "lg"],

@@ -8,7 +8,7 @@ const photoStop: Game = {
         "다양한 사진이 빠르게 넘어가다가 스탑하면 멈춘 사진 속 사람 수가 점수가 됩니다. 사람이 가장 많은 사진에서 멈춘 사람이 우승하는 운과 감각의 게임입니다.",
     thumbnailUrl: "/images/games/photo-stop.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 2,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["xs", "sm"],

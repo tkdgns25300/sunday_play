@@ -8,7 +8,7 @@ const zoomOutQuiz: Game = {
     "확대된 사진의 일부분에서 시작해 3단계에 걸쳐 점점 줌아웃하는 퀴즈입니다. 일찍 맞힐수록 높은 점수를 얻으며, 팀원이 함께 추리하는 과정에서 웃음과 집중이 넘칩니다.",
   thumbnailUrl: "/images/games/zoom-out-quiz.png",
   ageGroups: ["유년부", "초등부", "중고등부", "청년부", "장년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실", "실내강당"],
   prepTime: "none",
   groupSizes: ["sm", "md", "lg"],

@@ -8,7 +8,7 @@ const oneSecondSong: Game = {
         "진행자가 노래를 1초만 재생하면, 모든 팀이 동시에 듣고 가장 먼저 노래 제목을 외치는 팀이 득점합니다. 짧은 순간에 집중력을 발휘하는 음악 퀴즈 게임입니다.",
     thumbnailUrl: "/images/games/one-second-song.png",
     ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["md", "lg"],

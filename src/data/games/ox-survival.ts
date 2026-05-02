@@ -8,7 +8,7 @@ const oxSurvival: Game = {
     "전원이 일어선 상태에서 PPT에 O/X 문제가 나타나면, 참가자들이 O 또는 X 쪽으로 이동합니다. 정답 공개 후 틀린 사람은 탈락하고, 맞힌 사람만 다음 문제로 진행합니다. 후반으로 갈수록 어려운 문제가 나오며, 최후까지 살아남은 사람이 우승합니다.",
   thumbnailUrl: "/images/games/ox-survival.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-  energyLevel: 3,
+  energyLevel: 2,
   environments: ["실내강당"],
   prepTime: "none",
   groupSizes: ["md", "lg"],

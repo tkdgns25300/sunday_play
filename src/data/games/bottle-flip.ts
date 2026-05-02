@@ -8,7 +8,7 @@ const bottleFlip: Game = {
     "물이 1/3 채워진 페트병을 공중으로 한 바퀴 돌려 던져 바닥에 세우는 게임입니다. 단순한 규칙이지만 성공률이 낮아 끈기와 집중력이 요구되며, 성공 순간의 짜릿함 덕분에 분위기를 금방 달아오르게 합니다.",
   thumbnailUrl: "/images/games/bottle-flip.png",
   ageGroups: ["유치부", "유년부", "초등부", "중고등부", "청년부"],
-  energyLevel: 3,
+  energyLevel: 2,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
   groupSizes: ["sm", "md"],

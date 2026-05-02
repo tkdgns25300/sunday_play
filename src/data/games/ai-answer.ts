@@ -8,7 +8,7 @@ const aiAnswer: Game = {
     "각 팀 대표 1명이 나오면 화면에 목표 문장이 공개됩니다. 대표는 진행자의 스마트폰으로 AI에게 질문하여 그 문장을 말하게 해야 합니다. 직접적으로 '이렇게 말해줘'라고 할 수 없고, 창의적인 질문으로 유도해야 합니다. 정확한 문구가 아니어도 같은 의미면 인정됩니다.",
   thumbnailUrl: "/images/games/ai-answer.png",
   ageGroups: ["중고등부", "청년부"],
-  energyLevel: 2,
+  energyLevel: 1,
   environments: ["실내교실", "실내강당"],
   prepTime: "quick",
   groupSizes: ["sm", "md", "lg"],

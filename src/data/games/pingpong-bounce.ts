@@ -8,7 +8,7 @@ const pingpongBounce: Game = {
         "탁구공을 바닥에 한 번 이상 바운드시켜 종이컵에 넣는 게임입니다. 종이컵 10개를 4-3-2-1 형태로 배치하고, 팀별로 한 번씩 번갈아가며 바운드합니다. 가장 많은 컵을 채운 팀이 우승합니다.",
     thumbnailUrl: "/images/games/pingpong-bounce.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "quick",
     groupSizes: ["sm"],

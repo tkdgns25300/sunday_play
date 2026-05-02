@@ -8,7 +8,7 @@ const telepathy: Game = {
         "진행자가 제시어를 말하면 팀원들이 상의 없이 각자 떠오르는 동작을 생각합니다. '하나, 둘, 셋' 구호에 맞춰 동시에 동작을 하고, 같은 동작을 한 팀원이 많을수록 높은 점수를 얻습니다.",
     thumbnailUrl: "/images/games/telepathy.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],

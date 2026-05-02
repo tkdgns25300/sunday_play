@@ -8,7 +8,7 @@ const simonSays: Game = {
         '"가라사대"가 붙은 행동만 따라야 하고, 없으면 절대 움직이면 안 됩니다. 빠른 속도와 진행자의 속임수에 맞서 끝까지 살아남는 게임입니다.',
     thumbnailUrl: "/images/games/simon-says.png",
     ageGroups: ["유치부", "유년부", "초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당", "야외"],
     prepTime: "none",
     groupSizes: ["xs", "sm", "md", "lg"],

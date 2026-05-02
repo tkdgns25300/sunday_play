@@ -8,7 +8,7 @@ const newspaperPuzzle: Game = {
         "각 팀에게 신문지, 가위, 풀, 도화지를 나눠주고, 주어진 단어를 공개합니다. 신문지에서 글자를 찾아 오려 붙여 가장 빨리 단어를 완성한 팀이 우승합니다.",
     thumbnailUrl: "/images/games/newspaper-puzzle.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 2,
     environments: ["실내교실", "실내강당"],
     prepTime: "advance",
     groupSizes: ["sm", "md"],

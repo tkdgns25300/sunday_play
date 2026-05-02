@@ -8,7 +8,7 @@ const personQuiz: Game = {
         "팀원이 가로로 나란히 서서 한 명씩 화면의 인물 사진을 보고 3초 안에 맞추는 릴레이 게임입니다. 배우, 캐릭터, 유명인 등 다양한 인물이 출제되며, 틀리면 바로 탈락! 끝까지 살아남은 팀이 우승합니다.",
     thumbnailUrl: "/images/games/person-quiz.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
-    energyLevel: 3,
+    energyLevel: 1,
     environments: ["실내교실", "실내강당"],
     prepTime: "none",
     groupSizes: ["sm", "md"],

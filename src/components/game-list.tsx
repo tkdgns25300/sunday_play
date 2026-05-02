@@ -1,20 +1,13 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { games } from "@/data/games";
 import { createClient } from "@/lib/supabase/client";
 import { getPurchasedGames } from "@/lib/credit";
 import GameCard from "@/components/game-card";
 import GameFilter, { FilterState } from "@/components/game-filter";
-
-const INITIAL_FILTERS: FilterState = {
-  ageGroups: [],
-  environment: null,
-  prepTime: null,
-  groupSize: null,
-  energyLevel: null,
-  characterQualities: [],
-};
+import { AgeGroup, Environment, PrepTime, GroupSize, CharacterQuality } from "@/types/game";
 
 type SortOption = "recommend" | "credit-low" | "duration-short" | "duration-long" | "difficulty-easy" | "difficulty-hard";
 
@@ -27,10 +20,68 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "difficulty-hard", label: "난이도 어려운순" },
 ];
 
+const VALID_SORT_OPTIONS = SORT_OPTIONS.map((o) => o.value);
+
+function parseFiltersFromParams(params: URLSearchParams): FilterState {
+  return {
+    ageGroups: params.get("age")?.split(",").filter(Boolean) as AgeGroup[] ?? [],
+    environment: params.get("env") as Environment | null,
+    prepTime: params.get("prep") as PrepTime | null,
+    groupSize: params.get("size") as GroupSize | null,
+    energyLevel: params.get("energy") ? Number(params.get("energy")) : null,
+    characterQualities: params.get("quality")?.split(",").filter(Boolean) as CharacterQuality[] ?? [],
+  };
+}
+
+function buildSearchParams(
+  filters: FilterState,
+  sortBy: SortOption,
+  isDetailOpen: boolean,
+): string {
+  const params = new URLSearchParams();
+  if (filters.ageGroups.length > 0) params.set("age", filters.ageGroups.join(","));
+  if (filters.environment) params.set("env", filters.environment);
+  if (filters.prepTime) params.set("prep", filters.prepTime);
+  if (filters.groupSize) params.set("size", filters.groupSize);
+  if (filters.energyLevel) params.set("energy", String(filters.energyLevel));
+  if (filters.characterQualities.length > 0) params.set("quality", filters.characterQualities.join(","));
+  if (sortBy !== "recommend") params.set("sort", sortBy);
+  if (isDetailOpen) params.set("detail", "1");
+  const str = params.toString();
+  return str ? `?${str}` : "";
+}
+
 export default function GameList() {
-  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
-  const [sortBy, setSortBy] = useState<SortOption>("recommend");
+  const searchParams = useSearchParams();
+
+  const [filters, setFilters] = useState<FilterState>(() => parseFiltersFromParams(searchParams));
+  const [sortBy, setSortBy] = useState<SortOption>(() => {
+    const param = searchParams.get("sort");
+    return param && VALID_SORT_OPTIONS.includes(param as SortOption) ? param as SortOption : "recommend";
+  });
+  const [isDetailOpen, setIsDetailOpen] = useState(() => searchParams.get("detail") === "1");
   const [purchasedIds, setPurchasedIds] = useState<string[] | null>(null);
+
+  const syncUrl = useCallback((f: FilterState, s: SortOption, d: boolean) => {
+    const search = buildSearchParams(f, s, d);
+    const newUrl = `/games${search}`;
+    window.history.replaceState(null, "", newUrl);
+  }, []);
+
+  function handleFilterChange(next: FilterState) {
+    setFilters(next);
+    syncUrl(next, sortBy, isDetailOpen);
+  }
+
+  function handleSortChange(next: SortOption) {
+    setSortBy(next);
+    syncUrl(filters, next, isDetailOpen);
+  }
+
+  function handleDetailToggle(next: boolean) {
+    setIsDetailOpen(next);
+    syncUrl(filters, sortBy, next);
+  }
 
   useEffect(() => {
     async function load() {
@@ -112,13 +163,18 @@ export default function GameList() {
 
   return (
     <div className="flex flex-col gap-6">
-      <GameFilter filters={filters} onFilterChange={setFilters} />
+      <GameFilter
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        isDetailOpen={isDetailOpen}
+        onDetailToggle={handleDetailToggle}
+      />
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
           {filteredGames.length}개의 게임
         </p>
-        <SortDropdown value={sortBy} onChange={setSortBy} />
+        <SortDropdown value={sortBy} onChange={handleSortChange} />
       </div>
 
       {filteredGames.length > 0 ? (

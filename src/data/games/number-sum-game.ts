@@ -8,7 +8,7 @@ const numberSumGame: Game = {
     "각자 가진 숫자 카드를 팀원들과 합쳐 제시된 숫자를 빠르게 만드는 연합 활동입니다.",
   thumbnailUrl: "/images/games/number-sum-game.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
-  energyLevel: 4,
+  energyLevel: 3,
   environments: ["실내강당", "야외"],
   prepTime: "quick",
   groupSizes: ["md", "lg"],
