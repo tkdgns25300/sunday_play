@@ -26,9 +26,11 @@ function groupAssets(assets: GameAsset[]): AssetGroup[] {
 export default function DownloadsSection({ game }: { game: Game }) {
   const [isPurchased, setIsPurchased] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [creditBalance, setCreditBalance] = useState(0);
+  const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -36,13 +38,20 @@ export default function DownloadsSection({ game }: { game: Game }) {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
 
       setIsLoggedIn(true);
-      const purchased = await hasPurchasedGame(supabase, user.id, game.id);
+      const userId = user.id;
+      const [purchased, balance] = await Promise.all([
+        hasPurchasedGame(supabase, userId, game.id),
+        getCreditBalance(supabase, userId),
+      ]);
       setIsPurchased(purchased);
-      const balance = await getCreditBalance(supabase, user.id);
       setCreditBalance(balance);
+      setIsLoading(false);
     }
     load();
   }, [game.id]);
@@ -50,7 +59,6 @@ export default function DownloadsSection({ game }: { game: Game }) {
   if (game.assets.length === 0) return null;
 
   const groups = groupAssets(game.assets);
-  const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
 
   async function handlePurchase() {
     setIsPurchasing(true);
@@ -118,7 +126,9 @@ export default function DownloadsSection({ game }: { game: Game }) {
             </svg>
           </div>
           <h2 className="text-base font-bold lg:text-lg">진행 자료</h2>
-          {isPurchased ? (
+          {isLoading ? (
+            <span className="h-5 w-16 animate-pulse rounded-full bg-muted" />
+          ) : isPurchased ? (
             <span className="flex items-center gap-1 rounded-full bg-green-500 px-2.5 py-0.5 text-[11px] font-semibold text-white">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />
@@ -144,7 +154,19 @@ export default function DownloadsSection({ game }: { game: Game }) {
       </div>
 
       <div className="p-5">
-        {isPurchased ? (
+        {isLoading ? (
+          <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+            {groups.map((group) => (
+              <div key={group.name} className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
+                <div className="size-10 shrink-0 animate-pulse rounded-lg bg-muted" />
+                <div className="flex flex-col gap-1.5">
+                  <div className="h-4 w-20 animate-pulse rounded bg-muted" />
+                  <div className="h-3 w-12 animate-pulse rounded bg-muted" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : isPurchased ? (
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
               {groups.map((group) => (
@@ -535,18 +557,3 @@ function DownloadIcon() {
   );
 }
 
-function LockedCard({ name, types }: { name: string; types: string[] }) {
-  return (
-    <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-background px-4 py-3 dark:border-amber-500/30">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
-        <DownloadIcon />
-      </div>
-      <div className="flex flex-col gap-0.5">
-        <span className="text-sm font-medium">{name}</span>
-        <span className="text-[11px] text-muted-foreground uppercase">
-          {types.join(" / ")}
-        </span>
-      </div>
-    </div>
-  );
-}

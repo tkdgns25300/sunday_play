@@ -7,7 +7,7 @@ const chosungQuiz: Game = {
     description:
         "화면에 카테고리와 단어의 초성을 보여줍니다. 팀 구호를 외치거나 정답을 가장 먼저 외친 팀에게 기회가 주어지며, 정답을 맞추면 득점합니다.",
     thumbnailUrl: "/images/games/chosung-quiz.png",
-    ageGroups: ["초등부", "중고등부"],
+    ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
     environments: ["실내교실", "실내강당", "온라인"],
     prepTime: "quick",

@@ -30,7 +30,7 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 export default function GameList() {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
   const [sortBy, setSortBy] = useState<SortOption>("recommend");
-  const [purchasedIds, setPurchasedIds] = useState<string[]>([]);
+  const [purchasedIds, setPurchasedIds] = useState<string[] | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -124,7 +124,7 @@ export default function GameList() {
       {filteredGames.length > 0 ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredGames.map((game) => (
-            <GameCard key={game.id} game={game} isPurchased={purchasedIds.includes(game.id)} />
+            <GameCard key={game.id} game={game} isPurchased={purchasedIds?.includes(game.id)} />
           ))}
         </div>
       ) : (
