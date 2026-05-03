@@ -25,6 +25,12 @@ export default function Footer() {
             >
               환불정책
             </Link>
+            <a
+              href="mailto:tkdgns25300@naver.com?subject=[Sunday Play 문의]"
+              className="transition-colors hover:text-foreground"
+            >
+              문의하기
+            </a>
           </nav>
         </div>
 
