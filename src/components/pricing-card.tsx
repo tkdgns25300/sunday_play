@@ -102,7 +102,7 @@ export default function PricingCard() {
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className={`grid grid-cols-2 gap-4 ${CREDIT_PACKAGES.length <= 4 ? "lg:grid-cols-4" : "lg:grid-cols-5"}`}>
         {CREDIT_PACKAGES.map((pkg, index) => {
           const isRecommended = index === 2;
           return (
