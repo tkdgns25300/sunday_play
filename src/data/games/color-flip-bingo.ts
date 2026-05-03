@@ -9,7 +9,7 @@ const colorFlipBingo: Game = {
   thumbnailUrl: "/images/games/color-flip-bingo.png",
   ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
   energyLevel: 3,
-  environments: ["실내강당", "야외"],
+  environments: ["실내", "야외"],
   prepTime: "advance",
   groupSizes: ["md", "lg"],
   characterQualities: ["책임감", "솔선", "끈기"],

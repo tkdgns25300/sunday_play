@@ -9,7 +9,7 @@ const relayBallPipe: Game = {
     thumbnailUrl: "/images/games/relay-ball-pipe.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
-    environments: ["실내강당", "야외"],
+    environments: ["실내", "야외"],
     prepTime: "advance",
     groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "신뢰성", "조심성"],

@@ -9,7 +9,7 @@ const photoStop: Game = {
     thumbnailUrl: "/images/games/photo-stop.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 1,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["xs", "sm"],
     characterQualities: ["경각심", "민감성", "담대함"],

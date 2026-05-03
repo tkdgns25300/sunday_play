@@ -9,7 +9,7 @@ const bodyTalk: Game = {
     thumbnailUrl: "/images/games/body-talk.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["md", "lg"],
     characterQualities: ["창의성", "기쁨", "담대함"],

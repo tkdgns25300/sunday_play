@@ -9,7 +9,7 @@ const overlappingLetters: Game = {
     thumbnailUrl: "/images/games/overlapping-letters.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
-    environments: ["실내교실", "온라인"],
+    environments: ["실내", "온라인"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["경각심", "민감성", "분별력"],

@@ -9,7 +9,7 @@ const bibleRelay: Game = {
     thumbnailUrl: "/images/games/bible-relay.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 1,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["경청", "끈기", "충성"],

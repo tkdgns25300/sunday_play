@@ -9,7 +9,7 @@ const pingpongBingo: Game = {
     thumbnailUrl: "/images/games/pingpong-bingo.png",
     ageGroups: ["유년부", "초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "quick",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["끈기", "절제", "인내"],

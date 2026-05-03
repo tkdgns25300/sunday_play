@@ -9,7 +9,7 @@ const twentyQuestions: Game = {
     thumbnailUrl: "/images/games/twenty-questions.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
-    environments: ["실내교실", "실내강당", "온라인"],
+    environments: ["실내", "온라인"],
     prepTime: "none",
     groupSizes: ["md", "lg"],
     characterQualities: ["지혜", "분별력", "경청"],

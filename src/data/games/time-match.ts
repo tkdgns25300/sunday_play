@@ -9,7 +9,7 @@ const timeMatch: Game = {
     thumbnailUrl: "/images/games/time-match.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
-    environments: ["실내교실"],
+    environments: ["실내", "온라인"],
     prepTime: "none",
     groupSizes: ["xs", "sm"],
     characterQualities: ["인내", "절제", "민감성"],

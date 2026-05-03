@@ -9,7 +9,7 @@ const oxSurvival: Game = {
   thumbnailUrl: "/images/games/ox-survival.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
   energyLevel: 2,
-  environments: ["실내강당"],
+  environments: ["실내", "야외"],
   prepTime: "none",
   groupSizes: ["md", "lg"],
   characterQualities: ["지혜", "담대함", "분별력"],

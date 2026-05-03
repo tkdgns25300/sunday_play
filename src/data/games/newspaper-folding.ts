@@ -9,7 +9,7 @@ const newspaperFolding: Game = {
     thumbnailUrl: "/images/games/newspaper-folding.png",
     ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
     energyLevel: 3,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "quick",
     groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "담대함", "포용"],

@@ -10,7 +10,7 @@ const wordSpeedQuiz: Game = {
   thumbnailUrl: "/images/games/word-speed-quiz.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
   energyLevel: 1,
-  environments: ["실내교실"],
+  environments: ["실내"],
   prepTime: "quick",
   groupSizes: ["md"],
   characterQualities: ["지혜", "경각심", "분별력"],

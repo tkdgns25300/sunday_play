@@ -9,7 +9,7 @@ const tailCatch: Game = {
     thumbnailUrl: "/images/games/tail-catch.png",
     ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
     energyLevel: 3,
-    environments: ["실내강당", "야외"],
+    environments: ["실내", "야외"],
     prepTime: "quick",
     groupSizes: ["md", "lg"],
     characterQualities: ["담대함", "충성", "끈기"],

@@ -9,7 +9,7 @@ const voiceGuess: Game = {
     thumbnailUrl: "/images/games/voice-guess.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
-    environments: ["실내교실"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["sm"],
     characterQualities: ["경청", "민감성", "분별력"],

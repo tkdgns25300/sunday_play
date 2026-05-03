@@ -9,7 +9,7 @@ const telepathy: Game = {
     thumbnailUrl: "/images/games/telepathy.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["민감성", "경청", "포용"],

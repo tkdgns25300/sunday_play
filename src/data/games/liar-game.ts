@@ -9,7 +9,7 @@ const liarGame: Game = {
     thumbnailUrl: "/images/games/liar-game.png",
     ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
     energyLevel: 1,
-    environments: ["실내교실"],
+    environments: ["실내", "온라인"],
     prepTime: "quick",
     groupSizes: ["sm"],
     characterQualities: ["분별력", "지혜", "진실성"],

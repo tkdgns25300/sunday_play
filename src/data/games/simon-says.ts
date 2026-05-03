@@ -9,7 +9,7 @@ const simonSays: Game = {
     thumbnailUrl: "/images/games/simon-says.png",
     ageGroups: ["유치부", "유년부", "초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당", "야외"],
+    environments: ["실내", "야외"],
     prepTime: "none",
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["경청", "신중", "민감성"],

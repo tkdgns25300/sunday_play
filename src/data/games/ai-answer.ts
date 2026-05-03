@@ -9,7 +9,7 @@ const aiAnswer: Game = {
   thumbnailUrl: "/images/games/ai-answer.png",
   ageGroups: ["중고등부", "청년부"],
   energyLevel: 1,
-  environments: ["실내교실", "실내강당"],
+  environments: ["실내"],
   prepTime: "quick",
   groupSizes: ["sm", "md", "lg"],
   characterQualities: ["창의성", "지혜", "설득력"],

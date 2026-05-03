@@ -9,7 +9,7 @@ const touchGuess: Game = {
     thumbnailUrl: "/images/games/touch-guess.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "advance",
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["민감성", "담대함", "인내"],

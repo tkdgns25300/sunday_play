@@ -9,7 +9,7 @@ const groupNunchi: Game = {
     thumbnailUrl: "/images/games/group-nunchi.png",
     ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["lg"],
     characterQualities: ["경각심", "민감성", "절제"],

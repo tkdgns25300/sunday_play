@@ -9,7 +9,7 @@ const cupSpeedStacking: Game = {
   thumbnailUrl: "/images/games/cup-speed-stacking.png",
   ageGroups: ["초등부", "중고등부", "청년부"],
   energyLevel: 3,
-  environments: ["실내교실", "실내강당"],
+  environments: ["실내"],
   prepTime: "advance",
   groupSizes: ["md", "lg"],
   characterQualities: ["신뢰성", "끈기", "절제"],

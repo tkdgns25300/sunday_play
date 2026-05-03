@@ -9,7 +9,7 @@ const bottleFlip: Game = {
   thumbnailUrl: "/images/games/bottle-flip.png",
   ageGroups: ["유치부", "유년부", "초등부", "중고등부", "청년부"],
   energyLevel: 2,
-  environments: ["실내교실", "실내강당"],
+  environments: ["실내"],
   prepTime: "quick",
   groupSizes: ["sm", "md"],
   characterQualities: ["인내", "끈기", "절제"],

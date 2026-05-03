@@ -9,7 +9,7 @@ const actionCommand: Game = {
     thumbnailUrl: "/images/games/action-command.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "none",
     groupSizes: ["md", "lg"],
     characterQualities: ["경각심", "민감성", "기쁨"],

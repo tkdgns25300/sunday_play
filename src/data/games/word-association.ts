@@ -9,7 +9,7 @@ const wordAssociation: Game = {
   thumbnailUrl: "/images/games/word-association.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
   energyLevel: 1,
-  environments: ["실내교실", "실내강당"],
+  environments: ["실내"],
   prepTime: "none",
   groupSizes: ["sm"],
   characterQualities: ["경청", "민감성", "과단성"],

@@ -7,7 +7,7 @@ export type AgeGroup =
   | "청년부"
   | "장년부";
 
-export type Environment = "실내교실" | "실내강당" | "야외" | "온라인";
+export type Environment = "실내" | "야외" | "온라인";
 
 export type PrepTime = "none" | "quick" | "advance";
 

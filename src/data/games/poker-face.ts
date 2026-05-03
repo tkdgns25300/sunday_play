@@ -9,7 +9,7 @@ const pokerFace: Game = {
   thumbnailUrl: "/images/games/poker-face.png",
   ageGroups: ["초등부", "중고등부", "청년부", "장년부"],
   energyLevel: 2,
-  environments: ["실내교실", "실내강당"],
+  environments: ["실내"],
   prepTime: "quick",
   groupSizes: ["sm"],
   characterQualities: ["분별력", "신중", "담대함"],

@@ -10,8 +10,7 @@ export const AGE_GROUP_OPTIONS: { value: AgeGroup; label: string }[] = [
 ];
 
 export const ENVIRONMENT_OPTIONS: { value: Environment; label: string }[] = [
-  { value: "실내교실", label: "실내(교실)" },
-  { value: "실내강당", label: "실내(강당)" },
+  { value: "실내", label: "실내" },
   { value: "야외", label: "야외" },
   { value: "온라인", label: "온라인" },
 ];

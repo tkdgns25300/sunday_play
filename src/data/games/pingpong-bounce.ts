@@ -9,7 +9,7 @@ const pingpongBounce: Game = {
     thumbnailUrl: "/images/games/pingpong-bounce.png",
     ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 2,
-    environments: ["실내교실", "실내강당"],
+    environments: ["실내"],
     prepTime: "quick",
     groupSizes: ["sm"],
     characterQualities: ["인내", "절제", "끈기"],
