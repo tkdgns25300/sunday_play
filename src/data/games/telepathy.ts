@@ -14,7 +14,7 @@ const telepathy: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["민감성", "경청", "포용"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

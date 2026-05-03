@@ -14,7 +14,7 @@ const pingpongBounce: Game = {
     groupSizes: ["sm"],
     characterQualities: ["인내", "절제", "끈기"],
     durationMinutes: 15,
-    difficulty: 3,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

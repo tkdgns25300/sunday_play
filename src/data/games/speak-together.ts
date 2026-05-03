@@ -14,7 +14,7 @@ const speakTogether: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["경청", "민감성", "분별력"],
     durationMinutes: 15,
-    difficulty: 3,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

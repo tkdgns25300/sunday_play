@@ -14,7 +14,7 @@ const bodyTalk: Game = {
     groupSizes: ["md", "lg"],
     characterQualities: ["창의성", "기쁨", "담대함"],
     durationMinutes: 20,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

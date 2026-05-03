@@ -14,7 +14,7 @@ const wordAssociation: Game = {
   groupSizes: ["sm"],
   characterQualities: ["경청", "민감성", "과단성"],
   durationMinutes: 10,
-  difficulty: 2,
+  difficulty: 1,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

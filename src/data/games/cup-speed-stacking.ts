@@ -14,7 +14,7 @@ const cupSpeedStacking: Game = {
   groupSizes: ["md", "lg"],
   characterQualities: ["신뢰성", "끈기", "절제"],
   durationMinutes: 15,
-  difficulty: 3,
+  difficulty: 2,
   requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {

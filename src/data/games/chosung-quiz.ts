@@ -14,7 +14,7 @@ const chosungQuiz: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["지혜", "경각심", "민감성"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

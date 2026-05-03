@@ -14,7 +14,7 @@ const flashMemory: Game = {
   groupSizes: ["sm", "md", "lg"],
   characterQualities: ["경각심", "민감성", "신중"],
   durationMinutes: 15,
-  difficulty: 2,
+  difficulty: 3,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

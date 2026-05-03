@@ -14,7 +14,7 @@ const simonSays: Game = {
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["경청", "신중", "민감성"],
     durationMinutes: 10,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

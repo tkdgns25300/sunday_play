@@ -14,7 +14,7 @@ const foolGame: Game = {
   groupSizes: ["sm", "md"],
   characterQualities: ["경각심", "과단성", "절제"],
   durationMinutes: 10,
-  difficulty: 3,
+  difficulty: 2,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

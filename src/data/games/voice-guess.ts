@@ -14,7 +14,7 @@ const voiceGuess: Game = {
     groupSizes: ["sm"],
     characterQualities: ["경청", "민감성", "분별력"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

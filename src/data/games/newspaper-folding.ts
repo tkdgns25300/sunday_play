@@ -14,7 +14,7 @@ const newspaperFolding: Game = {
     groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "담대함", "포용"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 3,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

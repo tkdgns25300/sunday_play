@@ -14,7 +14,7 @@ const numberSumGame: Game = {
   groupSizes: ["md", "lg"],
   characterQualities: ["경청", "유연성", "베풂"],
   durationMinutes: 15,
-  difficulty: 3,
+  difficulty: 2,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

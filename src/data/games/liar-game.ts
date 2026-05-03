@@ -14,7 +14,7 @@ const liarGame: Game = {
     groupSizes: ["sm"],
     characterQualities: ["분별력", "지혜", "진실성"],
     durationMinutes: 15,
-    difficulty: 4,
+    difficulty: 3,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

@@ -36,11 +36,9 @@ export const ENERGY_LEVEL_LABELS: Record<number, string> = {
 };
 
 export const DIFFICULTY_LABELS: Record<number, string> = {
-  1: "매우 쉬움",
-  2: "쉬움",
-  3: "보통",
-  4: "어려움",
-  5: "매우 어려움",
+  1: "쉬움",
+  2: "보통",
+  3: "어려움",
 };
 
 export const CHARACTER_QUALITIES: CharacterQuality[] = [

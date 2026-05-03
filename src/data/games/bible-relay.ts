@@ -14,7 +14,7 @@ const bibleRelay: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["경청", "끈기", "충성"],
     durationMinutes: 10,
-    difficulty: 3,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [
         {

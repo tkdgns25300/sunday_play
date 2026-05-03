@@ -14,7 +14,7 @@ const relayBallPipe: Game = {
     groupSizes: ["md", "lg"],
     characterQualities: ["끈기", "신뢰성", "조심성"],
     durationMinutes: 10,
-    difficulty: 3,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

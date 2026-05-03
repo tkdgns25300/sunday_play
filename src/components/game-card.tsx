@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Game, GroupSize } from "@/types/game";
+import { DIFFICULTY_LABELS } from "@/constants/game";
 
 const GROUP_SIZE_RANGE: Record<GroupSize, { min: number; max: number | null }> = {
   xs: { min: 1, max: 5 },
@@ -92,6 +93,12 @@ export default function GameCard({ game, isPurchased }: GameCardProps) {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               {groupSizeLabel}
+            </span>
+            <span className="flex items-center gap-1" title="난이도">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              {DIFFICULTY_LABELS[game.difficulty]}
             </span>
           </div>
         </div>

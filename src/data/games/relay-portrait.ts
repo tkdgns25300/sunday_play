@@ -14,7 +14,7 @@ const relayPortrait: Game = {
   groupSizes: ["md", "lg"],
   characterQualities: ["창의성", "유연성", "기쁨"],
   durationMinutes: 15,
-  difficulty: 3,
+  difficulty: 2,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

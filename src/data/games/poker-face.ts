@@ -14,7 +14,7 @@ const pokerFace: Game = {
   groupSizes: ["sm"],
   characterQualities: ["분별력", "신중", "담대함"],
   durationMinutes: 15,
-  difficulty: 2,
+  difficulty: 3,
   requiredStaff: { min: 1, recommended: 1 },
   steps: [
     {

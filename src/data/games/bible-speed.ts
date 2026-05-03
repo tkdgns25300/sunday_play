@@ -14,7 +14,7 @@ const bibleSpeed: Game = {
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["분별력", "끈기", "경청"],
     durationMinutes: 10,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

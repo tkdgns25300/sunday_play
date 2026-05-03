@@ -14,7 +14,7 @@ const commonSenseQuiz: Game = {
     groupSizes: ["sm", "md", "lg"],
     characterQualities: ["지혜", "경청", "분별력"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

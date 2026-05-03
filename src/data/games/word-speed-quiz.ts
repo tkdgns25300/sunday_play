@@ -15,7 +15,7 @@ const wordSpeedQuiz: Game = {
   groupSizes: ["md"],
   characterQualities: ["지혜", "경각심", "분별력"],
   durationMinutes: 15,
-  difficulty: 3,
+  difficulty: 2,
   requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {

@@ -14,7 +14,7 @@ const tailCatch: Game = {
     groupSizes: ["md", "lg"],
     characterQualities: ["담대함", "충성", "끈기"],
     durationMinutes: 20,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 2 },
     steps: [
         {

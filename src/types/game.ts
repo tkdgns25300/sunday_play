@@ -69,7 +69,7 @@ export type Game = {
   groupSizes: GroupSize[];
   characterQualities: CharacterQuality[];
   durationMinutes: number;
-  difficulty: 1 | 2 | 3 | 4 | 5;
+  difficulty: 1 | 2 | 3;
   requiredStaff: { min: number; recommended: number };
   steps: GameStep[];
   materials: GameMaterial[];

@@ -141,21 +141,23 @@ export default function GameList() {
     });
 
     const sorted = [...filtered];
+    const byRecommend = (a: typeof sorted[0], b: typeof sorted[0]) => {
+      if (b.recommendScore !== a.recommendScore) return b.recommendScore - a.recommendScore;
+      return a.creditPrice - b.creditPrice;
+    };
+
     if (sortBy === "recommend") {
-      sorted.sort((a, b) => {
-        if (b.recommendScore !== a.recommendScore) return b.recommendScore - a.recommendScore;
-        return a.creditPrice - b.creditPrice;
-      });
+      sorted.sort(byRecommend);
     } else if (sortBy === "credit-low") {
-      sorted.sort((a, b) => a.creditPrice - b.creditPrice);
+      sorted.sort((a, b) => a.creditPrice - b.creditPrice || byRecommend(a, b));
     } else if (sortBy === "duration-short") {
-      sorted.sort((a, b) => a.durationMinutes - b.durationMinutes);
+      sorted.sort((a, b) => a.durationMinutes - b.durationMinutes || byRecommend(a, b));
     } else if (sortBy === "duration-long") {
-      sorted.sort((a, b) => b.durationMinutes - a.durationMinutes);
+      sorted.sort((a, b) => b.durationMinutes - a.durationMinutes || byRecommend(a, b));
     } else if (sortBy === "difficulty-easy") {
-      sorted.sort((a, b) => a.difficulty - b.difficulty);
+      sorted.sort((a, b) => a.difficulty - b.difficulty || byRecommend(a, b));
     } else if (sortBy === "difficulty-hard") {
-      sorted.sort((a, b) => b.difficulty - a.difficulty);
+      sorted.sort((a, b) => b.difficulty - a.difficulty || byRecommend(a, b));
     }
 
     return sorted;

@@ -14,7 +14,7 @@ const actionCommand: Game = {
     groupSizes: ["md", "lg"],
     characterQualities: ["경각심", "민감성", "기쁨"],
     durationMinutes: 20,
-    difficulty: 3,
+    difficulty: 2,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

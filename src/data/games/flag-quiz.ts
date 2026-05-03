@@ -14,7 +14,7 @@ const flagQuiz: Game = {
     groupSizes: ["xs", "sm", "md", "lg"],
     characterQualities: ["경청", "지혜", "창의성"],
     durationMinutes: 10,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {

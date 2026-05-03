@@ -14,7 +14,7 @@ const colorFlipBingo: Game = {
   groupSizes: ["md", "lg"],
   characterQualities: ["책임감", "솔선", "끈기"],
   durationMinutes: 15,
-  difficulty: 2,
+  difficulty: 1,
   requiredStaff: { min: 1, recommended: 2 },
   steps: [
     {

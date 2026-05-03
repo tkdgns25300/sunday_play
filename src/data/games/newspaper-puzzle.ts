@@ -14,7 +14,7 @@ const newspaperPuzzle: Game = {
     groupSizes: ["sm", "md"],
     characterQualities: ["근면", "솔선", "창의성"],
     durationMinutes: 15,
-    difficulty: 2,
+    difficulty: 1,
     requiredStaff: { min: 1, recommended: 1 },
     steps: [
         {
