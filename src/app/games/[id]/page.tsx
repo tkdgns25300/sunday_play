@@ -54,8 +54,27 @@ export default async function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: game.title,
+    description: game.summary,
+    image: `https://sundayplay.life${game.thumbnailUrl}`,
+    url: `https://sundayplay.life/games/${id}`,
+    offers: {
+      "@type": "Offer",
+      price: game.creditPrice,
+      priceCurrency: "KRW",
+      availability: "https://schema.org/InStock",
+    },
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <GameDetailGate game={game} />
     </div>
   );

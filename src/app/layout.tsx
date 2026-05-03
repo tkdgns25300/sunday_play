@@ -44,6 +44,18 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Sunday Play",
+              url: "https://sundayplay.life",
+              description: "주일학교 교사와 교회 리더를 위한 레크레이션 큐레이션 플랫폼",
+            }),
+          }}
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8F7J7SNDCZ" />
         <script
           dangerouslySetInnerHTML={{
