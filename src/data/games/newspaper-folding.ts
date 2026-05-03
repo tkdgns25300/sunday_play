@@ -7,7 +7,7 @@ const newspaperFolding: Game = {
     description:
         "팀원 전원이 신문지 위에 올라가 10초를 버텨야 합니다. 라운드마다 신문지를 반으로 접어 점점 작아지는 신문지 위에서 끝까지 버틴 팀이 우승합니다.",
     thumbnailUrl: "/images/games/newspaper-folding.png",
-    ageGroups: ["유치부", "초등부", "중고등부", "청년부"],
+    ageGroups: ["초등부", "중고등부", "청년부"],
     energyLevel: 3,
     environments: ["실내"],
     prepTime: "quick",

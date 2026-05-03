@@ -12,7 +12,7 @@ import { AgeGroup, Environment, PrepTime, GroupSize, CharacterQuality } from "@/
 type SortOption = "recommend" | "credit-low" | "duration-short" | "duration-long" | "difficulty-easy" | "difficulty-hard";
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: "recommend", label: "추천순" },
+  { value: "recommend", label: "추천순(기본)" },
   { value: "credit-low", label: "크레딧 낮은순" },
   { value: "duration-short", label: "소요시간 짧은순" },
   { value: "duration-long", label: "소요시간 긴순" },

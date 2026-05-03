@@ -50,6 +50,7 @@ export default function GameFilter({ filters, onFilterChange, isDetailOpen, onDe
     filters.characterQualities.length > 0;
 
   const hasDetailFilters =
+    filters.environment !== null ||
     filters.prepTime !== null ||
     filters.energyLevel !== null ||
     filters.characterQualities.length > 0;
@@ -71,16 +72,15 @@ export default function GameFilter({ filters, onFilterChange, isDetailOpen, onDe
           onSelect={(value) => toggleFilter("groupSize", value)}
           onClear={() => onFilterChange({ ...filters, groupSize: null })}
         />
-        <DropdownFilter
-          label="장소"
-          value={filters.environment}
-          options={ENVIRONMENT_OPTIONS}
-          onSelect={(value) => toggleFilter("environment", value)}
-          onClear={() => onFilterChange({ ...filters, environment: null })}
-        />
-
         {isDetailOpen && (
           <>
+            <DropdownFilter
+              label="장소"
+              value={filters.environment}
+              options={ENVIRONMENT_OPTIONS}
+              onSelect={(value) => toggleFilter("environment", value)}
+              onClear={() => onFilterChange({ ...filters, environment: null })}
+            />
             <DropdownFilter
               label="준비 시간"
               value={filters.prepTime}
