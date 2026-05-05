@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { games } from "@/data/games";
 import GameCard from "@/components/game-card";
 import { CREDIT_PACKAGES } from "@/constants/credit";
+import WelcomeModal from "@/components/welcome-modal";
 
 const PREVIEW_GAME_IDS = ["number-sum-game", "zoom-out-quiz", "flash-memory"];
 const PREVIEW_GAMES = PREVIEW_GAME_IDS.map((id) => games.find((g) => g.id === id)!).filter(Boolean);
@@ -102,6 +103,7 @@ const TARGET_USERS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <WelcomeModal />
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-12 lg:py-25 text-center md:py-32">
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
@@ -115,13 +117,30 @@ export default function Home() {
             <br />
             진행 자료까지 한 번에 준비하세요.
           </p>
+          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-3 shadow-md shadow-amber-500/10 dark:border-amber-500/50 dark:from-amber-950/40 dark:to-orange-950/30">
+            <div className="flex items-center gap-3">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-sm">
+                <span className="text-sm font-black text-white">C</span>
+              </div>
+              <div className="flex flex-col items-start">
+                <span className="text-base font-extrabold text-amber-700 dark:text-amber-400">
+                  지금 가입하면 1,000 크레딧 무료!
+                </span>
+                <span className="text-xs text-amber-600/70 dark:text-amber-500/70">
+                  가입 즉시 지급 — 게임 자료 바로 다운로드
+                </span>
+              </div>
+            </div>
+          </div>
           <div className="flex gap-3">
-            <Link href="/games">
-              <Button size="lg">게임 둘러보기</Button>
+            <Link href="/login">
+              <Button size="lg" className="bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30">
+                가입하고 크레딧 받기
+              </Button>
             </Link>
-            <Link href="/pricing">
+            <Link href="/games">
               <Button variant="outline" size="lg">
-                크레딧 충전
+                게임 둘러보기
               </Button>
             </Link>
           </div>
