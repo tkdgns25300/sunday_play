@@ -36,7 +36,7 @@ export default function Footer() {
 
         <div className="border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground/70">
           <p>
-            훈테크 | 대표 이상훈 | 사업자등록번호 165-41-01202
+            훈테크 | 대표 이상훈 | 사업자등록번호 165-41-01202 | 통신판매업 제2026-경북안동-0139호
           </p>
           <p>
             경상북도 안동시 감나무5길 15 | 이메일 tkdgns25300@naver.com
