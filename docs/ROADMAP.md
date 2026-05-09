@@ -297,4 +297,4 @@
 
 1. dev에서 기능 개발 및 커밋
 2. main으로 병합
-3. Phase 단위로 dev → main PR 병합 및 배포
+3. Phase 단위로 dev → main 병합 및 배포
