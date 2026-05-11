@@ -25,7 +25,7 @@ export default function RefundPage() {
               구매한 게임의 자료는 계정이 유효한 동안 횟수 제한 없이 재다운로드 가능합니다.
             </li>
             <li className="list-disc">
-              크레딧의 유효기간은 충전일로부터 5년입니다.
+              크레딧의 유효기간은 충전일로부터 3개월이며, 서비스 정책에 따라 연장될 수 있습니다.
             </li>
           </ul>
         </Section>
