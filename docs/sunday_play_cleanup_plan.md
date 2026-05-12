@@ -1,7 +1,328 @@
 # Sunday Play — 정리 작업 계획서
 
 > 작성일: 2026-05-12
-> 범위: docs 업데이트 + dead code 정리
+> 범위: docs 업데이트 + dead code 정리 + 보안/품질 이슈
+
+---
+
+# ⚠️ 추가 발견 사항 (2026-05-12 추가)
+
+코드 전면 검토 결과 추가로 발견된 이슈들.
+
+## 🔴 보안 취약점 (최우선)
+
+### 보안-1. `/api/credit/purchase` 가격 조작 취약점
+
+**위치**: `src/app/api/credit/purchase/route.ts`
+
+**문제**:
+```typescript
+const { gameId, creditPrice } = await request.json();  // 클라이언트가 보낸 가격 그대로
+const result = await purchaseGame(supabase, user.id, gameId, creditPrice);
+```
+
+악의적 사용자가 직접 API 호출 시 `creditPrice: 1` 로 보내면 1원에 2000원짜리 게임 구매 가능.
+
+**해결**:
+```typescript
+import { games } from "@/data/games";
+
+const { gameId } = await request.json();
+const game = games.find((g) => g.id === gameId);
+if (!game) {
+  return NextResponse.json(
+    { success: false, message: "존재하지 않는 게임입니다." },
+    { status: 400 }
+  );
+}
+const result = await purchaseGame(supabase, user.id, gameId, game.creditPrice);
+```
+
+→ 클라이언트는 `gameId`만 보내고, 서버가 게임 데이터에서 가격을 직접 조회.
+
+### 보안-2. 중복 충전 가능성 — verify + webhook
+
+**위치**: `/api/payment/verify`, `/api/payment/webhook`
+
+**문제**: 두 엔드포인트 모두 `chargeCredits` 호출. 동일한 `payment_id` 로 두 번 충전될 수 있음.
+
+**해결 옵션 A** (DB 제약):
+```sql
+ALTER TABLE credit_transactions
+ADD CONSTRAINT credit_transactions_payment_id_unique UNIQUE (payment_id);
+```
+
+**해결 옵션 B** (애플리케이션 레벨):
+`chargeCredits` 시작 시 `payment_id` 존재 여부 체크 후 진행.
+
+→ A + B 둘 다 적용 권장. DB가 최종 방어선, 애플리케이션이 빠른 검증.
+
+### 보안-3. `purchaseGame()` 동시성 문제
+
+**위치**: `src/lib/credit.ts`
+
+**문제**: balance 조회 → 차감 사이의 race condition. 사용자가 빠르게 두 번 클릭하면 잔액보다 많이 차감될 수 있음.
+
+**해결**: Supabase PostgreSQL 함수(RPC)로 원자적 차감 처리
+
+```sql
+CREATE OR REPLACE FUNCTION deduct_credit_for_purchase(
+  p_user_id uuid,
+  p_game_id text,
+  p_credit_price int
+)
+RETURNS json AS $$
+DECLARE
+  v_balance int;
+BEGIN
+  -- 잔액 잠금 후 조회
+  SELECT balance INTO v_balance
+  FROM user_credits
+  WHERE user_id = p_user_id
+  FOR UPDATE;
+
+  IF v_balance < p_credit_price THEN
+    RETURN json_build_object('success', false, 'message', '크레딧이 부족합니다.');
+  END IF;
+
+  IF EXISTS (SELECT 1 FROM game_purchases WHERE user_id = p_user_id AND game_id = p_game_id) THEN
+    RETURN json_build_object('success', false, 'message', '이미 구매한 게임입니다.');
+  END IF;
+
+  UPDATE user_credits SET balance = balance - p_credit_price, updated_at = now()
+  WHERE user_id = p_user_id;
+
+  INSERT INTO game_purchases (user_id, game_id, credit_amount)
+  VALUES (p_user_id, p_game_id, p_credit_price);
+
+  INSERT INTO credit_transactions (user_id, type, amount, description)
+  VALUES (p_user_id, 'deduct', p_credit_price, '게임 구매: ' || p_game_id);
+
+  RETURN json_build_object('success', true, 'message', '구매 완료');
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+```
+
+그리고 `purchaseGame()` 을 `supabase.rpc('deduct_credit_for_purchase', ...)` 호출로 변경.
+
+---
+
+## 🟠 ESLint 에러 2건
+
+### ESLint-1. `downloads-section.tsx:404` — setState in effect
+
+```typescript
+useEffect(() => {
+  if (showAll) {
+    async function findAll() { ... }
+    findAll();
+  } else {
+    setPreviewPaths(pages.map(...));  // ❌ 이펙트 안에서 동기적 setState
+  }
+}, [...]);
+```
+
+**해결**: `else` 분기를 `useMemo` 로 분리하거나, 초기값에서 처리.
+
+### ESLint-2. `theme-toggle.tsx:11` — setState in effect
+
+```typescript
+useEffect(() => {
+  setIsMounted(true);
+}, []);
+```
+
+**해결**: next-themes의 `useTheme()` 훅의 `resolvedTheme` 만 사용하고 mounted 체크를 제거하거나, suppressHydrationWarning 적극 활용.
+
+---
+
+## 🟡 ESLint 경고 4건
+
+### 경고-1. `layout.tsx:59` — Google Analytics 인라인 스크립트
+
+→ `@next/third-parties/google` 의 `GoogleAnalytics` 컴포넌트로 교체.
+
+```typescript
+import { GoogleAnalytics } from '@next/third-parties/google';
+// body 안에 <GoogleAnalytics gaId="G-8F7J7SNDCZ" />
+```
+
+### 경고-2. `mypage-content.tsx:63,115` — `<img>` 2건
+
+Google OAuth 프로필 아바타. `next/image` 로 교체하되 외부 도메인이라 `next.config.ts` 에 도메인 추가 필요:
+
+```typescript
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+    ],
+  },
+};
+```
+
+### 경고-3. `middleware.ts:16` — 사용 안 하는 변수
+
+```typescript
+// Before
+cookiesToSet.forEach(({ name, value, options }) =>
+  request.cookies.set(name, value)
+);
+
+// After
+cookiesToSet.forEach(({ name, value }) =>
+  request.cookies.set(name, value)
+);
+```
+
+---
+
+## 🟡 코드 품질 이슈
+
+### 품질-1. `pricing-card.tsx:155` — Dead className
+
+```typescript
+className={`w-full ${isRecommended ? "" : "variant-outline"}`}  // variant-outline은 Tailwind 클래스 아님
+```
+
+`variant` prop 따로 전달하므로 이 분기는 의미 없음.
+
+**해결**: `className="w-full"` 으로 단순화.
+
+### 품질-2. `downloads-section.tsx` PreviewButton — 200번 HEAD 요청
+
+```typescript
+for (let i = 1; i <= 200; i++) {
+  const res = await fetch(path, { method: "HEAD" });
+  if (res.ok) paths.push(path);
+  else break;
+}
+```
+
+매번 미리보기 열 때마다 최대 200번 HEAD 요청.
+
+**해결**: 게임 데이터에 `previewPageCount` 필드 추가하거나, `previewPages` 배열을 항상 명시.
+
+```typescript
+// types/game.ts
+type Game = {
+  ...
+  previewPageCount?: number;  // 전체 미리보기 페이지 수
+};
+```
+
+### 품질-3. `auth-button.tsx` — 로그인 상태 변경 시 크레딧 미갱신
+
+```typescript
+supabase.auth.onAuthStateChange((_event, session) => {
+  setUser(session?.user ?? null);  // user만 갱신, creditBalance 미갱신
+});
+```
+
+**해결**:
+```typescript
+supabase.auth.onAuthStateChange(async (_event, session) => {
+  setUser(session?.user ?? null);
+  if (session?.user) {
+    const balance = await getCreditBalance(supabase, session.user.id);
+    setCreditBalance(balance);
+  } else {
+    setCreditBalance(null);
+  }
+});
+```
+
+### 품질-4. `middleware.ts` matcher — API 경로 포함
+
+```typescript
+matcher: ["/((?!_next/static|_next/image|favicon.ico|icon|apple-icon|images|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"]
+```
+
+`/api/*` 경로에도 미들웨어 적용 → 매 API 호출마다 Supabase 세션 갱신.
+
+**해결**: matcher에 `api` 도 제외 추가:
+```typescript
+matcher: ["/((?!api|_next/static|_next/image|favicon.ico|icon|apple-icon|images|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"]
+```
+
+(단, API 라우트에서 `createClient()` 직접 호출하므로 미들웨어 없이도 인증 동작함. 안전하게 빼도 됨.)
+
+---
+
+# 📋 통합 실행 순서 (업데이트)
+
+```
+🔴 1단계 — 보안 (최우선)
+  ① /api/credit/purchase 가격 서버 조회로 변경
+  ② payment_id UNIQUE 제약 + 중복 체크
+  ③ purchaseGame RPC로 원자적 처리
+  ④ 빌드/테스트 확인
+
+🟠 2단계 — Dead code 정리 (기존 계획)
+  ⑤ src/lib/download.ts 신규, subscription.ts 삭제
+  ⑥ src/constants/subscription.ts, pricing.ts 삭제
+  ⑦ paywall.tsx subscribe 분기 제거
+  ⑧ game-detail.tsx Paywall 호출 수정
+  ⑨ privacy/page.tsx 문구 수정
+
+🟠 3단계 — ESLint 에러 해결
+  ⑩ downloads-section setState in effect 수정
+  ⑪ theme-toggle hydration 패턴 개선
+
+🟡 4단계 — ESLint 경고 + 품질 개선
+  ⑫ pricing-card variant-outline 제거
+  ⑬ auth-button 크레딧 재로드
+  ⑭ PreviewButton 게임 데이터 기반으로 변경
+  ⑮ mypage-content img → Image
+  ⑯ layout.tsx GA 컴포넌트화
+  ⑰ middleware.ts options 정리, matcher 조정
+
+🟢 5단계 — 문서
+  ⑱ docs/SCHEMA.md 전면 재작성
+  ⑲ docs/SPEC.md 전면 재작성
+  ⑳ docs/ROADMAP.md 체크박스 3건 수정
+```
+
+---
+
+# 📂 영향 받는 파일 목록 (전체)
+
+```
+삭제:
+- src/lib/subscription.ts
+- src/constants/subscription.ts
+- src/constants/pricing.ts
+
+신규:
+- src/lib/download.ts
+- (선택) DB 마이그레이션 파일 005_create_credit_tables.sql
+
+수정 (코드):
+- src/app/api/credit/purchase/route.ts (보안)
+- src/app/api/payment/verify/route.ts (중복 충전 방지)
+- src/app/api/payment/webhook/route.ts (중복 충전 방지)
+- src/lib/credit.ts (RPC 변경 또는 동시성 처리)
+- src/app/api/download/route.ts (import)
+- src/components/paywall.tsx (dead path)
+- src/components/game-detail.tsx (Paywall 호출)
+- src/components/downloads-section.tsx (setState in effect, PreviewButton)
+- src/components/theme-toggle.tsx (setState in effect)
+- src/components/pricing-card.tsx (dead className)
+- src/components/auth-button.tsx (credit 재로드)
+- src/components/mypage-content.tsx (img → Image)
+- src/app/layout.tsx (GA 컴포넌트화)
+- src/middleware.ts (matcher 조정)
+- src/lib/supabase/middleware.ts (unused options)
+- src/app/privacy/page.tsx (문구)
+- next.config.ts (이미지 도메인 추가)
+
+수정 (문서):
+- docs/SCHEMA.md (전면 재작성)
+- docs/SPEC.md (전면 재작성)
+- docs/ROADMAP.md (체크박스)
+```
+
+총 영향 파일: **삭제 3개, 신규 1~2개, 수정 16개**.
 
 ---
 
