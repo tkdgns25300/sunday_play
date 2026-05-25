@@ -19,7 +19,13 @@ export default function Header() {
 
         <nav className="hidden items-center gap-6 md:flex">
           <Link
-            href="/games"
+            href="/about"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            소개
+          </Link>
+          <Link
+            href="/"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             게임 찾기
@@ -55,7 +61,14 @@ export default function Header() {
         <nav className="border-t border-border px-4 py-3 md:hidden">
           <div className="flex flex-col gap-3">
             <Link
-              href="/games"
+              href="/about"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              소개
+            </Link>
+            <Link
+              href="/"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >

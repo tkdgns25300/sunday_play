@@ -216,7 +216,7 @@ export default function PricingCard() {
               </p>
               <Button
                 className="mt-2 w-full"
-                onClick={() => { setChargedCredits(null); router.push("/games"); }}
+                onClick={() => { setChargedCredits(null); router.push("/"); }}
               >
                 게임 둘러보기
               </Button>

@@ -91,7 +91,7 @@ export default function PaymentComplete() {
         <p className="mt-2 text-sm text-muted-foreground">
           크레딧이 충전되었습니다. 원하는 게임의 진행 자료를 구매하세요.
         </p>
-        <Button className="mt-6" onClick={() => router.push("/games")}>
+        <Button className="mt-6" onClick={() => router.push("/")}>
           게임 둘러보기
         </Button>
       </div>

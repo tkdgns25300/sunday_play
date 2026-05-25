@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThemeProvider from "@/components/theme-provider";
 import SignupTracker from "@/components/signup-tracker";
+import WelcomeModal from "@/components/welcome-modal";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -77,6 +78,7 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <SignupTracker />
           </Suspense>
+          <WelcomeModal />
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
