@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Game } from "@/types/game";
 import { createClient } from "@/lib/supabase/client";
+import { trackViewItem } from "@/lib/analytics";
 import GameDetail from "@/components/game-detail";
 
 export default function GameDetailGate({ game }: { game: Game }) {
@@ -21,10 +22,16 @@ export default function GameDetailGate({ game }: { game: Game }) {
       }
 
       setIsAuthed(true);
+      trackViewItem({
+        item_id: game.id,
+        item_name: game.title,
+        price: game.creditPrice,
+        currency: "KRW",
+      });
     }
 
     checkAccess();
-  }, [game.id, router]);
+  }, [game.id, game.title, game.creditPrice, router]);
 
   if (isAuthed === null) {
     return <GameDetail game={game} accessLevel="loading" />;

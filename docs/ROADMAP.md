@@ -197,7 +197,8 @@
 
 ### 분석
 
-- [x] Google Analytics 4
+- [x] Google Analytics 4 (페이지뷰 자동 추적)
+- [x] GA4 비즈니스 이벤트 추적 (sign_up, view_item, select_content, purchase, file_download)
 
 ### CS
 

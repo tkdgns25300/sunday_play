@@ -7,6 +7,7 @@ import { Game, GameAsset } from "@/types/game";
 import { createClient } from "@/lib/supabase/client";
 import { hasPurchasedGame, getCreditBalance } from "@/lib/credit";
 import { CREDIT_PRICE_LABELS } from "@/constants/credit";
+import { trackSelectContent, trackFileDownload } from "@/lib/analytics";
 
 type AssetGroup = {
   name: string;
@@ -77,6 +78,12 @@ export default function DownloadsSection({ game }: { game: Game }) {
         const newBalance = creditBalance - game.creditPrice;
         setCreditBalance(newBalance);
         window.dispatchEvent(new CustomEvent("credit-change", { detail: newBalance }));
+        trackSelectContent({
+          item_id: game.id,
+          item_name: game.title,
+          price: game.creditPrice,
+          currency: "KRW",
+        });
       } else {
         alert(result.message);
       }
@@ -104,6 +111,11 @@ export default function DownloadsSection({ game }: { game: Game }) {
         link.href = result.filePath;
         link.download = downloadName;
         link.click();
+        trackFileDownload({
+          fileName,
+          fileExtension: ext,
+          gameId: game.id,
+        });
       } else {
         alert(result.message);
       }

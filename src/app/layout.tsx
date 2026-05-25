@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThemeProvider from "@/components/theme-provider";
+import SignupTracker from "@/components/signup-tracker";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -72,6 +74,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
+          <Suspense fallback={null}>
+            <SignupTracker />
+          </Suspense>
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
