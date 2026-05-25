@@ -132,7 +132,7 @@ export default function MypageContent() {
             <Button
               variant="outline"
               className="mt-3"
-              onClick={() => router.push("/games")}
+              onClick={() => router.push("/")}
             >
               게임 둘러보기
             </Button>

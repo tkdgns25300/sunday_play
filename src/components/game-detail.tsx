@@ -79,7 +79,7 @@ export default function GameDetail({
     <div className="flex flex-col gap-8">
       <div>
         <Link
-          href="/games"
+          href="/"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
