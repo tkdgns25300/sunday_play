@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { trackPurchase } from "@/lib/analytics";
+import { CREDIT_PACKAGES } from "@/constants/credit";
 
 export default function PaymentComplete() {
   const searchParams = useSearchParams();
@@ -39,6 +41,22 @@ export default function PaymentComplete() {
 
         if (result.success) {
           setStatus("success");
+          const creditsNum = Number(credits);
+          const pkg = CREDIT_PACKAGES.find((p) => p.credits === creditsNum);
+          if (pkg) {
+            trackPurchase({
+              transactionId: paymentId,
+              value: pkg.amount,
+              items: [
+                {
+                  item_id: `credit-${pkg.amount}`,
+                  item_name: `크레딧 충전 ${pkg.label}`,
+                  price: pkg.amount,
+                  currency: "KRW",
+                },
+              ],
+            });
+          }
         } else {
           setStatus("fail");
           setMessage(result.message ?? "결제 검증에 실패했습니다.");
