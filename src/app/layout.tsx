@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ThemeProvider from "@/components/theme-provider";
 import SignupTracker from "@/components/signup-tracker";
+import NaverTracker from "@/components/naver-tracker";
 import WelcomeModal from "@/components/welcome-modal";
 import "./globals.css";
 
@@ -70,6 +71,20 @@ export default function RootLayout({
             `,
           }}
         />
+        <script src="//wcs.naver.net/wcslog.js" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (!wcs_add) var wcs_add = {};
+              wcs_add["wa"] = "s_41a53eaf5c29";
+              if (!_nasa) var _nasa = {};
+              if (window.wcs) {
+                wcs.inflow();
+                wcs_do();
+              }
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -78,6 +93,7 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <SignupTracker />
           </Suspense>
+          <NaverTracker />
           <WelcomeModal />
           <div className="flex min-h-screen flex-col">
             <Header />
