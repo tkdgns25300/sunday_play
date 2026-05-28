@@ -16,6 +16,8 @@ type NaverConv = {
   items?: NaverConvItem[];
 };
 
+type FbqParams = Record<string, string | number | string[] | undefined>;
+
 declare global {
   interface Window {
     gtag?: (command: "event", eventName: string, params?: GtagEventParams) => void;
@@ -25,6 +27,7 @@ declare global {
     };
     wcs_add?: Record<string, string>;
     wcs_do?: () => void;
+    fbq?: (command: "track" | "init", eventName: string, params?: FbqParams) => void;
   }
 }
 
@@ -50,6 +53,15 @@ export function trackNaverPageView() {
   window.wcs_do?.();
 }
 
+function trackMetaPixel(eventName: string, params?: FbqParams) {
+  if (typeof window === "undefined" || !window.fbq) return;
+  window.fbq("track", eventName, params);
+}
+
+export function trackMetaPageView() {
+  trackMetaPixel("PageView");
+}
+
 export type GameItem = {
   item_id: string;
   item_name: string;
@@ -72,6 +84,13 @@ export function trackViewItem(item: GameItem) {
         payAmount: item.price,
       },
     ],
+  });
+  trackMetaPixel("ViewContent", {
+    content_ids: [item.item_id],
+    content_name: item.item_name,
+    content_type: "product",
+    value: item.price,
+    currency: item.currency,
   });
 }
 
@@ -109,6 +128,12 @@ export function trackPurchase(params: {
       payAmount: item.price,
     })),
   });
+  trackMetaPixel("Purchase", {
+    value: params.value,
+    currency: "KRW",
+    content_ids: params.items.map((item) => item.item_id),
+    content_type: "product",
+  });
 }
 
 export function trackFileDownload(params: {
@@ -126,4 +151,5 @@ export function trackFileDownload(params: {
 export function trackSignUp(method: "google" | "email") {
   trackEvent("sign_up", { method });
   trackNaverConversion({ type: "sign_up" });
+  trackMetaPixel("CompleteRegistration", { method });
 }

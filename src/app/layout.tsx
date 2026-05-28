@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import ThemeProvider from "@/components/theme-provider";
 import SignupTracker from "@/components/signup-tracker";
 import NaverTracker from "@/components/naver-tracker";
+import MetaTracker from "@/components/meta-tracker";
 import WelcomeModal from "@/components/welcome-modal";
 import "./globals.css";
 
@@ -85,6 +86,31 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '2029527677989065');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=2029527677989065&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -94,6 +120,7 @@ export default function RootLayout({
             <SignupTracker />
           </Suspense>
           <NaverTracker />
+          <MetaTracker />
           <WelcomeModal />
           <div className="flex min-h-screen flex-col">
             <Header />
