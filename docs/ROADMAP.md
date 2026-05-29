@@ -246,7 +246,7 @@
 #### 측정 인프라
 
 - [x] 네이버 전환 추적 스크립트 사이트에 설치 (wcslog.js + sign_up/view_product/purchase/custom001 이벤트)
-- [ ] NHN Data에 자가설치 검수 요청 메일 발송 (navercts@nhndata.com)
+- [x] NHN Data에 자가설치 검수 요청 발송 (광고주센터에서 신청, 2026-05-25 신청중)
 - [ ] 검수 승인 후 광고주센터 전환수 측정 시작
 
 #### 운영/분석
@@ -254,7 +254,46 @@
 - [ ] 1주 후 데이터 리뷰 (CTR, CPC, 전환율, 그룹별 성과)
 - [ ] 2주 후 시나리오 판별: A 유지 / B 랜딩 개선 / C 입찰가 상향 / D 추적 점검
 - [ ] 1개월 후 광고비 증액 또는 채널 확장 결정
-- [ ] 메타(페이스북) 광고 추가 여부 판단 (1-2주 데이터 확인 후)
+
+### 마케팅 (메타 광고 — 페이스북·인스타)
+
+#### 인프라 세팅
+
+- [x] 메타 비즈니스 포트폴리오 생성 (이름: Hun)
+- [x] 페이스북 페이지 생성 (Sunday Play)
+- [x] 광고 계정 생성 (Sunday Play, KRW, GMT+9)
+- [x] 결제수단 등록
+- [x] Instagram 액세스 요청 (@lee_sanghun3, 승인 대기 — 페북 송출엔 영향 없음)
+- [x] Meta Pixel 데이터셋 생성 (Sunday Play Pixel, ID: 2029527677989065)
+- [x] 사이트 코드 통합 (커밋 85489e1)
+    - layout.tsx 픽셀 기본 스크립트 + noscript 폴백
+    - src/components/meta-tracker.tsx 신규 (SPA 라우팅 PageView)
+    - src/lib/analytics.ts에 fbq + trackMetaPixel 헬퍼 추가
+    - PageView / ViewContent / CompleteRegistration / Purchase 이벤트 매핑
+- [x] Meta Pixel Helper로 PageView 발사 검증 완료
+
+#### 첫 캠페인 (임시 저장 상태, 2026-05-29)
+
+- [x] 캠페인 생성: 트래픽 목표, 경매 구매 유형, 수동 트래픽 설정
+- [x] 광고 세트: 위치 한국, 연령 25-55, 관심사 "교육(사회적 개념)", 어드밴티지+ 타겟 ON
+- [x] 노출 위치: 어드밴티지 노출 위치 (자동 분배)
+- [x] 예산 ₩3,000/일 (학습 최적화를 위해 ₩10,000/일 증액 검토 필요)
+- [x] URL 매개변수: utm_source=meta&utm_medium=cpc&utm_campaign=traffic_v1&utm_content={{ad.name}}
+- [x] CTA: 더 알아보기
+- [ ] 광고 이미지 재제작 (nano banana 결과물 AI 느낌 강함 → 미니멀·깔끔 컨셉)
+- [ ] 광고 문구 입력 (기본 문구 / 제목 / 설명 3개 변형)
+- [ ] 광고 이름 정리 (Sunday Play - 트래픽 v1)
+- [ ] "여러 광고주의 광고" 체크 해제
+- [ ] "검토 후 게시" 클릭 — 광고 송출 시작
+- [ ] 메타 검수 통과 확인 (1~12시간 소요)
+
+#### 운영/분석
+
+- [ ] Day 1~3: 노출량·CTR 모니터링 (정상: CTR 1~3%)
+- [ ] Day 7: 1차 데이터 리뷰
+- [ ] Day 14~30: 픽셀에 가입 50건+ 쌓이면 "판매(전환)" 캠페인으로 전환
+- [ ] 유사 타겟(Lookalike Audience) 생성 (가입자 데이터 기반)
+- [ ] 전환 API 서버 구현 검토 (픽셀 차단 우회용, 우선순위 낮음)
 
 ### 런칭 차단 항목
 
