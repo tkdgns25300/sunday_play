@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Game, GameAsset } from "@/types/game";
@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { hasPurchasedGame, getCreditBalance } from "@/lib/credit";
 import { CREDIT_PRICE_LABELS } from "@/constants/credit";
 import { trackSelectContent, trackFileDownload } from "@/lib/analytics";
+import { PREVIEW_COUNTS } from "@/data/preview-counts";
 
 type AssetGroup = {
   name: string;
@@ -390,31 +391,16 @@ function AssetCard({
 }
 
 function PreviewButton({ gameId, previewPages, showAll }: { gameId: string; previewPages?: number[]; showAll?: boolean }) {
-  const [previewPaths, setPreviewPaths] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
+  const previewPaths = useMemo(() => {
     if (showAll) {
-      async function findAll() {
-        const paths: string[] = [];
-        for (let i = 1; i <= 200; i++) {
-          const path = `/downloads/games/${gameId}/preview/${i}.png`;
-          try {
-            const res = await fetch(path, { method: "HEAD" });
-            if (res.ok) paths.push(path);
-            else break;
-          } catch {
-            break;
-          }
-        }
-        setPreviewPaths(paths);
-      }
-      findAll();
-    } else {
-      const pages = previewPages ?? [1, 2];
-      setPreviewPaths(pages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`));
+      const count = PREVIEW_COUNTS[gameId] ?? 0;
+      return Array.from({ length: count }, (_, i) => `/downloads/games/${gameId}/preview/${i + 1}.png`);
     }
+    const pages = previewPages ?? [1, 2];
+    return pages.map((p) => `/downloads/games/${gameId}/preview/${p}.png`);
   }, [gameId, previewPages, showAll]);
 
   if (previewPaths.length === 0) return null;
@@ -464,9 +450,15 @@ function PreviewButton({ gameId, previewPages, showAll }: { gameId: string; prev
                 width={1200}
                 height={675}
                 className="w-full rounded-lg"
+                priority
                 draggable={showAll ? undefined : false}
                 onContextMenu={showAll ? undefined : (e) => e.preventDefault()}
               />
+              <div className="hidden">
+                {previewPaths.slice(currentIndex + 1, currentIndex + 3).map((path) => (
+                  <Image key={path} src={path} alt="" width={1200} height={675} priority />
+                ))}
+              </div>
               {!showAll && (
                 <div
                   className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-lg"
