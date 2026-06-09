@@ -40,26 +40,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { data: existing } = await supabaseAdmin
-      .from("user_credits")
-      .select("balance")
-      .eq("user_id", customerId)
-      .single();
-
-    const currentBalance = existing?.balance ?? 0;
-
-    await supabaseAdmin
-      .from("user_credits")
-      .upsert(
-        {
-          user_id: customerId,
-          balance: currentBalance + pkg.credits,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "user_id" }
-      );
-
-    await supabaseAdmin
+    const { error: txError } = await supabaseAdmin
       .from("credit_transactions")
       .insert({
         user_id: customerId,
@@ -68,6 +49,30 @@ export async function POST(request: NextRequest) {
         description: `크레딧 충전 ${pkg.label} (${pkg.credits.toLocaleString()} 크레딧)`,
         payment_id: paymentId,
       });
+
+    if (txError) {
+      if (txError.code === "23505") {
+        return NextResponse.json({ success: true, alreadyProcessed: true });
+      }
+      throw txError;
+    }
+
+    const { data: existing } = await supabaseAdmin
+      .from("user_credits")
+      .select("balance")
+      .eq("user_id", customerId)
+      .single();
+
+    await supabaseAdmin
+      .from("user_credits")
+      .upsert(
+        {
+          user_id: customerId,
+          balance: (existing?.balance ?? 0) + pkg.credits,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id" }
+      );
 
     return NextResponse.json({ success: true });
   } catch {

@@ -92,34 +92,32 @@ export async function chargeCredits(
   credits: number,
   paymentId: string,
   description: string
-): Promise<void> {
-  const balance = await getCreditBalance(supabase, userId);
-
-  if (balance === 0) {
-    const { error } = await supabase
-      .from("user_credits")
-      .upsert({
-        user_id: userId,
-        balance: credits,
-        updated_at: new Date().toISOString(),
-      });
-    if (error) throw error;
-  } else {
-    const { error } = await supabase
-      .from("user_credits")
-      .update({
-        balance: balance + credits,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("user_id", userId);
-    if (error) throw error;
-  }
-
-  await supabase.from("credit_transactions").insert({
+): Promise<{ alreadyProcessed: boolean }> {
+  const { error: txError } = await supabase.from("credit_transactions").insert({
     user_id: userId,
     type: "charge",
     amount: credits,
     description,
     payment_id: paymentId,
   });
+
+  if (txError) {
+    if (txError.code === "23505") return { alreadyProcessed: true };
+    throw txError;
+  }
+
+  const balance = await getCreditBalance(supabase, userId);
+  const { error: balanceError } = await supabase
+    .from("user_credits")
+    .upsert(
+      {
+        user_id: userId,
+        balance: balance + credits,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id" }
+    );
+  if (balanceError) throw balanceError;
+
+  return { alreadyProcessed: false };
 }

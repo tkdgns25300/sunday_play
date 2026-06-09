@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { trackPurchase } from "@/lib/analytics";
@@ -9,10 +9,14 @@ import { CREDIT_PACKAGES } from "@/constants/credit";
 export default function PaymentComplete() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const verifiedRef = useRef(false);
   const [status, setStatus] = useState<"loading" | "success" | "fail">("loading");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    if (verifiedRef.current) return;
+    verifiedRef.current = true;
+
     async function verify() {
       const paymentId = searchParams.get("paymentId");
       const credits = searchParams.get("credits");
@@ -41,21 +45,25 @@ export default function PaymentComplete() {
 
         if (result.success) {
           setStatus("success");
-          const creditsNum = Number(credits);
-          const pkg = CREDIT_PACKAGES.find((p) => p.credits === creditsNum);
-          if (pkg) {
-            trackPurchase({
-              transactionId: paymentId,
-              value: pkg.amount,
-              items: [
-                {
-                  item_id: `credit-${pkg.amount}`,
-                  item_name: `크레딧 충전 ${pkg.label}`,
-                  price: pkg.amount,
-                  currency: "KRW",
-                },
-              ],
-            });
+          window.history.replaceState({}, "", "/payment/complete");
+
+          if (!result.alreadyProcessed) {
+            const creditsNum = Number(credits);
+            const pkg = CREDIT_PACKAGES.find((p) => p.credits === creditsNum);
+            if (pkg) {
+              trackPurchase({
+                transactionId: paymentId,
+                value: pkg.amount,
+                items: [
+                  {
+                    item_id: `credit-${pkg.amount}`,
+                    item_name: `크레딧 충전 ${pkg.label}`,
+                    price: pkg.amount,
+                    currency: "KRW",
+                  },
+                ],
+              });
+            }
           }
         } else {
           setStatus("fail");
