@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await chargeCredits(
+    const { alreadyProcessed } = await chargeCredits(
       supabase,
       user.id,
       credits,
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       `크레딧 충전 ${validPackage.label} (${credits.toLocaleString()} 크레딧)`
     );
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, alreadyProcessed });
   } catch {
     return NextResponse.json(
       { success: false, message: "결제 검증 중 오류가 발생했습니다" },
