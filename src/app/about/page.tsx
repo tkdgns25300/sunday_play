@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { games } from "@/data/games";
 import GameCard from "@/components/game-card";
-import { CREDIT_PACKAGES } from "@/constants/credit";
+import { CREDIT_PACKAGES, WELCOME_CREDITS } from "@/constants/credit";
 
 const PREVIEW_GAME_IDS = ["number-sum-game", "zoom-out-quiz", "flash-memory"];
 const PREVIEW_GAMES = PREVIEW_GAME_IDS.map((id) => games.find((g) => g.id === id)!).filter(Boolean);
@@ -122,7 +122,7 @@ export default function AboutPage() {
               </div>
               <div className="flex flex-col items-start">
                 <span className="text-base font-extrabold text-amber-700 dark:text-amber-400">
-                  지금 가입하면 1,000 크레딧 무료!
+                  지금 가입하면 {WELCOME_CREDITS.toLocaleString()} 크레딧 무료!
                 </span>
                 <span className="text-xs text-amber-600/70 dark:text-amber-500/70">
                   가입 즉시 지급 — 게임 자료 바로 다운로드

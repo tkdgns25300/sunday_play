@@ -11,7 +11,7 @@ export const CREDIT_PACKAGES = process.env.NODE_ENV === "development"
   ? [TEST_PACKAGE, ...PRODUCTION_PACKAGES]
   : PRODUCTION_PACKAGES;
 
-export const WELCOME_CREDITS = 1000;
+export const WELCOME_CREDITS = 2000;
 
 export const CREDIT_PRICE_LABELS: Record<number, string> = {
   500: "500",
